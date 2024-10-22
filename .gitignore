@@ -1,0 +1,11 @@
+*.log
+bin/
+obj/
+*.user
+*.suo
+*.pdb
+*.dll
+*.vs/
+# ignore local sql databases or temp files
+*.db
+*.sql-journal
