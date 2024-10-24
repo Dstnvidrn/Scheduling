@@ -28,69 +28,199 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.labelTime = new System.Windows.Forms.Label();
+            this.labelDate = new System.Windows.Forms.Label();
             this.labelUserLocation = new System.Windows.Forms.Label();
-            this.txtbxUsername = new System.Windows.Forms.TextBox();
-            this.txtbxPassword = new System.Windows.Forms.TextBox();
             this.btnLogin = new System.Windows.Forms.Button();
+            this.dropdownLanguage = new System.Windows.Forms.ComboBox();
+            this.txtbxPassword = new System.Windows.Forms.TextBox();
+            this.txtbxUsername = new System.Windows.Forms.TextBox();
+            this.pnlLoginLeft = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.passwordIcon = new System.Windows.Forms.PictureBox();
+            this.usernameIcon = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pnlLoginLeft.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.passwordIcon)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.usernameIcon)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
+            // 
+            // labelTime
+            // 
+            this.labelTime.AutoSize = true;
+            this.labelTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
+            this.labelTime.ForeColor = System.Drawing.SystemColors.ControlLight;
+            this.labelTime.Location = new System.Drawing.Point(47, 298);
+            this.labelTime.Name = "labelTime";
+            this.labelTime.Size = new System.Drawing.Size(113, 29);
+            this.labelTime.TabIndex = 11;
+            this.labelTime.Text = "12:00 PM";
+            // 
+            // labelDate
+            // 
+            this.labelDate.AutoSize = true;
+            this.labelDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
+            this.labelDate.ForeColor = System.Drawing.SystemColors.ControlLight;
+            this.labelDate.Location = new System.Drawing.Point(12, 210);
+            this.labelDate.Name = "labelDate";
+            this.labelDate.Size = new System.Drawing.Size(193, 29);
+            this.labelDate.TabIndex = 10;
+            this.labelDate.Text = "Tuesday, Oct. 22";
             // 
             // labelUserLocation
             // 
             this.labelUserLocation.AutoSize = true;
-            this.labelUserLocation.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.labelUserLocation.Location = new System.Drawing.Point(740, 9);
+            this.labelUserLocation.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
+            this.labelUserLocation.ForeColor = System.Drawing.SystemColors.ControlLight;
+            this.labelUserLocation.Location = new System.Drawing.Point(47, 169);
             this.labelUserLocation.Name = "labelUserLocation";
-            this.labelUserLocation.Size = new System.Drawing.Size(48, 20);
-            this.labelUserLocation.TabIndex = 0;
-            this.labelUserLocation.Text = "lorem";
-            // 
-            // txtbxUsername
-            // 
-            this.txtbxUsername.Location = new System.Drawing.Point(272, 240);
-            this.txtbxUsername.Name = "txtbxUsername";
-            this.txtbxUsername.Size = new System.Drawing.Size(100, 20);
-            this.txtbxUsername.TabIndex = 1;
-            // 
-            // txtbxPassword
-            // 
-            this.txtbxPassword.Location = new System.Drawing.Point(272, 287);
-            this.txtbxPassword.Name = "txtbxPassword";
-            this.txtbxPassword.PasswordChar = '●';
-            this.txtbxPassword.Size = new System.Drawing.Size(100, 20);
-            this.txtbxPassword.TabIndex = 2;
+            this.labelUserLocation.Size = new System.Drawing.Size(116, 29);
+            this.labelUserLocation.TabIndex = 9;
+            this.labelUserLocation.Text = "Louisiana";
             // 
             // btnLogin
             // 
-            this.btnLogin.Location = new System.Drawing.Point(272, 326);
+            this.btnLogin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(111)))), ((int)(((byte)(97)))));
+            this.btnLogin.FlatAppearance.BorderSize = 0;
+            this.btnLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLogin.Location = new System.Drawing.Point(380, 330);
             this.btnLogin.Name = "btnLogin";
-            this.btnLogin.Size = new System.Drawing.Size(75, 23);
-            this.btnLogin.TabIndex = 3;
+            this.btnLogin.Size = new System.Drawing.Size(127, 34);
+            this.btnLogin.TabIndex = 16;
             this.btnLogin.Text = "Login";
-            this.btnLogin.UseVisualStyleBackColor = true;
+            this.btnLogin.UseVisualStyleBackColor = false;
+            // 
+            // dropdownLanguage
+            // 
+            this.dropdownLanguage.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.dropdownLanguage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.dropdownLanguage.FormattingEnabled = true;
+            this.dropdownLanguage.Items.AddRange(new object[] {
+            "EN",
+            "ES"});
+            this.dropdownLanguage.Location = new System.Drawing.Point(12, 373);
+            this.dropdownLanguage.Name = "dropdownLanguage";
+            this.dropdownLanguage.Size = new System.Drawing.Size(75, 21);
+            this.dropdownLanguage.TabIndex = 13;
+            // 
+            // txtbxPassword
+            // 
+            this.txtbxPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtbxPassword.Location = new System.Drawing.Point(366, 298);
+            this.txtbxPassword.Name = "txtbxPassword";
+            this.txtbxPassword.PasswordChar = '●';
+            this.txtbxPassword.Size = new System.Drawing.Size(175, 26);
+            this.txtbxPassword.TabIndex = 15;
+            // 
+            // txtbxUsername
+            // 
+            this.txtbxUsername.AccessibleName = "username input box";
+            this.txtbxUsername.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtbxUsername.Location = new System.Drawing.Point(365, 260);
+            this.txtbxUsername.Name = "txtbxUsername";
+            this.txtbxUsername.Size = new System.Drawing.Size(176, 26);
+            this.txtbxUsername.TabIndex = 14;
+            this.txtbxUsername.WordWrap = false;
+            // 
+            // pnlLoginLeft
+            // 
+            this.pnlLoginLeft.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(72)))), ((int)(((byte)(87)))));
+            this.pnlLoginLeft.Controls.Add(this.pictureBox2);
+            this.pnlLoginLeft.Controls.Add(this.dropdownLanguage);
+            this.pnlLoginLeft.Controls.Add(this.labelDate);
+            this.pnlLoginLeft.Controls.Add(this.labelUserLocation);
+            this.pnlLoginLeft.Controls.Add(this.labelTime);
+            this.pnlLoginLeft.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pnlLoginLeft.Location = new System.Drawing.Point(0, 0);
+            this.pnlLoginLeft.Name = "pnlLoginLeft";
+            this.pnlLoginLeft.Size = new System.Drawing.Size(236, 406);
+            this.pnlLoginLeft.TabIndex = 17;
+            this.pnlLoginLeft.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::Scheduling.Properties.Resources.user_icon;
+            this.pictureBox1.Location = new System.Drawing.Point(380, 24);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(141, 149);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 14;
+            this.pictureBox1.TabStop = false;
+            // 
+            // passwordIcon
+            // 
+            this.passwordIcon.Image = global::Scheduling.Properties.Resources.password_icon;
+            this.passwordIcon.Location = new System.Drawing.Point(333, 298);
+            this.passwordIcon.Name = "passwordIcon";
+            this.passwordIcon.Size = new System.Drawing.Size(26, 26);
+            this.passwordIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.passwordIcon.TabIndex = 19;
+            this.passwordIcon.TabStop = false;
+            // 
+            // usernameIcon
+            // 
+            this.usernameIcon.Image = global::Scheduling.Properties.Resources.username_icon;
+            this.usernameIcon.Location = new System.Drawing.Point(333, 260);
+            this.usernameIcon.Name = "usernameIcon";
+            this.usernameIcon.Size = new System.Drawing.Size(26, 26);
+            this.usernameIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.usernameIcon.TabIndex = 18;
+            this.usernameIcon.TabStop = false;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = global::Scheduling.Properties.Resources.location_icon1;
+            this.pictureBox2.Location = new System.Drawing.Point(35, 42);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(148, 100);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox2.TabIndex = 14;
+            this.pictureBox2.TabStop = false;
             // 
             // formLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.BackColor = System.Drawing.Color.White;
+            this.ClientSize = new System.Drawing.Size(657, 406);
+            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.passwordIcon);
+            this.Controls.Add(this.usernameIcon);
+            this.Controls.Add(this.pnlLoginLeft);
             this.Controls.Add(this.btnLogin);
             this.Controls.Add(this.txtbxPassword);
             this.Controls.Add(this.txtbxUsername);
-            this.Controls.Add(this.labelUserLocation);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "formLogin";
             this.Text = "Login";
             this.Load += new System.EventHandler(this.formLogin_Load);
+            this.pnlLoginLeft.ResumeLayout(false);
+            this.pnlLoginLeft.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.passwordIcon)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.usernameIcon)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
+        private System.Windows.Forms.Label labelTime;
+        private System.Windows.Forms.Label labelDate;
         private System.Windows.Forms.Label labelUserLocation;
-        private System.Windows.Forms.TextBox txtbxUsername;
-        private System.Windows.Forms.TextBox txtbxPassword;
         private System.Windows.Forms.Button btnLogin;
+        private System.Windows.Forms.ComboBox dropdownLanguage;
+        private System.Windows.Forms.TextBox txtbxPassword;
+        private System.Windows.Forms.TextBox txtbxUsername;
+        private System.Windows.Forms.Panel pnlLoginLeft;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox usernameIcon;
+        private System.Windows.Forms.PictureBox passwordIcon;
+        private System.Windows.Forms.PictureBox pictureBox2;
     }
 }
 
