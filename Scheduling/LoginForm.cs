@@ -7,6 +7,7 @@ using System.Data;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Scheduling.Services;
+using System.Collections.Generic;
 namespace Scheduling
 {
     public partial class LoginForm : Form
@@ -18,7 +19,18 @@ namespace Scheduling
         private static readonly string _APIKEY = ConfigurationManager.AppSettings["ApiKey"];
         private static readonly string _URL = $"{ConfigurationManager.AppSettings["URL"]}{_APIKEY}";
         private LocationService _locationService;
-        private Task<UserInfo> _userInfo;
+        private readonly Dictionary<string, string> _loginErrorMessages = new Dictionary<string, string>()
+        {
+            {"EN", "Incorrect username or password" },
+            {"ES", "Nombre de usuario o contraseña incorrecta." },
+            { "FR", "Nom d'utilisateur ou mot de passe incorrect." }
+        };
+        private readonly Dictionary<string, string> _loginBtnText = new Dictionary<string, string>()
+        {
+            {"EN", "Login" },
+            {"ES", "Iniciar sesión" },
+            {"FR", "Connexion"}
+        };
 
         public  LoginForm()
         {
@@ -87,11 +99,16 @@ namespace Scheduling
                 // check if matching result was found
 
                 if (result.Rows.Count > 0 && Convert.ToInt32(result.Rows[0][0]) > 0) {
+                    lblInvalidCreds.Visible = false;
                     return true;
                 }
                 else
                 {
-                    MessageBox.Show("Invalid username or password.", "Invaild Credentials",MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    string selectedLanguage = dropdownLanguage.SelectedItem as string;
+                    lblInvalidCreds.Text = _loginErrorMessages.ContainsKey(selectedLanguage)
+                        ? _loginErrorMessages[selectedLanguage] :
+                        _loginErrorMessages["EN"];
+                    lblInvalidCreds.Visible = true;
                     return false;
                 }
             }
@@ -144,6 +161,12 @@ namespace Scheduling
         private void lblUserCity_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void dropdownLanguage_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            btnLogin.Text = _loginBtnText[dropdownLanguage.SelectedItem.ToString()];
+            lblInvalidCreds.Text = _loginErrorMessages[dropdownLanguage.SelectedItem.ToString()];
         }
     }
 }

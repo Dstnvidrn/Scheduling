@@ -40,6 +40,8 @@
             this.iconLogin = new System.Windows.Forms.PictureBox();
             this.passwordIcon = new System.Windows.Forms.PictureBox();
             this.usernameIcon = new System.Windows.Forms.PictureBox();
+            this.lblInvalidCreds = new System.Windows.Forms.Label();
+            this.lblLangSelect = new System.Windows.Forms.Label();
             this.pnlLoginLeft.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconLogin)).BeginInit();
@@ -64,7 +66,7 @@
             this.btnLogin.FlatAppearance.BorderSize = 0;
             this.btnLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLogin.Location = new System.Drawing.Point(380, 330);
+            this.btnLogin.Location = new System.Drawing.Point(394, 330);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(127, 34);
             this.btnLogin.TabIndex = 16;
@@ -80,11 +82,13 @@
             this.dropdownLanguage.FormattingEnabled = true;
             this.dropdownLanguage.Items.AddRange(new object[] {
             "EN",
-            "ES"});
+            "ES",
+            "FR"});
             this.dropdownLanguage.Location = new System.Drawing.Point(12, 373);
             this.dropdownLanguage.Name = "dropdownLanguage";
             this.dropdownLanguage.Size = new System.Drawing.Size(75, 21);
             this.dropdownLanguage.TabIndex = 13;
+            this.dropdownLanguage.SelectedIndexChanged += new System.EventHandler(this.dropdownLanguage_SelectedIndexChanged);
             // 
             // txtbxPassword
             // 
@@ -99,7 +103,7 @@
             // 
             this.txtbxUsername.AccessibleName = "username input box";
             this.txtbxUsername.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtbxUsername.Location = new System.Drawing.Point(365, 260);
+            this.txtbxUsername.Location = new System.Drawing.Point(365, 253);
             this.txtbxUsername.Name = "txtbxUsername";
             this.txtbxUsername.Size = new System.Drawing.Size(176, 26);
             this.txtbxUsername.TabIndex = 14;
@@ -108,6 +112,7 @@
             // pnlLoginLeft
             // 
             this.pnlLoginLeft.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(72)))), ((int)(((byte)(87)))));
+            this.pnlLoginLeft.Controls.Add(this.lblLangSelect);
             this.pnlLoginLeft.Controls.Add(this.lblUserCountry);
             this.pnlLoginLeft.Controls.Add(this.lblUserCity);
             this.pnlLoginLeft.Controls.Add(this.pictureBox2);
@@ -130,6 +135,7 @@
             this.lblUserCountry.Size = new System.Drawing.Size(95, 29);
             this.lblUserCountry.TabIndex = 16;
             this.lblUserCountry.Text = "Country";
+            this.lblUserCountry.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblUserCity
             // 
@@ -176,12 +182,36 @@
             // usernameIcon
             // 
             this.usernameIcon.Image = global::Scheduling.Properties.Resources.username_icon;
-            this.usernameIcon.Location = new System.Drawing.Point(333, 260);
+            this.usernameIcon.Location = new System.Drawing.Point(333, 253);
             this.usernameIcon.Name = "usernameIcon";
             this.usernameIcon.Size = new System.Drawing.Size(26, 26);
             this.usernameIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.usernameIcon.TabIndex = 18;
             this.usernameIcon.TabStop = false;
+            // 
+            // lblInvalidCreds
+            // 
+            this.lblInvalidCreds.AutoSize = true;
+            this.lblInvalidCreds.BackColor = System.Drawing.Color.MistyRose;
+            this.lblInvalidCreds.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblInvalidCreds.ForeColor = System.Drawing.Color.Red;
+            this.lblInvalidCreds.Location = new System.Drawing.Point(345, 373);
+            this.lblInvalidCreds.Name = "lblInvalidCreds";
+            this.lblInvalidCreds.Padding = new System.Windows.Forms.Padding(5);
+            this.lblInvalidCreds.Size = new System.Drawing.Size(196, 26);
+            this.lblInvalidCreds.TabIndex = 20;
+            this.lblInvalidCreds.Text = "Invalid username or password";
+            this.lblInvalidCreds.Visible = false;
+            // 
+            // lblLangSelect
+            // 
+            this.lblLangSelect.AutoSize = true;
+            this.lblLangSelect.ForeColor = System.Drawing.SystemColors.ControlLight;
+            this.lblLangSelect.Location = new System.Drawing.Point(13, 350);
+            this.lblLangSelect.Name = "lblLangSelect";
+            this.lblLangSelect.Size = new System.Drawing.Size(91, 13);
+            this.lblLangSelect.TabIndex = 17;
+            this.lblLangSelect.Text = "Select Language:";
             // 
             // LoginForm
             // 
@@ -189,6 +219,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(657, 406);
+            this.Controls.Add(this.lblInvalidCreds);
             this.Controls.Add(this.iconLogin);
             this.Controls.Add(this.passwordIcon);
             this.Controls.Add(this.usernameIcon);
@@ -224,6 +255,8 @@
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Label lblUserCity;
         private System.Windows.Forms.Label lblUserCountry;
+        private System.Windows.Forms.Label lblInvalidCreds;
+        private System.Windows.Forms.Label lblLangSelect;
     }
 }
 
