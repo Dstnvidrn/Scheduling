@@ -28,14 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.labelTime = new System.Windows.Forms.Label();
-            this.labelDate = new System.Windows.Forms.Label();
-            this.labelUserLocation = new System.Windows.Forms.Label();
+            this.labelUserState = new System.Windows.Forms.Label();
             this.btnLogin = new System.Windows.Forms.Button();
             this.dropdownLanguage = new System.Windows.Forms.ComboBox();
             this.txtbxPassword = new System.Windows.Forms.TextBox();
             this.txtbxUsername = new System.Windows.Forms.TextBox();
             this.pnlLoginLeft = new System.Windows.Forms.Panel();
+            this.lblUserCountry = new System.Windows.Forms.Label();
+            this.lblUserCity = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.iconLogin = new System.Windows.Forms.PictureBox();
             this.passwordIcon = new System.Windows.Forms.PictureBox();
@@ -47,38 +47,16 @@
             ((System.ComponentModel.ISupportInitialize)(this.usernameIcon)).BeginInit();
             this.SuspendLayout();
             // 
-            // labelTime
+            // labelUserState
             // 
-            this.labelTime.AutoSize = true;
-            this.labelTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
-            this.labelTime.ForeColor = System.Drawing.SystemColors.ControlLight;
-            this.labelTime.Location = new System.Drawing.Point(47, 257);
-            this.labelTime.Name = "labelTime";
-            this.labelTime.Size = new System.Drawing.Size(113, 29);
-            this.labelTime.TabIndex = 11;
-            this.labelTime.Text = "12:00 PM";
-            // 
-            // labelDate
-            // 
-            this.labelDate.AutoSize = true;
-            this.labelDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
-            this.labelDate.ForeColor = System.Drawing.SystemColors.ControlLight;
-            this.labelDate.Location = new System.Drawing.Point(12, 169);
-            this.labelDate.Name = "labelDate";
-            this.labelDate.Size = new System.Drawing.Size(193, 29);
-            this.labelDate.TabIndex = 10;
-            this.labelDate.Text = "Tuesday, Oct. 22";
-            // 
-            // labelUserLocation
-            // 
-            this.labelUserLocation.AutoSize = true;
-            this.labelUserLocation.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
-            this.labelUserLocation.ForeColor = System.Drawing.SystemColors.ControlLight;
-            this.labelUserLocation.Location = new System.Drawing.Point(47, 128);
-            this.labelUserLocation.Name = "labelUserLocation";
-            this.labelUserLocation.Size = new System.Drawing.Size(116, 29);
-            this.labelUserLocation.TabIndex = 9;
-            this.labelUserLocation.Text = "Louisiana";
+            this.labelUserState.AutoSize = true;
+            this.labelUserState.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
+            this.labelUserState.ForeColor = System.Drawing.SystemColors.ControlLight;
+            this.labelUserState.Location = new System.Drawing.Point(34, 159);
+            this.labelUserState.Name = "labelUserState";
+            this.labelUserState.Size = new System.Drawing.Size(68, 29);
+            this.labelUserState.TabIndex = 9;
+            this.labelUserState.Text = "State";
             // 
             // btnLogin
             // 
@@ -130,16 +108,40 @@
             // pnlLoginLeft
             // 
             this.pnlLoginLeft.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(72)))), ((int)(((byte)(87)))));
+            this.pnlLoginLeft.Controls.Add(this.lblUserCountry);
+            this.pnlLoginLeft.Controls.Add(this.lblUserCity);
             this.pnlLoginLeft.Controls.Add(this.pictureBox2);
             this.pnlLoginLeft.Controls.Add(this.dropdownLanguage);
-            this.pnlLoginLeft.Controls.Add(this.labelDate);
-            this.pnlLoginLeft.Controls.Add(this.labelUserLocation);
-            this.pnlLoginLeft.Controls.Add(this.labelTime);
+            this.pnlLoginLeft.Controls.Add(this.labelUserState);
             this.pnlLoginLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlLoginLeft.Location = new System.Drawing.Point(0, 0);
             this.pnlLoginLeft.Name = "pnlLoginLeft";
             this.pnlLoginLeft.Size = new System.Drawing.Size(236, 406);
             this.pnlLoginLeft.TabIndex = 17;
+            this.pnlLoginLeft.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlLoginLeft_Paint);
+            // 
+            // lblUserCountry
+            // 
+            this.lblUserCountry.AutoSize = true;
+            this.lblUserCountry.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUserCountry.ForeColor = System.Drawing.SystemColors.ControlLight;
+            this.lblUserCountry.Location = new System.Drawing.Point(34, 188);
+            this.lblUserCountry.Name = "lblUserCountry";
+            this.lblUserCountry.Size = new System.Drawing.Size(95, 29);
+            this.lblUserCountry.TabIndex = 16;
+            this.lblUserCountry.Text = "Country";
+            // 
+            // lblUserCity
+            // 
+            this.lblUserCity.AutoSize = true;
+            this.lblUserCity.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUserCity.ForeColor = System.Drawing.SystemColors.ControlLight;
+            this.lblUserCity.Location = new System.Drawing.Point(34, 130);
+            this.lblUserCity.Name = "lblUserCity";
+            this.lblUserCity.Size = new System.Drawing.Size(53, 29);
+            this.lblUserCity.TabIndex = 15;
+            this.lblUserCity.Text = "City";
+            this.lblUserCity.Click += new System.EventHandler(this.lblUserCity_Click);
             // 
             // pictureBox2
             // 
@@ -197,6 +199,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "LoginForm";
             this.Text = "Login";
+            this.Load += new System.EventHandler(this.LoginForm_Load);
             this.pnlLoginLeft.ResumeLayout(false);
             this.pnlLoginLeft.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
@@ -209,9 +212,7 @@
         }
 
         #endregion
-        private System.Windows.Forms.Label labelTime;
-        private System.Windows.Forms.Label labelDate;
-        private System.Windows.Forms.Label labelUserLocation;
+        private System.Windows.Forms.Label labelUserState;
         private System.Windows.Forms.Button btnLogin;
         private System.Windows.Forms.ComboBox dropdownLanguage;
         private System.Windows.Forms.TextBox txtbxPassword;
@@ -221,6 +222,8 @@
         private System.Windows.Forms.PictureBox usernameIcon;
         private System.Windows.Forms.PictureBox passwordIcon;
         private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.Label lblUserCity;
+        private System.Windows.Forms.Label lblUserCountry;
     }
 }
 

@@ -12,7 +12,7 @@ using System.Windows.Forms;
 namespace Scheduling.Data
 {
 
-    internal class MySqlDatabase : IDatabase, IDataParameterFactory
+    internal class MySqlDatabase : IDataParameterFactory
     {
         private readonly string _connectionString;
 
@@ -25,10 +25,7 @@ namespace Scheduling.Data
         {
             return new MySqlConnection(_connectionString);
         }
-        public void ConnectToDatabase(IDataConnection connection)
-        {
-            throw new NotImplementedException();
-        }
+        
 
         public IDbDataParameter CreateParameter(string name, object value)
         {
@@ -78,7 +75,7 @@ namespace Scheduling.Data
                     if (parameters != null)
                     {
                         command.CommandText = query;
-                        foreach(var parameter in parameters)
+                        foreach (var parameter in parameters)
                         {
                             command.Parameters.Add(parameter);
                         }
@@ -94,6 +91,7 @@ namespace Scheduling.Data
                     }
                 }
             }
+
             return rowsAffected;
         }
     }

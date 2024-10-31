@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Scheduling.Data;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace Scheduling.Interfaces
     internal interface IDatabase
     {
         IDbConnection GetConnection();
-        void ConnectToDatabase(IDataConnection connection);
+        void ConnectToDatabase(MySqlDatabase connection);
 
         DataTable ExecuteSelectQuery(string query, IDataParameter[] parameters = null);
         int ExecuteNonQuery(string query, IDataParameter[] parameters = null);
