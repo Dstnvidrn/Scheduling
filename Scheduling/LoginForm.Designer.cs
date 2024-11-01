@@ -34,14 +34,14 @@
             this.txtbxPassword = new System.Windows.Forms.TextBox();
             this.txtbxUsername = new System.Windows.Forms.TextBox();
             this.pnlLoginLeft = new System.Windows.Forms.Panel();
+            this.lblLangSelect = new System.Windows.Forms.Label();
             this.lblUserCountry = new System.Windows.Forms.Label();
             this.lblUserCity = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.iconLogin = new System.Windows.Forms.PictureBox();
             this.passwordIcon = new System.Windows.Forms.PictureBox();
             this.usernameIcon = new System.Windows.Forms.PictureBox();
-            this.lblInvalidCreds = new System.Windows.Forms.Label();
-            this.lblLangSelect = new System.Windows.Forms.Label();
+            this.lblValidLogin = new System.Windows.Forms.Label();
             this.pnlLoginLeft.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconLogin)).BeginInit();
@@ -123,7 +123,16 @@
             this.pnlLoginLeft.Name = "pnlLoginLeft";
             this.pnlLoginLeft.Size = new System.Drawing.Size(236, 406);
             this.pnlLoginLeft.TabIndex = 17;
-            this.pnlLoginLeft.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlLoginLeft_Paint);
+            // 
+            // lblLangSelect
+            // 
+            this.lblLangSelect.AutoSize = true;
+            this.lblLangSelect.ForeColor = System.Drawing.SystemColors.ControlLight;
+            this.lblLangSelect.Location = new System.Drawing.Point(9, 357);
+            this.lblLangSelect.Name = "lblLangSelect";
+            this.lblLangSelect.Size = new System.Drawing.Size(91, 13);
+            this.lblLangSelect.TabIndex = 17;
+            this.lblLangSelect.Text = "Select Language:";
             // 
             // lblUserCountry
             // 
@@ -147,7 +156,6 @@
             this.lblUserCity.Size = new System.Drawing.Size(53, 29);
             this.lblUserCity.TabIndex = 15;
             this.lblUserCity.Text = "City";
-            this.lblUserCity.Click += new System.EventHandler(this.lblUserCity_Click);
             // 
             // pictureBox2
             // 
@@ -189,37 +197,28 @@
             this.usernameIcon.TabIndex = 18;
             this.usernameIcon.TabStop = false;
             // 
-            // lblInvalidCreds
+            // lblValidLogin
             // 
-            this.lblInvalidCreds.AutoSize = true;
-            this.lblInvalidCreds.BackColor = System.Drawing.Color.MistyRose;
-            this.lblInvalidCreds.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblInvalidCreds.ForeColor = System.Drawing.Color.Red;
-            this.lblInvalidCreds.Location = new System.Drawing.Point(345, 373);
-            this.lblInvalidCreds.Name = "lblInvalidCreds";
-            this.lblInvalidCreds.Padding = new System.Windows.Forms.Padding(5);
-            this.lblInvalidCreds.Size = new System.Drawing.Size(196, 26);
-            this.lblInvalidCreds.TabIndex = 20;
-            this.lblInvalidCreds.Text = "Invalid username or password";
-            this.lblInvalidCreds.Visible = false;
-            // 
-            // lblLangSelect
-            // 
-            this.lblLangSelect.AutoSize = true;
-            this.lblLangSelect.ForeColor = System.Drawing.SystemColors.ControlLight;
-            this.lblLangSelect.Location = new System.Drawing.Point(13, 350);
-            this.lblLangSelect.Name = "lblLangSelect";
-            this.lblLangSelect.Size = new System.Drawing.Size(91, 13);
-            this.lblLangSelect.TabIndex = 17;
-            this.lblLangSelect.Text = "Select Language:";
+            this.lblValidLogin.AutoSize = true;
+            this.lblValidLogin.BackColor = System.Drawing.SystemColors.Control;
+            this.lblValidLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblValidLogin.ForeColor = System.Drawing.Color.Black;
+            this.lblValidLogin.Location = new System.Drawing.Point(419, 374);
+            this.lblValidLogin.Name = "lblValidLogin";
+            this.lblValidLogin.Padding = new System.Windows.Forms.Padding(5);
+            this.lblValidLogin.Size = new System.Drawing.Size(72, 26);
+            this.lblValidLogin.TabIndex = 20;
+            this.lblValidLogin.Text = "Success!";
+            this.lblValidLogin.Visible = false;
             // 
             // LoginForm
             // 
+            this.AcceptButton = this.btnLogin;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(657, 406);
-            this.Controls.Add(this.lblInvalidCreds);
+            this.Controls.Add(this.lblValidLogin);
             this.Controls.Add(this.iconLogin);
             this.Controls.Add(this.passwordIcon);
             this.Controls.Add(this.usernameIcon);
@@ -255,7 +254,7 @@
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Label lblUserCity;
         private System.Windows.Forms.Label lblUserCountry;
-        private System.Windows.Forms.Label lblInvalidCreds;
+        private System.Windows.Forms.Label lblValidLogin;
         private System.Windows.Forms.Label lblLangSelect;
     }
 }

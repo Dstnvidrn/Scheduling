@@ -18,6 +18,7 @@ namespace Scheduling
         private static readonly HttpClient _httpClient = new HttpClient();
         private static readonly string _APIKEY = ConfigurationManager.AppSettings["ApiKey"];
         private static readonly string _URL = $"{ConfigurationManager.AppSettings["URL"]}{_APIKEY}";
+        private readonly int? _userId;
         private LocationService _locationService;
         private readonly Dictionary<string, string> _loginErrorMessages = new Dictionary<string, string>()
         {
@@ -25,12 +26,19 @@ namespace Scheduling
             {"ES", "Nombre de usuario o contraseña incorrecta." },
             { "FR", "Nom d'utilisateur ou mot de passe incorrect." }
         };
+        private readonly Dictionary<string, string> _loginSuccessMessages = new Dictionary<string, string>()
+        {
+            {"EN", "Success!" },
+            {"ES", "¡Éxito !" },
+            {"FR", "Succès !"}
+        };
         private readonly Dictionary<string, string> _loginBtnText = new Dictionary<string, string>()
         {
             {"EN", "Login" },
             {"ES", "Iniciar sesión" },
             {"FR", "Connexion"}
         };
+        
 
         public  LoginForm()
         {
@@ -63,27 +71,39 @@ namespace Scheduling
 
        
 
-        private void btnLogin_Click(object sender, EventArgs e)
+        private async void btnLogin_Click(object sender, EventArgs e)
         {
             string username = txtbxUsername.Text;
             string password = txtbxPassword.Text;
-
+            int? userId = ValidateCredentials(username, password);
+            string selectedLanguage = dropdownLanguage.SelectedItem.ToString();
             // Verify login credentials
-            if (ValidateCredentials(username, password))
+            if (userId.HasValue)
             {
-                MessageBox.Show("Login Successful!");
+                SetLabelMessage(lblValidLogin, _loginSuccessMessages, selectedLanguage, true);
+                await Task.Delay(1500);
+                this.Hide();
+                using (Form appointmentForm = new AppointmentsForm(userId))
+                {
+                    appointmentForm.ShowDialog();
+                    this.Close();
+                }
 
+            }
+            else
+            {
+                SetLabelMessage(lblValidLogin, _loginErrorMessages, selectedLanguage, false);
             }
             
         }
 
         
 
-        private bool ValidateCredentials(string username, string password)
+        private int? ValidateCredentials(string username, string password)
         {
             try
             {
-                string query = "SELECT COUNT(*) FROM user WHERE userName= @username AND password= @password";
+                string query = "SELECT userId FROM user WHERE userName= @username AND password= @password";
 
 
                 IDbDataParameter[] parameters = new IDbDataParameter[]
@@ -98,25 +118,16 @@ namespace Scheduling
 
                 // check if matching result was found
 
-                if (result.Rows.Count > 0 && Convert.ToInt32(result.Rows[0][0]) > 0) {
-                    lblInvalidCreds.Visible = false;
-                    return true;
-                }
-                else
-                {
-                    string selectedLanguage = dropdownLanguage.SelectedItem as string;
-                    lblInvalidCreds.Text = _loginErrorMessages.ContainsKey(selectedLanguage)
-                        ? _loginErrorMessages[selectedLanguage] :
-                        _loginErrorMessages["EN"];
-                    lblInvalidCreds.Visible = true;
-                    return false;
+                if (result.Rows.Count > 0) {
+                    
+                    return Convert.ToInt32(result.Rows[0]["userId"]);
                 }
             }
             catch(Exception ex)
             {
                 MessageBox.Show($"Error occurred: {ex.Message}");
             }
-            return false;
+            return null;
         }
         private async Task<UserInfo> GetUserInfo(string url)
         {
@@ -151,22 +162,25 @@ namespace Scheduling
             UserInfo userInfo = await GetUserInfo(_URL);
             if (userInfo != null) UpdateLocationLabels(userInfo);
         }
-
-    private void pnlLoginLeft_Paint(object sender, PaintEventArgs e)
-        {
-            
-
-        }
-
-        private void lblUserCity_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void dropdownLanguage_SelectedIndexChanged(object sender, EventArgs e)
         {
             btnLogin.Text = _loginBtnText[dropdownLanguage.SelectedItem.ToString()];
-            lblInvalidCreds.Text = _loginErrorMessages[dropdownLanguage.SelectedItem.ToString()];
+            lblValidLogin.Text = _loginErrorMessages[dropdownLanguage.SelectedItem.ToString()];
+        }
+        private void SetLabelMessage(Label label, Dictionary<string, string> messages, string language, bool isSuccess)
+        {
+            // Retrieve the message based on the selected language
+            string message = messages.ContainsKey(language) ? messages[language] : messages["EN"]; // Default to English if language is not found
+            string backgroundColorHex = isSuccess ? "#D4EDDA" : "#F8D7DA";
+            string textColorHex = isSuccess ? "#155724" : "#721C24";
+            int xLocation = isSuccess ? 423 : 345;
+            // Set label properties
+            label.Location = new Point(xLocation, label.Location.Y);
+            label.Text = message;
+            label.BackColor = ColorTranslator.FromHtml(backgroundColorHex);
+            label.ForeColor = ColorTranslator.FromHtml(textColorHex);
+            label.Visible = true;
         }
     }
+
 }
