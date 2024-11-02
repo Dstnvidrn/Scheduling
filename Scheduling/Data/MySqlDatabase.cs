@@ -2,6 +2,7 @@
 using Scheduling.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Linq;
 using System.Text;
@@ -12,13 +13,15 @@ using System.Windows.Forms;
 namespace Scheduling.Data
 {
 
-    internal class MySqlDatabase : IDataParameterFactory
+    public class MySqlDatabase : IDataParameterFactory
     {
-        private readonly string _connectionString;
+        
+        // Get connection from Config file
+        private readonly string _connectionString = ConfigurationManager.ConnectionStrings["MySqlDatabaseConnection"].ConnectionString;
 
-        public MySqlDatabase(string connectionString)
+        public MySqlDatabase()
         {
-            _connectionString = connectionString;
+            
         }
 
         public IDbConnection GetConnection()
@@ -93,6 +96,30 @@ namespace Scheduling.Data
             }
 
             return rowsAffected;
+        }
+
+        public DataTable GetAppointments()
+        {
+            
+                string query = @"
+                    SELECT
+                        customer.customerName,
+                        appointment.title,
+                        appointment.description,
+                        appointment.location,
+                        appointment.contact,
+                        appointment.type,
+                        appointment.createDate,
+                        appointment.createdBy,
+                        appointment.lastUpdate,
+                        appointment.lastUpdateBy                        
+                    FROM
+                        appointment
+                    INNER JOIN
+                        customer ON appointment.customerId = customer.customerId
+                    
+                    ";
+            return ExecuteSelectQuery(query);
         }
     }
 }

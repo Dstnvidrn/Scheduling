@@ -18,7 +18,6 @@ namespace Scheduling
         private static readonly HttpClient _httpClient = new HttpClient();
         private static readonly string _APIKEY = ConfigurationManager.AppSettings["ApiKey"];
         private static readonly string _URL = $"{ConfigurationManager.AppSettings["URL"]}{_APIKEY}";
-        private readonly int? _userId;
         private LocationService _locationService;
         private readonly Dictionary<string, string> _loginErrorMessages = new Dictionary<string, string>()
         {
@@ -60,12 +59,10 @@ namespace Scheduling
             labelUserState.ForeColor = ColorTranslator.FromHtml(Colors.NeutralLightColor);
             lblUserCity.ForeColor = ColorTranslator.FromHtml(Colors.NeutralLightColor);
             lblUserCountry.ForeColor = ColorTranslator.FromHtml(Colors.NeutralLightColor);
-
-            // Get connection from Config file
-            string connectionString = ConfigurationManager.ConnectionStrings["MySqlDatabaseConnection"].ConnectionString;
+            
             
             // initialize database connection with connection string
-            _database = new MySqlDatabase(connectionString);
+            _database = new MySqlDatabase();
            
         }
 
@@ -83,10 +80,13 @@ namespace Scheduling
                 SetLabelMessage(lblValidLogin, _loginSuccessMessages, selectedLanguage, true);
                 await Task.Delay(1500);
                 this.Hide();
-                using (Form appointmentForm = new AppointmentsForm(userId))
+
+                using (Form appointmentForm = new AppointmentsForm(_database,userId))
                 {
                     appointmentForm.ShowDialog();
                     this.Close();
+                    
+
                 }
 
             }

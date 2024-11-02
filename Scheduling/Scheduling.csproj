@@ -110,11 +110,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Appointments.cs">
+    <Compile Include="AppointmentsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Appointments.Designer.cs">
-      <DependentUpon>Appointments.cs</DependentUpon>
+    <Compile Include="AppointmentsForm.Designer.cs">
+      <DependentUpon>AppointmentsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Colors.cs" />
     <Compile Include="Data\MySqlDatabase.cs" />
@@ -129,10 +129,10 @@
     <Compile Include="Interfaces\IDataParameterFactory.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Data\Database.cs" />
+    <Compile Include="Services\LocalizationService.cs" />
     <Compile Include="Services\LocationService.cs" />
-    <EmbeddedResource Include="Appointments.resx">
-      <DependentUpon>Appointments.cs</DependentUpon>
+    <EmbeddedResource Include="AppointmentsForm.resx">
+      <DependentUpon>AppointmentsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
@@ -147,6 +147,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Resources\Localization\Messages.en.resx" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -162,19 +163,19 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\user-icon.png" />
+    <None Include="Resources\Images\user-icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\username-icon.png" />
+    <None Include="Resources\Images\username-icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\password-icon.png" />
+    <None Include="Resources\Images\password-icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\location-icon.png" />
+    <None Include="Resources\Images\location-icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\location-icon1.png" />
+    <None Include="Resources\Images\location-icon1.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Enums\" />
