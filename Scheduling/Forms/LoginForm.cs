@@ -20,7 +20,7 @@ namespace Scheduling
         private static readonly string _APIKEY = ConfigurationManager.AppSettings["ApiKey"];
         private static readonly string _URL = $"{ConfigurationManager.AppSettings["URL"]}{_APIKEY}";
         private LocationService _locationService;
-        
+        private AuthenticationService _authenticationService;
         
 
         public  LoginForm()
@@ -47,6 +47,7 @@ namespace Scheduling
             LocalizationService.SetCulture(dropdownLanguage.SelectedItem.ToString());            
             // initialize database connection with connection string
             _database = new MySqlDatabase();
+            _authenticationService = new AuthenticationService(_database);
            
         }
 
@@ -56,10 +57,10 @@ namespace Scheduling
         {
             string username = txtbxUsername.Text;
             string password = txtbxPassword.Text;
-            int? userId = ValidateCredentials(username, password);
+            int? userId = _database.GetUserId(username);
             string selectedLanguage = dropdownLanguage.SelectedItem.ToString();
             // Verify login credentials
-            if (userId.HasValue)
+            if (_authenticationService.ValidateCredentials(username, password))
             {
                 // Log login attempt - SUCCESS
                 LoginLogger.LogLoginAttempt(username, true);
@@ -88,36 +89,36 @@ namespace Scheduling
 
         
 
-        private int? ValidateCredentials(string username, string password)
-        {
-            try
-            {
-                string query = "SELECT userId FROM user WHERE userName= @username AND password= @password";
+        //private bool ValidateCredentials(string username, string password)
+        //{
+        //    try
+        //    {
+        //        string query = "SELECT userId FROM user WHERE userName= @username AND password= @password";
 
 
-                IDbDataParameter[] parameters = new IDbDataParameter[]
-                {
-                    _database.CreateParameter("@username", username),
-                    _database.CreateParameter("@password", password)
-                };
+        //        IDbDataParameter[] parameters = new IDbDataParameter[]
+        //        {
+        //            _database.CreateParameter("@username", username),
+        //            _database.CreateParameter("@password", password)
+        //        };
 
-                // Execute query
+        //        // Execute query
 
-                DataTable result = _database.ExecuteSelectQuery(query, parameters);
+        //        DataTable result = _database.ExecuteSelectQuery(query, parameters);
 
-                // check if matching result was found
+        //        // check if matching result was found
 
-                if (result.Rows.Count > 0) {
+        //        if (result.Rows.Count > 0) {
                     
-                    return Convert.ToInt32(result.Rows[0]["userId"]);
-                }
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show($"Error occurred: {ex.Message}");
-            }
-            return null;
-        }
+        //            return Convert.ToInt32(result.Rows[0]["userId"]);
+        //        }
+        //    }
+        //    catch(Exception ex)
+        //    {
+        //        MessageBox.Show($"Error occurred: {ex.Message}");
+        //    }
+        //    return null;
+        //}
         private async Task<UserInfo> GetUserInfo(string url)
         {
             UserInfo userInfo = null;

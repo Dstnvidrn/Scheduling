@@ -15,20 +15,18 @@ namespace Scheduling.Data
 
     public class MySqlDatabase : IDataParameterFactory
     {
-        
-        // Get connection from Config file
-        private readonly string _connectionString = ConfigurationManager.ConnectionStrings["MySqlDatabaseConnection"].ConnectionString;
+        private readonly string _connectionString;
 
         public MySqlDatabase()
         {
-            
-        }
+            _connectionString = ConfigurationManager.ConnectionStrings["MySqlDatabaseConnection"].ConnectionString;
+    }
 
         public IDbConnection GetConnection()
         {
             return new MySqlConnection(_connectionString);
         }
-        
+
 
         public IDbDataParameter CreateParameter(string name, object value)
         {
@@ -67,6 +65,26 @@ namespace Scheduling.Data
             }
             return dataTable;
         }
+        public int? GetUserId(string username)
+        {
+            string query = "SELECT userId FROM user WHERE userName = @username";
+
+            IDataParameter[] parameters = new IDataParameter[]
+            {
+                new MySqlParameter("@username", username)
+            };
+            DataTable result = ExecuteSelectQuery(query, parameters);
+            if (result.Rows.Count > 0)
+            {
+                return Convert.ToInt32(result.Rows[0]["userId"]);
+            }
+            return null;
+
+        }
+
+
+            
+        
 
         public int ExecuteNonQuery(string query, IDataParameter[] parameters = null)
         {

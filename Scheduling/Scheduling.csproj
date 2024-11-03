@@ -127,6 +127,7 @@
     </Compile>
     <Compile Include="Interfaces\IDatabase.cs" />
     <Compile Include="Interfaces\IDataParameterFactory.cs" />
+    <Compile Include="Services\AuthenticationService.cs" />
     <Compile Include="Services\LoginLogger.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
