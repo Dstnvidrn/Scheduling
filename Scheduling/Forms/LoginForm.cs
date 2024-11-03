@@ -19,29 +19,13 @@ namespace Scheduling
         private static readonly string _APIKEY = ConfigurationManager.AppSettings["ApiKey"];
         private static readonly string _URL = $"{ConfigurationManager.AppSettings["URL"]}{_APIKEY}";
         private LocationService _locationService;
-        private readonly Dictionary<string, string> _loginErrorMessages = new Dictionary<string, string>()
-        {
-            {"EN", "Incorrect username or password" },
-            {"ES", "Nombre de usuario o contraseña incorrecta." },
-            { "FR", "Nom d'utilisateur ou mot de passe incorrect." }
-        };
-        private readonly Dictionary<string, string> _loginSuccessMessages = new Dictionary<string, string>()
-        {
-            {"EN", "Success!" },
-            {"ES", "¡Éxito !" },
-            {"FR", "Succès !"}
-        };
-        private readonly Dictionary<string, string> _loginBtnText = new Dictionary<string, string>()
-        {
-            {"EN", "Login" },
-            {"ES", "Iniciar sesión" },
-            {"FR", "Connexion"}
-        };
+        
         
 
         public  LoginForm()
         {
             InitializeComponent();
+
             this.AutoSize = false;
             dropdownLanguage.SelectedItem = "EN";
             // Set sizing for login form
@@ -59,8 +43,7 @@ namespace Scheduling
             labelUserState.ForeColor = ColorTranslator.FromHtml(Colors.NeutralLightColor);
             lblUserCity.ForeColor = ColorTranslator.FromHtml(Colors.NeutralLightColor);
             lblUserCountry.ForeColor = ColorTranslator.FromHtml(Colors.NeutralLightColor);
-            
-            
+            LocalizationService.SetCulture(dropdownLanguage.SelectedItem.ToString());            
             // initialize database connection with connection string
             _database = new MySqlDatabase();
            
@@ -77,7 +60,7 @@ namespace Scheduling
             // Verify login credentials
             if (userId.HasValue)
             {
-                SetLabelMessage(lblValidLogin, _loginSuccessMessages, selectedLanguage, true);
+                SetLabelMessage(lblValidLogin, true);
                 await Task.Delay(1500);
                 this.Hide();
 
@@ -92,7 +75,7 @@ namespace Scheduling
             }
             else
             {
-                SetLabelMessage(lblValidLogin, _loginErrorMessages, selectedLanguage, false);
+                SetLabelMessage(lblValidLogin, false);
             }
             
         }
@@ -164,13 +147,12 @@ namespace Scheduling
         }
         private void dropdownLanguage_SelectedIndexChanged(object sender, EventArgs e)
         {
-            btnLogin.Text = _loginBtnText[dropdownLanguage.SelectedItem.ToString()];
-            lblValidLogin.Text = _loginErrorMessages[dropdownLanguage.SelectedItem.ToString()];
+            LocalizationService.SetCulture(dropdownLanguage.SelectedItem.ToString().ToLower());
         }
-        private void SetLabelMessage(Label label, Dictionary<string, string> messages, string language, bool isSuccess)
+        private void SetLabelMessage(Label label, bool isSuccess)
         {
             // Retrieve the message based on the selected language
-            string message = messages.ContainsKey(language) ? messages[language] : messages["EN"]; // Default to English if language is not found
+            string message = isSuccess ? LocalizationService.GetMessage("LoginSuccess") : LocalizationService.GetMessage("LoginError");// Default to English if language is not found
             string backgroundColorHex = isSuccess ? "#D4EDDA" : "#F8D7DA";
             string textColorHex = isSuccess ? "#155724" : "#721C24";
             int xLocation = isSuccess ? 423 : 345;

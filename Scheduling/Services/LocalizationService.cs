@@ -20,7 +20,7 @@ namespace Scheduling.Services
         public static void SetCulture(string cultureCode) 
         { 
             CultureInfo culture = new CultureInfo(cultureCode);
-            _resourceManager = new ResourceManager("Scheduling.Resources.Localization.Messages.en.resx", typeof(LocalizationService).Assembly);
+            _resourceManager = new ResourceManager("Scheduling.Resources.Localization.Messages", typeof(LocalizationService).Assembly);
             CultureInfo.CurrentUICulture = culture;
         }
         public static string GetMessage(string key)

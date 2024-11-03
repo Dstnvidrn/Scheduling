@@ -118,19 +118,19 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="FieldRequired" xml:space="preserve">
-    <value>This field is required.</value>
+    <value>Este campo es obligatorio.</value>
     <comment>Used for form validation</comment>
   </data>
-  <data name="InvaildPhone" xml:space="preserve">
-    <value>Phone number must contain only digits and dashes.</value>
+  <data name="InvalidPhone" xml:space="preserve">
+    <value>El número de teléfono debe contener solo dígitos y guiones.</value>
     <comment>Used for customer form validation</comment>
   </data>
   <data name="LoginError" xml:space="preserve">
-    <value>Incorrect username or password.</value>
+    <value>Nombre de usuario o contraseña incorrectos.</value>
     <comment>Shown when login fails</comment>
   </data>
   <data name="LoginSuccess" xml:space="preserve">
-    <value>Success</value>
-    <comment>Show when login succeeds</comment>
+    <value>Éxito</value>
+    <comment>Shown when login succeeds</comment>
   </data>
 </root>

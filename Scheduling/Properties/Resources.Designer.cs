@@ -65,7 +65,7 @@ namespace Scheduling.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap location_icon {
             get {
-                object obj = ResourceManager.GetObject("location-icon", resourceCulture);
+                object obj = ResourceManager.GetObject("location_icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -75,7 +75,7 @@ namespace Scheduling.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap location_icon1 {
             get {
-                object obj = ResourceManager.GetObject("location-icon1", resourceCulture);
+                object obj = ResourceManager.GetObject("location_icon1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -85,7 +85,7 @@ namespace Scheduling.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap password_icon {
             get {
-                object obj = ResourceManager.GetObject("password-icon", resourceCulture);
+                object obj = ResourceManager.GetObject("password_icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -95,7 +95,7 @@ namespace Scheduling.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap user_icon {
             get {
-                object obj = ResourceManager.GetObject("user-icon", resourceCulture);
+                object obj = ResourceManager.GetObject("user_icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -105,7 +105,7 @@ namespace Scheduling.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap username_icon {
             get {
-                object obj = ResourceManager.GetObject("username-icon", resourceCulture);
+                object obj = ResourceManager.GetObject("username_icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
