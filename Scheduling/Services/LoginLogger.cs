@@ -10,11 +10,17 @@ namespace Scheduling.Logging
 {
     public static class LoginLogger
     {
-        private static readonly string _logFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Login_History.txt.");
+        private static readonly string _logDirectoryPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Logs");
+        private static readonly string _logFilePath = Path.Combine(_logDirectoryPath, "Login_History.txt");
 
 
         public static void LogLoginAttempt(string username, bool IsSuccess)
         {
+            // Check if `Logs` folder exists
+            if (!Directory.Exists(_logDirectoryPath))
+            {
+                Directory.CreateDirectory(_logDirectoryPath);
+            }
             string timestamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             string status = IsSuccess ? "Success" : "Failure";
             string logEntry = $"{timestamp} - User: {username} - Status: {status}";

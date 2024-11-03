@@ -8,6 +8,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Scheduling.Services;
 using System.Collections.Generic;
+using Scheduling.Logging;
 namespace Scheduling
 {
     public partial class LoginForm : Form
@@ -60,7 +61,10 @@ namespace Scheduling
             // Verify login credentials
             if (userId.HasValue)
             {
+                // Log login attempt - SUCCESS
+                LoginLogger.LogLoginAttempt(username, true);
                 SetLabelMessage(lblValidLogin, true);
+
                 await Task.Delay(1500);
                 this.Hide();
 
@@ -75,6 +79,8 @@ namespace Scheduling
             }
             else
             {
+                // Log login attempt - FAIL
+                LoginLogger.LogLoginAttempt(username, false);
                 SetLabelMessage(lblValidLogin, false);
             }
             
