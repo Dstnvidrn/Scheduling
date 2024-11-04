@@ -133,4 +133,8 @@
     <value>Éxito</value>
     <comment>Shown when login succeeds</comment>
   </data>
+  <data name="Standby" xml:space="preserve">
+    <value>Iniciar sesión</value>
+    <comment>Display default login text</comment>
+  </data>
 </root>
