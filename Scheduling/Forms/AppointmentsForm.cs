@@ -35,7 +35,11 @@ namespace Scheduling
             LayoutManager.CenterSingleNestedControl(pnlContainer, tlpMenuOptions);
             LayoutManager.CenterSingleNestedControl(pnlContainer, tlpLogoutOption);
             LayoutManager.CenterSingleNestedControl(pnlContainer, lblAppointments);
+
+            // Set placerholder text in search box
+            LayoutManager.SetPlacholderText(txtAppointmentSearch, "Search", Colors.NeutalDarkColor);
         }
+        
         
         private void RenameColumnHeaders()
         {
@@ -87,10 +91,23 @@ namespace Scheduling
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
-
-        private void tableLayoutAppointments_Paint(object sender, PaintEventArgs e)
+        private void txtAppointmentSearch_Enter(object sender, EventArgs e)
         {
-
+            TextBox searchTxt = sender as TextBox;
+            if (searchTxt != null && searchTxt.ForeColor == ColorTranslator.FromHtml(Colors.NeutalDarkColor))
+            {
+                LayoutManager.SetPlacholderText((sender as TextBox), "", "#000000");
+            }
         }
+        private void txtAppointmentSearch_Exit(object sender, EventArgs e)
+        {
+            TextBox searchTxt = sender as TextBox;
+            if (searchTxt != null && string.IsNullOrEmpty(searchTxt.Text))
+            {
+                LayoutManager.SetPlacholderText((sender as TextBox), "Search", Colors.NeutalDarkColor);
+            }
+        }
+
+        
     }
 }

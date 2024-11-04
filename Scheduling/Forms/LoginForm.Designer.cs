@@ -198,6 +198,7 @@
             this.tsslLoginStatus});
             this.statusStrip1.Location = new System.Drawing.Point(0, 175);
             this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.statusStrip1.Size = new System.Drawing.Size(415, 22);
             this.statusStrip1.TabIndex = 35;
             this.statusStrip1.Text = "statusStrip1";
@@ -205,7 +206,9 @@
             // tsslLoginStatus
             // 
             this.tsslLoginStatus.BackColor = System.Drawing.Color.Transparent;
+            this.tsslLoginStatus.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.tsslLoginStatus.Name = "tsslLoginStatus";
+            this.tsslLoginStatus.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.tsslLoginStatus.Size = new System.Drawing.Size(37, 17);
             this.tsslLoginStatus.Text = "Login";
             // 
@@ -246,6 +249,7 @@
             this.btnLogin.FlatAppearance.BorderSize = 0;
             this.btnLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLogin.ForeColor = System.Drawing.Color.White;
             this.btnLogin.Location = new System.Drawing.Point(126, 109);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Padding = new System.Windows.Forms.Padding(2);

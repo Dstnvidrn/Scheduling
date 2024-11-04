@@ -70,7 +70,6 @@
             this.tableLayoutAppointments.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutAppointments.Size = new System.Drawing.Size(1515, 807);
             this.tableLayoutAppointments.TabIndex = 2;
-            this.tableLayoutAppointments.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutAppointments_Paint);
             // 
             // pnlContainer
             // 
@@ -92,7 +91,7 @@
             this.lblAppointments.AutoSize = true;
             this.lblAppointments.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAppointments.ForeColor = System.Drawing.Color.White;
-            this.lblAppointments.Location = new System.Drawing.Point(73, 24);
+            this.lblAppointments.Location = new System.Drawing.Point(73, 12);
             this.lblAppointments.Name = "lblAppointments";
             this.lblAppointments.Size = new System.Drawing.Size(143, 25);
             this.lblAppointments.TabIndex = 6;
@@ -180,7 +179,7 @@
             // 
             // btnCreate
             // 
-            this.btnCreate.BackColor = System.Drawing.Color.RosyBrown;
+            this.btnCreate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(111)))), ((int)(((byte)(97)))));
             this.btnCreate.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnCreate.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnCreate.FlatAppearance.BorderSize = 0;
@@ -260,7 +259,7 @@
             this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button1.FlatAppearance.BorderSize = 0;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.button1.Location = new System.Drawing.Point(1013, 5);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(100, 26);
@@ -276,7 +275,8 @@
             this.txtAppointmentSearch.Name = "txtAppointmentSearch";
             this.txtAppointmentSearch.Size = new System.Drawing.Size(175, 26);
             this.txtAppointmentSearch.TabIndex = 1;
-            this.txtAppointmentSearch.Text = "Search";
+            this.txtAppointmentSearch.Enter += new System.EventHandler(this.txtAppointmentSearch_Enter);
+            this.txtAppointmentSearch.Leave += new System.EventHandler(this.txtAppointmentSearch_Exit);
             // 
             // AppointmentsForm
             // 

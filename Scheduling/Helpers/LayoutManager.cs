@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,6 +26,12 @@ namespace Scheduling.Helpers
             // Position controls
             innerControl1.Left = startingX;
             innerControl2.Left = startingX + spaceBetweenInner + innerControl1.Width;
+        }
+
+        public static void SetPlacholderText(TextBox textBox, string text, string hexColor)
+        {
+            textBox.Text = text;
+            textBox.ForeColor = ColorTranslator.FromHtml(hexColor);
         }
 
     }
