@@ -170,9 +170,9 @@
             // pbLoginIcon
             // 
             this.pbLoginIcon.Image = global::Scheduling.Properties.Resources.user_icon;
-            this.pbLoginIcon.Location = new System.Drawing.Point(34, 21);
+            this.pbLoginIcon.Location = new System.Drawing.Point(126, 38);
             this.pbLoginIcon.Name = "pbLoginIcon";
-            this.pbLoginIcon.Size = new System.Drawing.Size(152, 147);
+            this.pbLoginIcon.Size = new System.Drawing.Size(175, 147);
             this.pbLoginIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbLoginIcon.TabIndex = 28;
             this.pbLoginIcon.TabStop = false;
@@ -194,7 +194,7 @@
             // txtPassword
             // 
             this.txtPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPassword.Location = new System.Drawing.Point(122, 81);
+            this.txtPassword.Location = new System.Drawing.Point(126, 70);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '●';
             this.txtPassword.Size = new System.Drawing.Size(175, 26);
@@ -203,7 +203,7 @@
             // passwordIcon
             // 
             this.passwordIcon.Image = global::Scheduling.Properties.Resources.password_icon;
-            this.passwordIcon.Location = new System.Drawing.Point(90, 81);
+            this.passwordIcon.Location = new System.Drawing.Point(94, 70);
             this.passwordIcon.Name = "passwordIcon";
             this.passwordIcon.Size = new System.Drawing.Size(26, 26);
             this.passwordIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -213,7 +213,7 @@
             // usernameIcon
             // 
             this.usernameIcon.Image = global::Scheduling.Properties.Resources.username_icon;
-            this.usernameIcon.Location = new System.Drawing.Point(90, 39);
+            this.usernameIcon.Location = new System.Drawing.Point(94, 28);
             this.usernameIcon.Name = "usernameIcon";
             this.usernameIcon.Size = new System.Drawing.Size(26, 26);
             this.usernameIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -226,7 +226,7 @@
             this.btnLogin.FlatAppearance.BorderSize = 0;
             this.btnLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLogin.Location = new System.Drawing.Point(122, 120);
+            this.btnLogin.Location = new System.Drawing.Point(126, 109);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Padding = new System.Windows.Forms.Padding(2);
             this.btnLogin.Size = new System.Drawing.Size(175, 35);
@@ -239,7 +239,7 @@
             // 
             this.txtUsername.AccessibleName = "username input box";
             this.txtUsername.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtUsername.Location = new System.Drawing.Point(122, 39);
+            this.txtUsername.Location = new System.Drawing.Point(126, 28);
             this.txtUsername.Name = "txtUsername";
             this.txtUsername.Size = new System.Drawing.Size(175, 26);
             this.txtUsername.TabIndex = 29;

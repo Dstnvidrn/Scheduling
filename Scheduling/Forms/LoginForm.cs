@@ -57,7 +57,7 @@ namespace Scheduling
        private void CenterControls()
         {
             // Center Login icon
-            LayoutManager.CenterDuoNestedControls(pnlLoginImage, passwordIcon, btnLogin, 20);
+            LayoutManager.CenterDuoNestedControls(pnlLoginImage, passwordIcon, pbLoginIcon, 10);
             // Center Username icon and textbox
             LayoutManager.CenterDuoNestedControls(pnlLoginControls, usernameIcon, txtUsername, 10);
             // Center password icon and textbox
@@ -100,8 +100,7 @@ namespace Scheduling
                 using (Form appointmentForm = new AppointmentsForm(_database,userId))
                 {
                     appointmentForm.ShowDialog();
-                    this.Close();
-                    
+                    this.Show();                  
 
                 }
 
