@@ -60,13 +60,13 @@ namespace Scheduling
             int? userId = _database.GetUserId(username);
             string selectedLanguage = dropdownLanguage.SelectedItem.ToString();
             // Verify login credentials
-            if (_authenticationService.ValidateCredentials(username, password))
+            if (_authenticationService.ValidateCredentials(username, password) && userId != null)
             {
                 // Log login attempt - SUCCESS
                 LoginLogger.LogLoginAttempt(username, true);
                 SetLabelMessage(lblValidLogin, true);
 
-                await Task.Delay(1500);
+                await Task.Delay(1200);
                 this.Hide();
 
                 using (Form appointmentForm = new AppointmentsForm(_database,userId))

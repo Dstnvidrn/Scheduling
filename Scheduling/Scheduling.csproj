@@ -118,6 +118,7 @@
     </Compile>
     <Compile Include="Helpers\Colors.cs" />
     <Compile Include="Data\MySqlDatabase.cs" />
+    <Compile Include="Helpers\LayoutManager.cs" />
     <Compile Include="Interfaces\IDataConnection.cs" />
     <Compile Include="Forms\LoginForm.cs">
       <SubType>Form</SubType>

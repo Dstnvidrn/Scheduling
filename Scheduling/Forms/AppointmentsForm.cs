@@ -1,5 +1,6 @@
 ﻿using Scheduling.Data;
 using System;
+using Scheduling.Helpers;
 using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
@@ -19,17 +20,38 @@ namespace Scheduling
             InitializeComponent();
             _userId = userId;
             _database = database;
-            appointmentTable.Width = this.Width;
-            appointmentTable.Height = this.Height;
-
-
-            asideAppointments.BackColor = ColorTranslator.FromHtml(Colors.BaseColor);
+            dgvAppointments.Width = this.Width;
+            dgvAppointments.Height = this.Height;
+            pnlContainer.BackColor = ColorTranslator.FromHtml(Colors.BaseColor);
             btnCreate.BackColor = ColorTranslator.FromHtml(Colors.CtaColor);
+
+            
         }
 
         private void AppointmentsForm_Load(object sender, EventArgs e)
         {
             PopulateDataGridView();
+            RenameColumnHeaders();
+            LayoutManager.CenterNestedControl(pnlContainer, tlpMenuOptions);
+            LayoutManager.CenterNestedControl(pnlContainer, tlpLogoutOption);
+            LayoutManager.CenterNestedControl(pnlContainer, lblAppointments);
+        }
+        
+        private void RenameColumnHeaders()
+        {
+            dgvAppointments.AutoGenerateColumns = false;
+            //Rename table headers for greater readability
+            
+            dgvAppointments.Columns["customerName"].HeaderText = "Customer Name";
+            dgvAppointments.Columns["title"].HeaderText = "Title";
+            dgvAppointments.Columns["description"].HeaderText = "Description";
+            dgvAppointments.Columns["location"].HeaderText = "Location";
+            dgvAppointments.Columns["contact"].HeaderText = "Contact";
+            dgvAppointments.Columns["type"].HeaderText = "Type";
+            dgvAppointments.Columns["createDate"].HeaderText = "Created Date";
+            dgvAppointments.Columns["createdBy"].HeaderText = "Created By";
+            dgvAppointments.Columns["lastUpdate"].HeaderText = "Last Update";
+            dgvAppointments.Columns["lastUpdateBy"].HeaderText = "Updated By";
         }
         private void PopulateDataGridView()
         {
@@ -37,7 +59,7 @@ namespace Scheduling
             {
                 DataTable userData = _database.GetAppointments();
 
-                appointmentTable.DataSource = userData;
+                dgvAppointments.DataSource = userData;
             }
             catch (Exception ex)
             {
@@ -46,6 +68,11 @@ namespace Scheduling
         }
 
         private void btnCreate_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dgvAppointments_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }
