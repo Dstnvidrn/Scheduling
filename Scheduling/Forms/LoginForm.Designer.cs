@@ -39,22 +39,22 @@
             this.pnlLoginImage = new System.Windows.Forms.Panel();
             this.pbLoginIcon = new System.Windows.Forms.PictureBox();
             this.pnlLoginControls = new System.Windows.Forms.Panel();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.tsslLoginStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.passwordIcon = new System.Windows.Forms.PictureBox();
             this.usernameIcon = new System.Windows.Forms.PictureBox();
             this.btnLogin = new System.Windows.Forms.Button();
             this.txtUsername = new System.Windows.Forms.TextBox();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.tsslLoginStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.pnlLoginLeft.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbLocationIcon)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.pnlLoginImage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbLoginIcon)).BeginInit();
             this.pnlLoginControls.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.passwordIcon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.usernameIcon)).BeginInit();
-            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblState
@@ -191,6 +191,23 @@
             this.pnlLoginControls.Size = new System.Drawing.Size(415, 197);
             this.pnlLoginControls.TabIndex = 1;
             // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsslLoginStatus});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 175);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(415, 22);
+            this.statusStrip1.TabIndex = 35;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // tsslLoginStatus
+            // 
+            this.tsslLoginStatus.BackColor = System.Drawing.Color.Transparent;
+            this.tsslLoginStatus.Name = "tsslLoginStatus";
+            this.tsslLoginStatus.Size = new System.Drawing.Size(37, 17);
+            this.tsslLoginStatus.Text = "Login";
+            // 
             // txtPassword
             // 
             this.txtPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -223,9 +240,11 @@
             // btnLogin
             // 
             this.btnLogin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(111)))), ((int)(((byte)(97)))));
+            this.btnLogin.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnLogin.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnLogin.FlatAppearance.BorderSize = 0;
             this.btnLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLogin.Location = new System.Drawing.Point(126, 109);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Padding = new System.Windows.Forms.Padding(2);
@@ -238,31 +257,16 @@
             // txtUsername
             // 
             this.txtUsername.AccessibleName = "username input box";
-            this.txtUsername.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtUsername.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtUsername.Location = new System.Drawing.Point(126, 28);
             this.txtUsername.Name = "txtUsername";
-            this.txtUsername.Size = new System.Drawing.Size(175, 26);
+            this.txtUsername.Size = new System.Drawing.Size(175, 24);
             this.txtUsername.TabIndex = 29;
             this.txtUsername.WordWrap = false;
             // 
-            // statusStrip1
-            // 
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsslLoginStatus});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 175);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(415, 22);
-            this.statusStrip1.TabIndex = 35;
-            this.statusStrip1.Text = "statusStrip1";
-            // 
-            // tsslLoginStatus
-            // 
-            this.tsslLoginStatus.Name = "tsslLoginStatus";
-            this.tsslLoginStatus.Size = new System.Drawing.Size(37, 17);
-            this.tsslLoginStatus.Text = "Login";
-            // 
             // LoginForm
             // 
+            this.AcceptButton = this.btnLogin;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
@@ -281,10 +285,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbLoginIcon)).EndInit();
             this.pnlLoginControls.ResumeLayout(false);
             this.pnlLoginControls.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.passwordIcon)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.usernameIcon)).EndInit();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.passwordIcon)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.usernameIcon)).EndInit();
             this.ResumeLayout(false);
 
         }

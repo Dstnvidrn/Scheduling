@@ -100,8 +100,11 @@ namespace Scheduling
                 using (Form appointmentForm = new AppointmentsForm(_database,userId))
                 {
                     appointmentForm.ShowDialog();
-                    this.Show();                  
-
+                    if (appointmentForm.DialogResult != DialogResult.OK)
+                    {
+                        this.Close();                
+                    }
+                    this.Show();
                 }
 
             }

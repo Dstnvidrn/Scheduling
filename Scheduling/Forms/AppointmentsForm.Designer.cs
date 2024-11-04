@@ -103,7 +103,7 @@
             this.tlpLogoutOption.ColumnCount = 1;
             this.tlpLogoutOption.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tlpLogoutOption.Controls.Add(this.btnLogout, 0, 0);
-            this.tlpLogoutOption.Location = new System.Drawing.Point(9, 738);
+            this.tlpLogoutOption.Location = new System.Drawing.Point(30, 741);
             this.tlpLogoutOption.Name = "tlpLogoutOption";
             this.tlpLogoutOption.RowCount = 1;
             this.tlpLogoutOption.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -113,6 +113,7 @@
             // btnLogout
             // 
             this.btnLogout.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.btnLogout.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnLogout.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnLogout.FlatAppearance.BorderSize = 0;
             this.btnLogout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -123,6 +124,7 @@
             this.btnLogout.TabIndex = 4;
             this.btnLogout.Text = "&Logout";
             this.btnLogout.UseVisualStyleBackColor = false;
+            this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
             // 
             // tlpMenuOptions
             // 
@@ -149,6 +151,7 @@
             // btnDelete
             // 
             this.btnDelete.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.btnDelete.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnDelete.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnDelete.FlatAppearance.BorderSize = 0;
             this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -163,6 +166,7 @@
             // btnEdit
             // 
             this.btnEdit.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.btnEdit.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnEdit.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnEdit.FlatAppearance.BorderSize = 0;
             this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -177,6 +181,7 @@
             // btnCreate
             // 
             this.btnCreate.BackColor = System.Drawing.Color.RosyBrown;
+            this.btnCreate.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnCreate.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnCreate.FlatAppearance.BorderSize = 0;
             this.btnCreate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -192,6 +197,7 @@
             // btnDetails
             // 
             this.btnDetails.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.btnDetails.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnDetails.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnDetails.FlatAppearance.BorderSize = 0;
             this.btnDetails.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -202,6 +208,7 @@
             this.btnDetails.TabIndex = 3;
             this.btnDetails.Text = "Details";
             this.btnDetails.UseVisualStyleBackColor = false;
+            this.btnDetails.Click += new System.EventHandler(this.btnDetails_Click);
             // 
             // AppointmentsForm
             // 

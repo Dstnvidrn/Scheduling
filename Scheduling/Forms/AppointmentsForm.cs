@@ -76,5 +76,16 @@ namespace Scheduling
         {
 
         }
+
+        private void btnDetails_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnLogout_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.OK;
+            this.Close();
+        }
     }
 }
