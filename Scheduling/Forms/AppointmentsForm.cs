@@ -32,9 +32,9 @@ namespace Scheduling
         {
             PopulateDataGridView();
             RenameColumnHeaders();
-            LayoutManager.CenterNestedControl(pnlContainer, tlpMenuOptions);
-            LayoutManager.CenterNestedControl(pnlContainer, tlpLogoutOption);
-            LayoutManager.CenterNestedControl(pnlContainer, lblAppointments);
+            LayoutManager.CenterSingleNestedControl(pnlContainer, tlpMenuOptions);
+            LayoutManager.CenterSingleNestedControl(pnlContainer, tlpLogoutOption);
+            LayoutManager.CenterSingleNestedControl(pnlContainer, lblAppointments);
         }
         
         private void RenameColumnHeaders()

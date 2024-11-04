@@ -28,52 +28,45 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.labelUserState = new System.Windows.Forms.Label();
-            this.btnLogin = new System.Windows.Forms.Button();
+            this.lblState = new System.Windows.Forms.Label();
             this.dropdownLanguage = new System.Windows.Forms.ComboBox();
-            this.txtbxPassword = new System.Windows.Forms.TextBox();
-            this.txtbxUsername = new System.Windows.Forms.TextBox();
             this.pnlLoginLeft = new System.Windows.Forms.Panel();
             this.lblLangSelect = new System.Windows.Forms.Label();
             this.lblUserCountry = new System.Windows.Forms.Label();
             this.lblUserCity = new System.Windows.Forms.Label();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.iconLogin = new System.Windows.Forms.PictureBox();
+            this.pbLocationIcon = new System.Windows.Forms.PictureBox();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.pnlLoginImage = new System.Windows.Forms.Panel();
+            this.pbLoginIcon = new System.Windows.Forms.PictureBox();
+            this.pnlLoginControls = new System.Windows.Forms.Panel();
+            this.txtPassword = new System.Windows.Forms.TextBox();
             this.passwordIcon = new System.Windows.Forms.PictureBox();
             this.usernameIcon = new System.Windows.Forms.PictureBox();
-            this.lblValidLogin = new System.Windows.Forms.Label();
+            this.btnLogin = new System.Windows.Forms.Button();
+            this.txtUsername = new System.Windows.Forms.TextBox();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.tsslLoginStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.pnlLoginLeft.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.iconLogin)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbLocationIcon)).BeginInit();
+            this.tableLayoutPanel1.SuspendLayout();
+            this.pnlLoginImage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbLoginIcon)).BeginInit();
+            this.pnlLoginControls.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.passwordIcon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.usernameIcon)).BeginInit();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // labelUserState
+            // lblState
             // 
-            this.labelUserState.AutoSize = true;
-            this.labelUserState.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
-            this.labelUserState.ForeColor = System.Drawing.SystemColors.ControlLight;
-            this.labelUserState.Location = new System.Drawing.Point(34, 159);
-            this.labelUserState.Name = "labelUserState";
-            this.labelUserState.Size = new System.Drawing.Size(68, 29);
-            this.labelUserState.TabIndex = 9;
-            this.labelUserState.Text = "State";
-            // 
-            // btnLogin
-            // 
-            this.btnLogin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(111)))), ((int)(((byte)(97)))));
-            this.btnLogin.FlatAppearance.BorderSize = 0;
-            this.btnLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLogin.Location = new System.Drawing.Point(394, 330);
-            this.btnLogin.Name = "btnLogin";
-            this.btnLogin.Padding = new System.Windows.Forms.Padding(2);
-            this.btnLogin.Size = new System.Drawing.Size(127, 34);
-            this.btnLogin.TabIndex = 16;
-            this.btnLogin.Text = "&Login";
-            this.btnLogin.UseVisualStyleBackColor = false;
-            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
+            this.lblState.AutoSize = true;
+            this.lblState.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
+            this.lblState.ForeColor = System.Drawing.SystemColors.ControlLight;
+            this.lblState.Location = new System.Drawing.Point(85, 159);
+            this.lblState.Name = "lblState";
+            this.lblState.Size = new System.Drawing.Size(68, 29);
+            this.lblState.TabIndex = 9;
+            this.lblState.Text = "State";
             // 
             // dropdownLanguage
             // 
@@ -91,34 +84,15 @@
             this.dropdownLanguage.TabIndex = 13;
             this.dropdownLanguage.SelectedIndexChanged += new System.EventHandler(this.dropdownLanguage_SelectedIndexChanged);
             // 
-            // txtbxPassword
-            // 
-            this.txtbxPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtbxPassword.Location = new System.Drawing.Point(366, 298);
-            this.txtbxPassword.Name = "txtbxPassword";
-            this.txtbxPassword.PasswordChar = '●';
-            this.txtbxPassword.Size = new System.Drawing.Size(175, 26);
-            this.txtbxPassword.TabIndex = 15;
-            // 
-            // txtbxUsername
-            // 
-            this.txtbxUsername.AccessibleName = "username input box";
-            this.txtbxUsername.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtbxUsername.Location = new System.Drawing.Point(365, 253);
-            this.txtbxUsername.Name = "txtbxUsername";
-            this.txtbxUsername.Size = new System.Drawing.Size(176, 26);
-            this.txtbxUsername.TabIndex = 14;
-            this.txtbxUsername.WordWrap = false;
-            // 
             // pnlLoginLeft
             // 
             this.pnlLoginLeft.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(72)))), ((int)(((byte)(87)))));
             this.pnlLoginLeft.Controls.Add(this.lblLangSelect);
             this.pnlLoginLeft.Controls.Add(this.lblUserCountry);
             this.pnlLoginLeft.Controls.Add(this.lblUserCity);
-            this.pnlLoginLeft.Controls.Add(this.pictureBox2);
+            this.pnlLoginLeft.Controls.Add(this.pbLocationIcon);
             this.pnlLoginLeft.Controls.Add(this.dropdownLanguage);
-            this.pnlLoginLeft.Controls.Add(this.labelUserState);
+            this.pnlLoginLeft.Controls.Add(this.lblState);
             this.pnlLoginLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlLoginLeft.Location = new System.Drawing.Point(0, 0);
             this.pnlLoginLeft.Name = "pnlLoginLeft";
@@ -140,7 +114,7 @@
             this.lblUserCountry.AutoSize = true;
             this.lblUserCountry.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblUserCountry.ForeColor = System.Drawing.SystemColors.ControlLight;
-            this.lblUserCountry.Location = new System.Drawing.Point(34, 188);
+            this.lblUserCountry.Location = new System.Drawing.Point(69, 188);
             this.lblUserCountry.Name = "lblUserCountry";
             this.lblUserCountry.Size = new System.Drawing.Size(95, 29);
             this.lblUserCountry.TabIndex = 16;
@@ -152,111 +126,188 @@
             this.lblUserCity.AutoSize = true;
             this.lblUserCity.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblUserCity.ForeColor = System.Drawing.SystemColors.ControlLight;
-            this.lblUserCity.Location = new System.Drawing.Point(34, 130);
+            this.lblUserCity.Location = new System.Drawing.Point(87, 120);
             this.lblUserCity.Name = "lblUserCity";
             this.lblUserCity.Size = new System.Drawing.Size(53, 29);
             this.lblUserCity.TabIndex = 15;
             this.lblUserCity.Text = "City";
             // 
-            // pictureBox2
+            // pbLocationIcon
             // 
-            this.pictureBox2.Image = global::Scheduling.Properties.Resources.location_icon1;
-            this.pictureBox2.Location = new System.Drawing.Point(90, 49);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(50, 53);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox2.TabIndex = 14;
-            this.pictureBox2.TabStop = false;
+            this.pbLocationIcon.Image = global::Scheduling.Properties.Resources.location_icon1;
+            this.pbLocationIcon.Location = new System.Drawing.Point(90, 49);
+            this.pbLocationIcon.Name = "pbLocationIcon";
+            this.pbLocationIcon.Size = new System.Drawing.Size(50, 53);
+            this.pbLocationIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbLocationIcon.TabIndex = 14;
+            this.pbLocationIcon.TabStop = false;
             // 
-            // iconLogin
+            // tableLayoutPanel1
             // 
-            this.iconLogin.Image = global::Scheduling.Properties.Resources.user_icon;
-            this.iconLogin.Location = new System.Drawing.Point(380, 49);
-            this.iconLogin.Name = "iconLogin";
-            this.iconLogin.Size = new System.Drawing.Size(141, 149);
-            this.iconLogin.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.iconLogin.TabIndex = 14;
-            this.iconLogin.TabStop = false;
+            this.tableLayoutPanel1.ColumnCount = 1;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.Controls.Add(this.pnlLoginImage, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.pnlLoginControls, 0, 1);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(236, 0);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(421, 406);
+            this.tableLayoutPanel1.TabIndex = 18;
+            // 
+            // pnlLoginImage
+            // 
+            this.pnlLoginImage.Controls.Add(this.pbLoginIcon);
+            this.pnlLoginImage.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlLoginImage.Location = new System.Drawing.Point(3, 3);
+            this.pnlLoginImage.Name = "pnlLoginImage";
+            this.pnlLoginImage.Size = new System.Drawing.Size(415, 197);
+            this.pnlLoginImage.TabIndex = 0;
+            // 
+            // pbLoginIcon
+            // 
+            this.pbLoginIcon.Image = global::Scheduling.Properties.Resources.user_icon;
+            this.pbLoginIcon.Location = new System.Drawing.Point(34, 21);
+            this.pbLoginIcon.Name = "pbLoginIcon";
+            this.pbLoginIcon.Size = new System.Drawing.Size(152, 147);
+            this.pbLoginIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbLoginIcon.TabIndex = 28;
+            this.pbLoginIcon.TabStop = false;
+            // 
+            // pnlLoginControls
+            // 
+            this.pnlLoginControls.Controls.Add(this.statusStrip1);
+            this.pnlLoginControls.Controls.Add(this.txtPassword);
+            this.pnlLoginControls.Controls.Add(this.passwordIcon);
+            this.pnlLoginControls.Controls.Add(this.usernameIcon);
+            this.pnlLoginControls.Controls.Add(this.btnLogin);
+            this.pnlLoginControls.Controls.Add(this.txtUsername);
+            this.pnlLoginControls.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlLoginControls.Location = new System.Drawing.Point(3, 206);
+            this.pnlLoginControls.Name = "pnlLoginControls";
+            this.pnlLoginControls.Size = new System.Drawing.Size(415, 197);
+            this.pnlLoginControls.TabIndex = 1;
+            // 
+            // txtPassword
+            // 
+            this.txtPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPassword.Location = new System.Drawing.Point(122, 81);
+            this.txtPassword.Name = "txtPassword";
+            this.txtPassword.PasswordChar = '●';
+            this.txtPassword.Size = new System.Drawing.Size(175, 26);
+            this.txtPassword.TabIndex = 30;
             // 
             // passwordIcon
             // 
             this.passwordIcon.Image = global::Scheduling.Properties.Resources.password_icon;
-            this.passwordIcon.Location = new System.Drawing.Point(333, 298);
+            this.passwordIcon.Location = new System.Drawing.Point(90, 81);
             this.passwordIcon.Name = "passwordIcon";
             this.passwordIcon.Size = new System.Drawing.Size(26, 26);
             this.passwordIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.passwordIcon.TabIndex = 19;
+            this.passwordIcon.TabIndex = 33;
             this.passwordIcon.TabStop = false;
             // 
             // usernameIcon
             // 
             this.usernameIcon.Image = global::Scheduling.Properties.Resources.username_icon;
-            this.usernameIcon.Location = new System.Drawing.Point(333, 253);
+            this.usernameIcon.Location = new System.Drawing.Point(90, 39);
             this.usernameIcon.Name = "usernameIcon";
             this.usernameIcon.Size = new System.Drawing.Size(26, 26);
             this.usernameIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.usernameIcon.TabIndex = 18;
+            this.usernameIcon.TabIndex = 32;
             this.usernameIcon.TabStop = false;
             // 
-            // lblValidLogin
+            // btnLogin
             // 
-            this.lblValidLogin.AutoSize = true;
-            this.lblValidLogin.BackColor = System.Drawing.SystemColors.Control;
-            this.lblValidLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblValidLogin.ForeColor = System.Drawing.Color.Black;
-            this.lblValidLogin.Location = new System.Drawing.Point(419, 374);
-            this.lblValidLogin.Name = "lblValidLogin";
-            this.lblValidLogin.Padding = new System.Windows.Forms.Padding(5);
-            this.lblValidLogin.Size = new System.Drawing.Size(72, 26);
-            this.lblValidLogin.TabIndex = 20;
-            this.lblValidLogin.Text = "Success!";
-            this.lblValidLogin.Visible = false;
+            this.btnLogin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(111)))), ((int)(((byte)(97)))));
+            this.btnLogin.FlatAppearance.BorderSize = 0;
+            this.btnLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLogin.Location = new System.Drawing.Point(122, 120);
+            this.btnLogin.Name = "btnLogin";
+            this.btnLogin.Padding = new System.Windows.Forms.Padding(2);
+            this.btnLogin.Size = new System.Drawing.Size(175, 35);
+            this.btnLogin.TabIndex = 31;
+            this.btnLogin.Text = "&Login";
+            this.btnLogin.UseVisualStyleBackColor = false;
+            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
+            // 
+            // txtUsername
+            // 
+            this.txtUsername.AccessibleName = "username input box";
+            this.txtUsername.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtUsername.Location = new System.Drawing.Point(122, 39);
+            this.txtUsername.Name = "txtUsername";
+            this.txtUsername.Size = new System.Drawing.Size(175, 26);
+            this.txtUsername.TabIndex = 29;
+            this.txtUsername.WordWrap = false;
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsslLoginStatus});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 175);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(415, 22);
+            this.statusStrip1.TabIndex = 35;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // tsslLoginStatus
+            // 
+            this.tsslLoginStatus.Name = "tsslLoginStatus";
+            this.tsslLoginStatus.Size = new System.Drawing.Size(37, 17);
+            this.tsslLoginStatus.Text = "Login";
             // 
             // LoginForm
             // 
-            this.AcceptButton = this.btnLogin;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(657, 406);
-            this.Controls.Add(this.lblValidLogin);
-            this.Controls.Add(this.iconLogin);
-            this.Controls.Add(this.passwordIcon);
-            this.Controls.Add(this.usernameIcon);
+            this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.pnlLoginLeft);
-            this.Controls.Add(this.btnLogin);
-            this.Controls.Add(this.txtbxPassword);
-            this.Controls.Add(this.txtbxUsername);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "LoginForm";
             this.Text = "Login";
             this.Load += new System.EventHandler(this.LoginForm_Load);
             this.pnlLoginLeft.ResumeLayout(false);
             this.pnlLoginLeft.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.iconLogin)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbLocationIcon)).EndInit();
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.pnlLoginImage.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pbLoginIcon)).EndInit();
+            this.pnlLoginControls.ResumeLayout(false);
+            this.pnlLoginControls.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.passwordIcon)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.usernameIcon)).EndInit();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.Label labelUserState;
-        private System.Windows.Forms.Button btnLogin;
+        private System.Windows.Forms.Label lblState;
         private System.Windows.Forms.ComboBox dropdownLanguage;
-        private System.Windows.Forms.TextBox txtbxPassword;
-        private System.Windows.Forms.TextBox txtbxUsername;
         private System.Windows.Forms.Panel pnlLoginLeft;
-        private System.Windows.Forms.PictureBox iconLogin;
-        private System.Windows.Forms.PictureBox usernameIcon;
-        private System.Windows.Forms.PictureBox passwordIcon;
-        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.PictureBox pbLocationIcon;
         private System.Windows.Forms.Label lblUserCity;
         private System.Windows.Forms.Label lblUserCountry;
-        private System.Windows.Forms.Label lblValidLogin;
         private System.Windows.Forms.Label lblLangSelect;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.Panel pnlLoginImage;
+        private System.Windows.Forms.PictureBox pbLoginIcon;
+        private System.Windows.Forms.Panel pnlLoginControls;
+        private System.Windows.Forms.PictureBox usernameIcon;
+        private System.Windows.Forms.TextBox txtPassword;
+        private System.Windows.Forms.TextBox txtUsername;
+        private System.Windows.Forms.Button btnLogin;
+        private System.Windows.Forms.PictureBox passwordIcon;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel tsslLoginStatus;
     }
 }
 

@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Scheduling.Services;
 using System.Collections.Generic;
 using Scheduling.Logging;
+using Scheduling.Helpers;
 namespace Scheduling
 {
     public partial class LoginForm : Form
@@ -41,7 +42,9 @@ namespace Scheduling
             this.BackColor = ColorTranslator.FromHtml(Colors.PrimaryColor);
             btnLogin.BackColor = ColorTranslator.FromHtml(Colors.CtaColor);
 
-            labelUserState.ForeColor = ColorTranslator.FromHtml(Colors.NeutralLightColor);
+            
+
+            lblState.ForeColor = ColorTranslator.FromHtml(Colors.NeutralLightColor);
             lblUserCity.ForeColor = ColorTranslator.FromHtml(Colors.NeutralLightColor);
             lblUserCountry.ForeColor = ColorTranslator.FromHtml(Colors.NeutralLightColor);
             LocalizationService.SetCulture(dropdownLanguage.SelectedItem.ToString());            
@@ -51,12 +54,37 @@ namespace Scheduling
            
         }
 
-       
+       private void CenterControls()
+        {
+            // Center Login icon
+            LayoutManager.CenterDuoNestedControls(pnlLoginImage, passwordIcon, btnLogin, 20);
+            // Center Username icon and textbox
+            LayoutManager.CenterDuoNestedControls(pnlLoginControls, usernameIcon, txtUsername, 10);
+            // Center password icon and textbox
+            LayoutManager.CenterDuoNestedControls(pnlLoginControls,passwordIcon, txtPassword, 10);
+            
+            // Center login button to allign with text boxes
+            LayoutManager.CenterDuoNestedControls(pnlLoginControls, passwordIcon, btnLogin,10);
+            
+
+            // Center Location Icon
+            LayoutManager.CenterSingleNestedControl(pnlLoginLeft, pbLocationIcon);
+
+            //Center city label 
+            LayoutManager.CenterSingleNestedControl(pnlLoginLeft, lblUserCity);
+
+            // Center State/region label
+            LayoutManager.CenterSingleNestedControl(pnlLoginLeft, lblState);
+            // Center Country label
+            LayoutManager.CenterSingleNestedControl(pnlLoginLeft, lblUserCountry);
+
+
+        }
 
         private async void btnLogin_Click(object sender, EventArgs e)
         {
-            string username = txtbxUsername.Text;
-            string password = txtbxPassword.Text;
+            string username = txtUsername.Text;
+            string password = txtPassword.Text;
             int? userId = _database.GetUserId(username);
             string selectedLanguage = dropdownLanguage.SelectedItem.ToString();
             // Verify login credentials
@@ -64,7 +92,7 @@ namespace Scheduling
             {
                 // Log login attempt - SUCCESS
                 LoginLogger.LogLoginAttempt(username, true);
-                SetLabelMessage(lblValidLogin, true);
+                SetLabelMessage(tsslLoginStatus, true);
 
                 await Task.Delay(1200);
                 this.Hide();
@@ -82,7 +110,7 @@ namespace Scheduling
             {
                 // Log login attempt - FAIL
                 LoginLogger.LogLoginAttempt(username, false);
-                SetLabelMessage(lblValidLogin, false);
+                SetLabelMessage(tsslLoginStatus, false);
             }
             
         }
@@ -107,7 +135,7 @@ namespace Scheduling
 
             if (userInfo != null)
             {
-                labelUserState.Text = $"{userInfo.Region},";
+                lblState.Text = $"{userInfo.Region},";
                 lblUserCity.Text = $"{userInfo.City},";
                 lblUserCountry.Text = userInfo.Country;
             }
@@ -115,7 +143,8 @@ namespace Scheduling
 
         private async void LoginForm_Load(object sender, EventArgs e)
         {
-
+            // Adjust centering of items on form
+            CenterControls();
             UserInfo userInfo = await GetUserInfo(_URL);
             if (userInfo != null) UpdateLocationLabels(userInfo);
         }
@@ -123,7 +152,7 @@ namespace Scheduling
         {
             LocalizationService.SetCulture(dropdownLanguage.SelectedItem.ToString().ToLower());
         }
-        private void SetLabelMessage(Label label, bool isSuccess)
+        private void SetLabelMessage(ToolStripLabel label, bool isSuccess)
         {
             // Retrieve the message based on the selected language
             string message = isSuccess ? LocalizationService.GetMessage("LoginSuccess") : LocalizationService.GetMessage("LoginError");// Default to English if language is not found
@@ -131,12 +160,14 @@ namespace Scheduling
             string textColorHex = isSuccess ? "#155724" : "#721C24";
             int xLocation = isSuccess ? 423 : 345;
             // Set label properties
-            label.Location = new Point(xLocation, label.Location.Y);
             label.Text = message;
             label.BackColor = ColorTranslator.FromHtml(backgroundColorHex);
             label.ForeColor = ColorTranslator.FromHtml(textColorHex);
             label.Visible = true;
         }
+
+
+        
     }
 
 }
