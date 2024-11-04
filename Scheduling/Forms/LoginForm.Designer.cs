@@ -62,7 +62,7 @@
             this.lblState.AutoSize = true;
             this.lblState.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
             this.lblState.ForeColor = System.Drawing.SystemColors.ControlLight;
-            this.lblState.Location = new System.Drawing.Point(85, 159);
+            this.lblState.Location = new System.Drawing.Point(72, 134);
             this.lblState.Name = "lblState";
             this.lblState.Size = new System.Drawing.Size(68, 29);
             this.lblState.TabIndex = 9;
@@ -114,7 +114,7 @@
             this.lblUserCountry.AutoSize = true;
             this.lblUserCountry.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblUserCountry.ForeColor = System.Drawing.SystemColors.ControlLight;
-            this.lblUserCountry.Location = new System.Drawing.Point(69, 188);
+            this.lblUserCountry.Location = new System.Drawing.Point(72, 163);
             this.lblUserCountry.Name = "lblUserCountry";
             this.lblUserCountry.Size = new System.Drawing.Size(95, 29);
             this.lblUserCountry.TabIndex = 16;
@@ -124,9 +124,10 @@
             // lblUserCity
             // 
             this.lblUserCity.AutoSize = true;
+            this.lblUserCity.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(72)))), ((int)(((byte)(87)))));
             this.lblUserCity.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblUserCity.ForeColor = System.Drawing.SystemColors.ControlLight;
-            this.lblUserCity.Location = new System.Drawing.Point(87, 120);
+            this.lblUserCity.Location = new System.Drawing.Point(72, 105);
             this.lblUserCity.Name = "lblUserCity";
             this.lblUserCity.Size = new System.Drawing.Size(53, 29);
             this.lblUserCity.TabIndex = 15;
@@ -135,9 +136,9 @@
             // pbLocationIcon
             // 
             this.pbLocationIcon.Image = global::Scheduling.Properties.Resources.location_icon1;
-            this.pbLocationIcon.Location = new System.Drawing.Point(90, 49);
+            this.pbLocationIcon.Location = new System.Drawing.Point(77, 41);
             this.pbLocationIcon.Name = "pbLocationIcon";
-            this.pbLocationIcon.Size = new System.Drawing.Size(50, 53);
+            this.pbLocationIcon.Size = new System.Drawing.Size(63, 61);
             this.pbLocationIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbLocationIcon.TabIndex = 14;
             this.pbLocationIcon.TabStop = false;

@@ -137,8 +137,8 @@ namespace Scheduling
 
             if (userInfo != null)
             {
-                lblState.Text = $"{userInfo.Region},";
-                lblUserCity.Text = $"{userInfo.City},";
+                lblState.Text = userInfo.Region;
+                lblUserCity.Text = userInfo.City;
                 lblUserCountry.Text = userInfo.Country;
             }
         }
@@ -146,13 +146,14 @@ namespace Scheduling
         private async void LoginForm_Load(object sender, EventArgs e)
         {
             // Adjust centering of items on form
-            CenterControls();
             UserInfo userInfo = await GetUserInfo(_URL);
             if (userInfo != null) UpdateLocationLabels(userInfo);
+            CenterControls();
         }
         private void dropdownLanguage_SelectedIndexChanged(object sender, EventArgs e)
         {
             LocalizationService.SetCulture(dropdownLanguage.SelectedItem.ToString().ToLower());
+            tsslLoginStatus.Text = LocalizationService.GetMessage("Standby");
         }
         private void SetLabelMessage(ToolStripLabel label, bool isSuccess)
         {
