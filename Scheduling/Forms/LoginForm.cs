@@ -86,39 +86,6 @@ namespace Scheduling
             }
             
         }
-
-        
-
-        //private bool ValidateCredentials(string username, string password)
-        //{
-        //    try
-        //    {
-        //        string query = "SELECT userId FROM user WHERE userName= @username AND password= @password";
-
-
-        //        IDbDataParameter[] parameters = new IDbDataParameter[]
-        //        {
-        //            _database.CreateParameter("@username", username),
-        //            _database.CreateParameter("@password", password)
-        //        };
-
-        //        // Execute query
-
-        //        DataTable result = _database.ExecuteSelectQuery(query, parameters);
-
-        //        // check if matching result was found
-
-        //        if (result.Rows.Count > 0) {
-                    
-        //            return Convert.ToInt32(result.Rows[0]["userId"]);
-        //        }
-        //    }
-        //    catch(Exception ex)
-        //    {
-        //        MessageBox.Show($"Error occurred: {ex.Message}");
-        //    }
-        //    return null;
-        //}
         private async Task<UserInfo> GetUserInfo(string url)
         {
             UserInfo userInfo = null;
