@@ -87,5 +87,10 @@ namespace Scheduling
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
+
+        private void tableLayoutAppointments_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
