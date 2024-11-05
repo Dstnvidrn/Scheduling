@@ -110,6 +110,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\Repositories\CustomerRepository.cs" />
     <Compile Include="Forms\AppointmentsForm.cs">
       <SubType>Form</SubType>
     </Compile>
