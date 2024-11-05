@@ -35,7 +35,7 @@ namespace Scheduling
             LayoutManager.CenterSingleNestedControl(pnlContainer, tlpMenuOptions);
             LayoutManager.CenterSingleNestedControl(pnlContainer, tlpLogoutOption);
             LayoutManager.CenterSingleNestedControl(pnlContainer, lblAppointments);
-
+            LayoutManager.CenterSingleNestedControl(pnlContainer, lblCustomers);
             // Set placerholder text in search box
             LayoutManager.SetPlacholderText(txtAppointmentSearch, "Search", Colors.NeutalDarkColor);
         }
@@ -108,6 +108,9 @@ namespace Scheduling
             }
         }
 
-        
+        private void pnlContainer_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
