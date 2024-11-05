@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Scheduling.Models
 {
-    internal class City
+    public class City
     {
     }
 }

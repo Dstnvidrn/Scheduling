@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Scheduling.Models
 {
-    public class Address
+    public class User
     {
     }
 }

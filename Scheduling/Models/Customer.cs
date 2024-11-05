@@ -6,7 +6,15 @@ using System.Threading.Tasks;
 
 namespace Scheduling.Models
 {
-    internal class Customer
+    public class Customer
     {
+        public int CustomerId { get; set; }
+        public string CustomerName { get; set; }
+        public Address Address { get; set; }
+        public bool IsActive { get; set; }
+        public DateTime CreateDate { get; set; } = DateTime.Now;
+        public User CreatedBy { get; set; }
+        public DateTime LastUpdate {  get; set; }
+        public User UpdatedBy { get; set; }
     }
 }

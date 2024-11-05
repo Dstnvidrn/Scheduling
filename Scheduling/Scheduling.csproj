@@ -116,6 +116,12 @@
     <Compile Include="Forms\AppointmentsForm.Designer.cs">
       <DependentUpon>AppointmentsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\CustomerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CustomerForm.Designer.cs">
+      <DependentUpon>CustomerForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Helpers\Colors.cs" />
     <Compile Include="Data\MySqlDatabase.cs" />
     <Compile Include="Helpers\LayoutManager.cs" />
@@ -128,6 +134,12 @@
     </Compile>
     <Compile Include="Interfaces\IDatabase.cs" />
     <Compile Include="Interfaces\IDataParameterFactory.cs" />
+    <Compile Include="Models\Address.cs" />
+    <Compile Include="Models\Appointment.cs" />
+    <Compile Include="Models\City.cs" />
+    <Compile Include="Models\Country.cs" />
+    <Compile Include="Models\Customer.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Services\AuthenticationService.cs" />
     <Compile Include="Services\LoginLogger.cs" />
     <Compile Include="Program.cs" />
