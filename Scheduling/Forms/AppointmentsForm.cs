@@ -4,13 +4,18 @@ using Scheduling.Helpers;
 using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
+using Scheduling.Data.Repositories;
+using Scheduling.Interfaces;
+using System.Collections.Generic;
+using Scheduling.DTOs;
 
 namespace Scheduling
 {
     public partial class AppointmentsForm : Form
     {
         private int? _userId;
-        private readonly MySqlDatabase _database;
+        private readonly IDatabase _database;
+        private readonly AppointmentRepository _appointmentRepository;
         public AppointmentsForm()
         {
             InitializeComponent();
@@ -20,6 +25,7 @@ namespace Scheduling
             InitializeComponent();
             _userId = userId;
             _database = database;
+            _appointmentRepository = new AppointmentRepository(database);
             dgvAppointments.Width = this.Width;
             dgvAppointments.Height = this.Height;
             pnlContainer.BackColor = ColorTranslator.FromHtml(Colors.BaseColor);
@@ -46,7 +52,7 @@ namespace Scheduling
             dgvAppointments.AutoGenerateColumns = false;
             //Rename table headers for greater readability
             
-            dgvAppointments.Columns["customerName"].HeaderText = "Customer Name";
+            dgvAppointments.Columns["customerName"].HeaderText = "Customer";
             dgvAppointments.Columns["title"].HeaderText = "Title";
             dgvAppointments.Columns["description"].HeaderText = "Description";
             dgvAppointments.Columns["location"].HeaderText = "Location";
@@ -55,13 +61,13 @@ namespace Scheduling
             dgvAppointments.Columns["createDate"].HeaderText = "Created Date";
             dgvAppointments.Columns["createdBy"].HeaderText = "Created By";
             dgvAppointments.Columns["lastUpdate"].HeaderText = "Last Update";
-            dgvAppointments.Columns["lastUpdateBy"].HeaderText = "Updated By";
+            dgvAppointments.Columns["updatedBy"].HeaderText = "Updated By";
         }
         private void PopulateDataGridView()
         {
             try
             {
-                DataTable userData = _database.GetAppointments();
+                List<AppointmentDTO> userData = _appointmentRepository.GetAppointments();
 
                 dgvAppointments.DataSource = userData;
             }

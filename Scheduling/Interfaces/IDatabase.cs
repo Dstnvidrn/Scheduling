@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace Scheduling.Interfaces
 {
-    internal interface IDatabase
+    public interface IDatabase
     {
         IDbConnection GetConnection();
-        void ConnectToDatabase(MySqlDatabase connection);
 
         DataTable ExecuteSelectQuery(string query, IDataParameter[] parameters = null);
         int ExecuteNonQuery(string query, IDataParameter[] parameters = null);
+        IDbDataParameter CreateParameter(string name, object value);
     }
 }

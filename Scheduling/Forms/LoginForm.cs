@@ -10,24 +10,28 @@ using Scheduling.Services;
 using System.Collections.Generic;
 using Scheduling.Logging;
 using Scheduling.Helpers;
+using Scheduling.Data.Repositories;
 namespace Scheduling
 {
     public partial class LoginForm : Form
     {
-        private int inputTextWidth = 175;
-        private int inputTextHeight = 30;
+        
         private readonly MySqlDatabase _database;
         private static readonly HttpClient _httpClient = new HttpClient();
         private static readonly string _APIKEY = ConfigurationManager.AppSettings["ApiKey"];
         private static readonly string _URL = $"{ConfigurationManager.AppSettings["URL"]}{_APIKEY}";
         private LocationService _locationService;
         private AuthenticationService _authenticationService;
+        IDbConnection _connection;
+        private UserRepository _userRepository;
         
 
         public  LoginForm()
         {
             InitializeComponent();
-
+            _database = new MySqlDatabase();
+            _connection = _database.GetConnection();
+            _userRepository = new UserRepository(_database);
             this.AutoSize = false;
             dropdownLanguage.SelectedItem = "EN";
             // Set sizing for login form
@@ -49,7 +53,6 @@ namespace Scheduling
             lblUserCountry.ForeColor = ColorTranslator.FromHtml(Colors.NeutralLightColor);
             LocalizationService.SetCulture(dropdownLanguage.SelectedItem.ToString());            
             // initialize database connection with connection string
-            _database = new MySqlDatabase();
             _authenticationService = new AuthenticationService(_database);
            
         }
@@ -85,7 +88,7 @@ namespace Scheduling
         {
             string username = txtUsername.Text;
             string password = txtPassword.Text;
-            int? userId = _database.GetUserId(username);
+            int? userId = _userRepository.GetUserId(username);
             string selectedLanguage = dropdownLanguage.SelectedItem.ToString();
             // Verify login credentials
             if (_authenticationService.ValidateCredentials(username, password) && userId != null)

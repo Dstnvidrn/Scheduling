@@ -110,7 +110,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\Repositories\AppointmentRepository.cs" />
     <Compile Include="Data\Repositories\CustomerRepository.cs" />
+    <Compile Include="Data\Repositories\UserRepository.cs" />
+    <Compile Include="DTOs\AppointmentDTO.cs" />
     <Compile Include="Forms\AppointmentsForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -124,7 +127,7 @@
       <DependentUpon>CustomerForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Helpers\Colors.cs" />
-    <Compile Include="Data\MySqlDatabase.cs" />
+    <Compile Include="Data\Database\MySqlDatabase.cs" />
     <Compile Include="Helpers\LayoutManager.cs" />
     <Compile Include="Interfaces\IDataConnection.cs" />
     <Compile Include="Forms\LoginForm.cs">
