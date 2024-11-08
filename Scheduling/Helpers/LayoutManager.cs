@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -11,11 +13,15 @@ namespace Scheduling.Helpers
     public class LayoutManager
     {
 
-        public static void CenterSingleNestedControl(Control outerPanel, Control innerPanel)
+        public static void CenterSingleNestedControlsX(Control outerPanel, Control innerPanel)
         {
             innerPanel.Left = (outerPanel.ClientSize.Width - innerPanel.Width) / 2;
         }
-        public static void CenterDuoNestedControls(Control outerControl, Control innerControl1, Control innerControl2, int spaceBetweenInner)
+        public static void CenterSingleNestedControlsXMargins(Control outerPanel, Control innerPanel, int leftGap, int rightGap)
+        {
+            innerPanel.Left = leftGap + ((outerPanel.Width - innerPanel.Width - leftGap - rightGap) / 2);
+        }
+        public static void CenterDuoNestedControlsX(Control outerControl, Control innerControl1, Control innerControl2, int spaceBetweenInner)
         {
             // Calculate total width as a combined unit
             int totalWidth = innerControl1.Width + spaceBetweenInner + innerControl2.Width;
@@ -26,6 +32,11 @@ namespace Scheduling.Helpers
             // Position controls
             innerControl1.Left = startingX;
             innerControl2.Left = startingX + spaceBetweenInner + innerControl1.Width;
+        }
+        public static void CenterSingleNestedControlYMargins(Control outerControl, Control innerControl, int topGap, int bottomGap)
+        {
+
+            innerControl.Top = topGap + ((outerControl.Height - innerControl.Height - topGap - bottomGap) / 2);
         }
 
         public static void SetPlacholderText(TextBox textBox, string text, string hexColor)
