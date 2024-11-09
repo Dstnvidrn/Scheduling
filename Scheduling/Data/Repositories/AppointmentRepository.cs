@@ -4,21 +4,34 @@ using Scheduling.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Scheduling.Data.Repositories
 {
-    public class AppointmentRepository
+    public class AppointmentRepository : IAppointmentRepository
     {
-        private readonly IDatabase _database;
-        public AppointmentRepository(IDatabase database) 
+        private readonly IDatabaseHelper _databaseHelper;
+        public AppointmentRepository(IDatabaseHelper databaseHelper) 
         {
-            _database = database;
+            _databaseHelper = databaseHelper;
         }
 
-        public List<AppointmentDTO> GetAppointments()
+        public void CreateAppointment(Appointment appointment)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteAppointment(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public AppointmentsForm GetAppointmentById(int id)
+        {
+            throw new NotImplementedException();
+            
+        }
+
+        public List<Appointment> GetAppointments()
         {
 
             string query = @"
@@ -37,9 +50,9 @@ namespace Scheduling.Data.Repositories
                 appointment.end,
                 appointment.createDate,
                 appointment.createdBy,
-                createdByUser.userName AS CreatedByUserName,
+                createdByUser.userName AS createdByUserName,
                 appointment.lastUpdate,
-                lastUpdateBy.userName AS lastUpdateBy
+                user.userName AS LastUpdatedByUserName
             FROM
                 appointment
             INNER JOIN
@@ -47,34 +60,43 @@ namespace Scheduling.Data.Repositories
             LEFT JOIN
                 user AS createdByUser ON appointment.createdBy = createdByUser.userId
             LEFT JOIN
-                user AS lastUpdateBy ON appointment.lastUpdateBy = lastUpdateBy.userId";
+                user ON appointment.lastUpdateBy = user.userId;";
 
-            DataTable dataTable = _database.ExecuteSelectQuery(query);
+            DataTable dataTable = _databaseHelper.ExecuteSelectQuery(query);
 
             // map DataTable to List<>
-            var appointments = new List<AppointmentDTO>();
+            var appointments = new List<Appointment>();
             foreach(DataRow row in dataTable.Rows)
             {
-                var appointment = new AppointmentDTO
+                
+                var appointment = new Appointment
                 {
-
+                    AppointmentId = Convert.ToInt32(row["appointmentId"]),
+                    CustomerId = Convert.ToInt32(row["customerId"]),
                     CustomerName = row["customerName"].ToString(),
                     Description = row["Description"].ToString(),
                     Title = row["title"].ToString(),
                     Type = row["type"].ToString(),
                     Start = Convert.ToDateTime(row["start"]),
                     End = Convert.ToDateTime(row["end"]),
+                    URL = row["URL"].ToString(),
                     Location = row["location"].ToString(),
                     Contact = row["contact"].ToString(),
                     CreateDate = Convert.ToDateTime(row["createDate"]),
-                    CreatedBy = row["createdBy"].ToString(),
+                    CreatedBy = new User { Username = row["createdBy"].ToString(), UserId = Convert.ToInt32(row["createdByUser.userid"])},
                     LastUpdate = Convert.ToDateTime(row["lastUpdate"]),
-                    UpdatedBy = row["lastUpdateBy"].ToString()
+                    LastUpdatedBy = new User { Username = row["lastUpdateBy"].ToString() }
                 };
                 appointments.Add(appointment);        
             }
             return appointments;
         }
 
+        public void UpdateAppointment(Appointment appointment)
+        {
+            throw new NotImplementedException();
+        }
+
+        
     }
 }
