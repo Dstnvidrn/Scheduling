@@ -8,6 +8,9 @@ using Scheduling.Data.Repositories;
 using Scheduling.Interfaces;
 using System.Collections.Generic;
 using Scheduling.DTOs;
+using Scheduling.Forms;
+using Scheduling.Enums;
+using Scheduling.Services;
 
 namespace Scheduling
 {
@@ -15,7 +18,7 @@ namespace Scheduling
     {
         private int? _userId;
         private readonly IDatabase _database;
-        private readonly AppointmentRepository _appointmentRepository;
+        private readonly AppointmentService _appointmentService;
         public AppointmentsForm()
         {
             InitializeComponent();
@@ -25,7 +28,7 @@ namespace Scheduling
             InitializeComponent();
             _userId = userId;
             _database = database;
-            _appointmentRepository = new AppointmentRepository(database);
+            _appointmentService = new AppointmentRepository(database);
             dgvAppointments.Width = this.Width;
             dgvAppointments.Height = this.Height;
             pnlContainer.BackColor = ColorTranslator.FromHtml(Colors.BaseColor);
@@ -38,10 +41,10 @@ namespace Scheduling
         {
             PopulateDataGridView();
             RenameColumnHeaders();
-            LayoutManager.CenterSingleNestedControl(pnlContainer, tlpMenuOptions);
-            LayoutManager.CenterSingleNestedControl(pnlContainer, tlpLogoutOption);
-            LayoutManager.CenterSingleNestedControl(pnlContainer, lblAppointments);
-            LayoutManager.CenterSingleNestedControl(pnlContainer, lblCustomers);
+            LayoutManager.CenterSingleNestedControlsX(pnlContainer, tlpMenuOptions);
+            LayoutManager.CenterSingleNestedControlsX(pnlContainer, tlpLogoutOption);
+            LayoutManager.CenterSingleNestedControlsX(pnlContainer, lblAppointments);
+            LayoutManager.CenterSingleNestedControlsX(pnlContainer, lblCustomers);
             // Set placerholder text in search box
             LayoutManager.SetPlacholderText(txtAppointmentSearch, "Search", Colors.NeutalDarkColor);
         }
@@ -117,6 +120,22 @@ namespace Scheduling
         private void pnlContainer_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void btnAddCustomer_Click(object sender, EventArgs e)
+        {
+            using(CustomerForm customerForm = new CustomerForm(_database, Mode.Create))
+            {
+                customerForm.ShowDialog();
+
+                if (customerForm.DialogResult == DialogResult.OK)
+                {
+                    
+                }
+            }
+            
+
+            
         }
     }
 }

@@ -39,13 +39,14 @@
             this.pnlLoginImage = new System.Windows.Forms.Panel();
             this.pbLoginIcon = new System.Windows.Forms.PictureBox();
             this.pnlLoginControls = new System.Windows.Forms.Panel();
+            this.lnklblCancel = new System.Windows.Forms.LinkLabel();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.tsslLoginStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.txtPassword = new System.Windows.Forms.TextBox();
-            this.passwordIcon = new System.Windows.Forms.PictureBox();
             this.usernameIcon = new System.Windows.Forms.PictureBox();
             this.btnLogin = new System.Windows.Forms.Button();
             this.txtUsername = new System.Windows.Forms.TextBox();
+            this.passwordIcon = new System.Windows.Forms.PictureBox();
             this.pnlLoginLeft.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbLocationIcon)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
@@ -53,8 +54,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbLoginIcon)).BeginInit();
             this.pnlLoginControls.SuspendLayout();
             this.statusStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.passwordIcon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.usernameIcon)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.passwordIcon)).BeginInit();
             this.SuspendLayout();
             // 
             // lblState
@@ -145,6 +146,7 @@
             // 
             // tableLayoutPanel1
             // 
+            this.tableLayoutPanel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(229)))), ((int)(((byte)(229)))), ((int)(((byte)(229)))));
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
@@ -161,6 +163,7 @@
             // 
             // pnlLoginImage
             // 
+            this.pnlLoginImage.BackColor = System.Drawing.Color.Transparent;
             this.pnlLoginImage.Controls.Add(this.pbLoginIcon);
             this.pnlLoginImage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlLoginImage.Location = new System.Drawing.Point(3, 3);
@@ -180,9 +183,11 @@
             // 
             // pnlLoginControls
             // 
+            this.pnlLoginControls.BackColor = System.Drawing.Color.Transparent;
+            this.pnlLoginControls.Controls.Add(this.passwordIcon);
+            this.pnlLoginControls.Controls.Add(this.lnklblCancel);
             this.pnlLoginControls.Controls.Add(this.statusStrip1);
             this.pnlLoginControls.Controls.Add(this.txtPassword);
-            this.pnlLoginControls.Controls.Add(this.passwordIcon);
             this.pnlLoginControls.Controls.Add(this.usernameIcon);
             this.pnlLoginControls.Controls.Add(this.btnLogin);
             this.pnlLoginControls.Controls.Add(this.txtUsername);
@@ -192,6 +197,17 @@
             this.pnlLoginControls.Size = new System.Drawing.Size(415, 197);
             this.pnlLoginControls.TabIndex = 1;
             // 
+            // lnklblCancel
+            // 
+            this.lnklblCancel.AutoSize = true;
+            this.lnklblCancel.Location = new System.Drawing.Point(194, 151);
+            this.lnklblCancel.Name = "lnklblCancel";
+            this.lnklblCancel.Size = new System.Drawing.Size(40, 13);
+            this.lnklblCancel.TabIndex = 36;
+            this.lnklblCancel.TabStop = true;
+            this.lnklblCancel.Text = "Cancel";
+            this.lnklblCancel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnklblCancel_LinkClicked);
+            // 
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -200,6 +216,7 @@
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.statusStrip1.Size = new System.Drawing.Size(415, 22);
+            this.statusStrip1.SizingGrip = false;
             this.statusStrip1.TabIndex = 35;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -220,16 +237,6 @@
             this.txtPassword.PasswordChar = '●';
             this.txtPassword.Size = new System.Drawing.Size(175, 26);
             this.txtPassword.TabIndex = 30;
-            // 
-            // passwordIcon
-            // 
-            this.passwordIcon.Image = global::Scheduling.Properties.Resources.password_icon;
-            this.passwordIcon.Location = new System.Drawing.Point(94, 70);
-            this.passwordIcon.Name = "passwordIcon";
-            this.passwordIcon.Size = new System.Drawing.Size(26, 26);
-            this.passwordIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.passwordIcon.TabIndex = 33;
-            this.passwordIcon.TabStop = false;
             // 
             // usernameIcon
             // 
@@ -269,17 +276,32 @@
             this.txtUsername.TabIndex = 29;
             this.txtUsername.WordWrap = false;
             // 
+            // passwordIcon
+            // 
+            this.passwordIcon.BackColor = System.Drawing.Color.Transparent;
+            this.passwordIcon.Image = global::Scheduling.Properties.Resources.password_icon;
+            this.passwordIcon.Location = new System.Drawing.Point(94, 70);
+            this.passwordIcon.Name = "passwordIcon";
+            this.passwordIcon.Size = new System.Drawing.Size(26, 26);
+            this.passwordIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.passwordIcon.TabIndex = 37;
+            this.passwordIcon.TabStop = false;
+            this.passwordIcon.WaitOnLoad = true;
+            // 
             // LoginForm
             // 
             this.AcceptButton = this.btnLogin;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
+            this.CancelButton = this.lnklblCancel;
             this.ClientSize = new System.Drawing.Size(657, 406);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.pnlLoginLeft);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.MaximizeBox = false;
             this.Name = "LoginForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Login";
             this.Load += new System.EventHandler(this.LoginForm_Load);
             this.pnlLoginLeft.ResumeLayout(false);
@@ -292,8 +314,8 @@
             this.pnlLoginControls.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.passwordIcon)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.usernameIcon)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.passwordIcon)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -314,9 +336,10 @@
         private System.Windows.Forms.TextBox txtPassword;
         private System.Windows.Forms.TextBox txtUsername;
         private System.Windows.Forms.Button btnLogin;
-        private System.Windows.Forms.PictureBox passwordIcon;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel tsslLoginStatus;
+        private System.Windows.Forms.LinkLabel lnklblCancel;
+        private System.Windows.Forms.PictureBox passwordIcon;
     }
 }
 

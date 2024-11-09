@@ -15,72 +15,63 @@ namespace Scheduling
 {
     public partial class LoginForm : Form
     {
-        
-        private readonly MySqlDatabase _database;
-        private static readonly HttpClient _httpClient = new HttpClient();
         private static readonly string _APIKEY = ConfigurationManager.AppSettings["ApiKey"];
         private static readonly string _URL = $"{ConfigurationManager.AppSettings["URL"]}{_APIKEY}";
         private LocationService _locationService;
         private AuthenticationService _authenticationService;
-        IDbConnection _connection;
-        private UserRepository _userRepository;
+        private UserService _userService;
         
 
-        public  LoginForm()
+        public  LoginForm(UserService userService)
         {
             InitializeComponent();
-            _database = new MySqlDatabase();
-            _connection = _database.GetConnection();
-            _userRepository = new UserRepository(_database);
-            this.AutoSize = false;
+            LoadColors();           
             dropdownLanguage.SelectedItem = "EN";
-            // Set sizing for login form
-            this.FormBorderStyle = FormBorderStyle.FixedDialog;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
-            pnlLoginLeft.BackColor = Color.FromArgb(63, 72, 87);
 
             _locationService = new LocationService();
-            // Assign color schemes to controls
-            this.StartPosition = FormStartPosition.CenterScreen;
-            this.BackColor = ColorTranslator.FromHtml(Colors.PrimaryColor);
-            btnLogin.BackColor = ColorTranslator.FromHtml(Colors.CtaColor);
-
             
-
-            lblState.ForeColor = ColorTranslator.FromHtml(Colors.NeutralLightColor);
-            lblUserCity.ForeColor = ColorTranslator.FromHtml(Colors.NeutralLightColor);
-            lblUserCountry.ForeColor = ColorTranslator.FromHtml(Colors.NeutralLightColor);
             LocalizationService.SetCulture(dropdownLanguage.SelectedItem.ToString());            
             // initialize database connection with connection string
             _authenticationService = new AuthenticationService(_database);
            
         }
+        private void LoadColors()
+        {
+            this.BackColor = ColorTranslator.FromHtml(Colors.PrimaryColor);
+            btnLogin.BackColor = ColorTranslator.FromHtml(Colors.CtaColor);
+            pnlLoginLeft.BackColor = Color.FromArgb(63, 72, 87);
+
+
+            lblState.ForeColor = ColorTranslator.FromHtml(Colors.NeutralLightColor);
+            lblUserCity.ForeColor = ColorTranslator.FromHtml(Colors.NeutralLightColor);
+            lblUserCountry.ForeColor = ColorTranslator.FromHtml(Colors.NeutralLightColor);
+        }
 
        private void CenterControls()
         {
             // Center Login icon
-            LayoutManager.CenterDuoNestedControls(pnlLoginImage, passwordIcon, pbLoginIcon, 10);
+            LayoutManager.CenterDuoNestedControlsX(pnlLoginImage, passwordIcon, pbLoginIcon, 10);
             // Center Username icon and textbox
-            LayoutManager.CenterDuoNestedControls(pnlLoginControls, usernameIcon, txtUsername, 10);
+            LayoutManager.CenterDuoNestedControlsX(pnlLoginControls, usernameIcon, txtUsername, 10);
             // Center password icon and textbox
-            LayoutManager.CenterDuoNestedControls(pnlLoginControls,passwordIcon, txtPassword, 10);
+            LayoutManager.CenterDuoNestedControlsX(pnlLoginControls,passwordIcon, txtPassword, 10);
             
             // Center login button to allign with text boxes
-            LayoutManager.CenterDuoNestedControls(pnlLoginControls, passwordIcon, btnLogin,10);
-            
+            LayoutManager.CenterDuoNestedControlsX(pnlLoginControls, passwordIcon, btnLogin,10);
+            // Center cancel link label
+            LayoutManager.CenterSingleNestedControlsXMargins(pnlLoginControls, lnklblCancel, passwordIcon.Width + 10, 0);
 
             // Center Location Icon
-            LayoutManager.CenterSingleNestedControl(pnlLoginLeft, pbLocationIcon);
+            LayoutManager.CenterSingleNestedControlsX(pnlLoginLeft, pbLocationIcon);
 
             //Center city label 
-            LayoutManager.CenterSingleNestedControl(pnlLoginLeft, lblUserCity);
+            LayoutManager.CenterSingleNestedControlsX(pnlLoginLeft, lblUserCity);
 
             // Center State/region label
-            LayoutManager.CenterSingleNestedControl(pnlLoginLeft, lblState);
+            LayoutManager.CenterSingleNestedControlsX(pnlLoginLeft, lblState);
             // Center Country label
-            LayoutManager.CenterSingleNestedControl(pnlLoginLeft, lblUserCountry);
-
+            LayoutManager.CenterSingleNestedControlsX(pnlLoginLeft, lblUserCountry);
+           
 
         }
 
@@ -172,8 +163,15 @@ namespace Scheduling
             label.Visible = true;
         }
 
+        private void lnklblCancel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            this.Close();
+        }
 
-        
+        private void passwordIcon_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 
 }

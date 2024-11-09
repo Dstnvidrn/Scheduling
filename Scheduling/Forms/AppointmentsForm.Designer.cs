@@ -100,7 +100,7 @@
             this.lblCustomers.AutoSize = true;
             this.lblCustomers.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCustomers.ForeColor = System.Drawing.Color.White;
-            this.lblCustomers.Location = new System.Drawing.Point(81, 388);
+            this.lblCustomers.Location = new System.Drawing.Point(90, 383);
             this.lblCustomers.Name = "lblCustomers";
             this.lblCustomers.Size = new System.Drawing.Size(115, 25);
             this.lblCustomers.TabIndex = 8;
@@ -128,7 +128,8 @@
             // 
             // btnAddCustomer
             // 
-            this.btnAddCustomer.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.btnAddCustomer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(111)))), ((int)(((byte)(97)))));
+            this.btnAddCustomer.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnAddCustomer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnAddCustomer.FlatAppearance.BorderSize = 0;
             this.btnAddCustomer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -139,10 +140,12 @@
             this.btnAddCustomer.TabIndex = 0;
             this.btnAddCustomer.Text = "Add";
             this.btnAddCustomer.UseVisualStyleBackColor = false;
+            this.btnAddCustomer.Click += new System.EventHandler(this.btnAddCustomer_Click);
             // 
             // btnUpdateCustomer
             // 
             this.btnUpdateCustomer.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.btnUpdateCustomer.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnUpdateCustomer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnUpdateCustomer.FlatAppearance.BorderSize = 0;
             this.btnUpdateCustomer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -157,6 +160,7 @@
             // btnDeleteCustomer
             // 
             this.btnDeleteCustomer.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.btnDeleteCustomer.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnDeleteCustomer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnDeleteCustomer.FlatAppearance.BorderSize = 0;
             this.btnDeleteCustomer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -173,7 +177,7 @@
             this.lblAppointments.AutoSize = true;
             this.lblAppointments.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAppointments.ForeColor = System.Drawing.Color.White;
-            this.lblAppointments.Location = new System.Drawing.Point(72, 21);
+            this.lblAppointments.Location = new System.Drawing.Point(72, 18);
             this.lblAppointments.Name = "lblAppointments";
             this.lblAppointments.Size = new System.Drawing.Size(143, 25);
             this.lblAppointments.TabIndex = 6;
@@ -194,12 +198,13 @@
             // 
             // btnLogout
             // 
-            this.btnLogout.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.btnLogout.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.btnLogout.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnLogout.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnLogout.FlatAppearance.BorderSize = 0;
             this.btnLogout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLogout.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLogout.ForeColor = System.Drawing.Color.Black;
             this.btnLogout.Location = new System.Drawing.Point(5, 5);
             this.btnLogout.Name = "btnLogout";
             this.btnLogout.Size = new System.Drawing.Size(230, 53);
@@ -330,6 +335,7 @@
             // 
             // pnlSearch
             // 
+            this.pnlSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(229)))), ((int)(((byte)(229)))), ((int)(((byte)(229)))));
             this.pnlSearch.Controls.Add(this.txtAppointmentSearch);
             this.pnlSearch.Controls.Add(this.button1);
             this.pnlSearch.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -355,7 +361,7 @@
             this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button1.FlatAppearance.BorderSize = 0;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.Location = new System.Drawing.Point(1013, 5);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(100, 26);
