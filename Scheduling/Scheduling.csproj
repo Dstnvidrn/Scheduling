@@ -110,10 +110,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\Database\DatabaseConnectionFactory.cs" />
     <Compile Include="Data\Repositories\AppointmentRepository.cs" />
     <Compile Include="Data\Repositories\CustomerRepository.cs" />
     <Compile Include="Data\Repositories\UserRepository.cs" />
     <Compile Include="DTOs\AppointmentDTO.cs" />
+    <Compile Include="DTOs\CustomerDTO.cs" />
+    <Compile Include="DTOs\UserDTO.cs" />
+    <Compile Include="Enums\Mode.cs" />
     <Compile Include="Forms\AppointmentsForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -128,7 +132,11 @@
     </Compile>
     <Compile Include="Helpers\Colors.cs" />
     <Compile Include="Data\Database\MySqlDatabase.cs" />
+    <Compile Include="Helpers\DatabaseHelper.cs" />
     <Compile Include="Helpers\LayoutManager.cs" />
+    <Compile Include="Interfaces\IAppointmentMapper.cs" />
+    <Compile Include="Interfaces\IAppointmentRepository.cs" />
+    <Compile Include="Interfaces\IDatabaseHelper.cs" />
     <Compile Include="Interfaces\IDataConnection.cs" />
     <Compile Include="Forms\LoginForm.cs">
       <SubType>Form</SubType>
@@ -138,12 +146,15 @@
     </Compile>
     <Compile Include="Interfaces\IDatabase.cs" />
     <Compile Include="Interfaces\IDataParameterFactory.cs" />
+    <Compile Include="Interfaces\IUserMapper.cs" />
+    <Compile Include="Interfaces\IUserRepository.cs" />
     <Compile Include="Models\Address.cs" />
     <Compile Include="Models\Appointment.cs" />
     <Compile Include="Models\City.cs" />
     <Compile Include="Models\Country.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Services\AppointmentService.cs" />
     <Compile Include="Services\AuthenticationService.cs" />
     <Compile Include="Services\LoginLogger.cs" />
     <Compile Include="Program.cs" />
@@ -155,8 +166,14 @@
     </Compile>
     <Compile Include="Services\LocalizationService.cs" />
     <Compile Include="Services\LocationService.cs" />
+    <Compile Include="Services\Mappers\AppointmentMapper.cs" />
+    <Compile Include="Services\Mappers\UserMapper.cs" />
+    <Compile Include="Services\UserService.cs" />
     <EmbeddedResource Include="Forms\AppointmentsForm.resx">
       <DependentUpon>AppointmentsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CustomerForm.resx">
+      <DependentUpon>CustomerForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
@@ -199,7 +216,6 @@
     <None Include="Resources\Images\location-icon1.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Enums\" />
     <Folder Include="Logs\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
