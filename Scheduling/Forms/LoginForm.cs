@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using Scheduling.Logging;
 using Scheduling.Helpers;
 using Scheduling.Data.Repositories;
+using Scheduling.Interfaces;
 namespace Scheduling
 {
     public partial class LoginForm : Form
@@ -20,19 +21,21 @@ namespace Scheduling
         private LocationService _locationService;
         private AuthenticationService _authenticationService;
         private UserService _userService;
-        
+        private IDatabaseHelper _databaseHelper;
+        private bool isLoginClicked = false;
 
-        public  LoginForm(UserService userService)
+        public  LoginForm(DatabaseHelper databaseHelper)
         {
             InitializeComponent();
             LoadColors();           
             dropdownLanguage.SelectedItem = "EN";
-
+            _databaseHelper = databaseHelper;
             _locationService = new LocationService();
+            // Repository Setup
             
-            LocalizationService.SetCulture(dropdownLanguage.SelectedItem.ToString());            
-            // initialize database connection with connection string
-            _authenticationService = new AuthenticationService(_database);
+            LocalizationService.SetCulture(dropdownLanguage.SelectedItem.ToString());
+            _userService = new UserService(_databaseHelper);
+            _authenticationService = new AuthenticationService(databaseHelper);
            
         }
         private void LoadColors()
@@ -77,9 +80,10 @@ namespace Scheduling
 
         private async void btnLogin_Click(object sender, EventArgs e)
         {
+            btnLogin.Enabled = false;
             string username = txtUsername.Text;
             string password = txtPassword.Text;
-            int? userId = _userRepository.GetUserId(username);
+            int? userId = _userService.GetUserId(username);
             string selectedLanguage = dropdownLanguage.SelectedItem.ToString();
             // Verify login credentials
             if (_authenticationService.ValidateCredentials(username, password) && userId != null)
@@ -91,7 +95,7 @@ namespace Scheduling
                 await Task.Delay(1200);
                 this.Hide();
 
-                using (Form appointmentForm = new AppointmentsForm(_database,userId))
+                using (Form appointmentForm = new AppointmentsForm(_databaseHelper))
                 {
                     appointmentForm.ShowDialog();
                     if (appointmentForm.DialogResult != DialogResult.OK)
@@ -99,6 +103,7 @@ namespace Scheduling
                         this.Close();                
                     }
                     this.Show();
+                    btnLogin.Enabled = true;
                 }
 
             }

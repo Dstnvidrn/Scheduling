@@ -1,4 +1,5 @@
 ﻿using Scheduling.Data;
+using Scheduling.Data.Repositories;
 using Scheduling.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -13,41 +14,27 @@ namespace Scheduling.Services
 {
     public class AuthenticationService
     {
-        private readonly MySqlDatabase _database;
-        public AuthenticationService(MySqlDatabase database)
+        private readonly IAuthenticationRepository _authenticationRepository;
+
+
+        public AuthenticationService(IDatabaseHelper databaseHelper)
         {
-            _database = database;
+            _authenticationRepository = new AuthenticationRepository(databaseHelper);
 
         }
 
-        public  bool ValidateCredentials(string username, string password)
+        public bool ValidateCredentials(string username, string password)
         {
             try
             {
-                string query = "SELECT userId FROM user WHERE userName= @username AND password= @password";
-
-
-                IDbDataParameter[] parameters = new IDbDataParameter[]
-                {
-                    _database.CreateParameter("@username", username),
-                    _database.CreateParameter("@password", password)
-                };
-
-                // Execute query
-
-                DataTable result = _database.ExecuteSelectQuery(query, parameters);
-
-                // check if matching result was found
-
-                return result.Rows.Count > 0;
-                
+                return _authenticationRepository.ValidateCredentials(username, password);
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Error occurred: {ex.Message}");
+                return false;
             }
-            return false;
         }
-
     }
+
 }

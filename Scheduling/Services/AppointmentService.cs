@@ -1,5 +1,7 @@
-﻿using Scheduling.DTOs;
+﻿using Scheduling.Data.Repositories;
+using Scheduling.DTOs;
 using Scheduling.Interfaces;
+using Scheduling.Services.Mappers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,10 +15,11 @@ namespace Scheduling.Services
         private readonly IAppointmentRepository _repository;
         private readonly IAppointmentMapper _mapper;
 
-        public AppointmentService(IAppointmentRepository repository, IAppointmentMapper mapper)
+        public AppointmentService(IDatabaseHelper databaseHelper)
+
         {
-            _repository = repository;
-            _mapper = mapper;
+            _repository = new AppointmentRepository(databaseHelper);
+            _mapper = new AppointmentMapper();
         }
 
         public List<AppointmentDTO> GetAllAppointments()

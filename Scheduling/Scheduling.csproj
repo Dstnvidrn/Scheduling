@@ -112,6 +112,7 @@
   <ItemGroup>
     <Compile Include="Data\Database\DatabaseConnectionFactory.cs" />
     <Compile Include="Data\Repositories\AppointmentRepository.cs" />
+    <Compile Include="Data\Repositories\AuthenticationRepository.cs" />
     <Compile Include="Data\Repositories\CustomerRepository.cs" />
     <Compile Include="Data\Repositories\UserRepository.cs" />
     <Compile Include="DTOs\AppointmentDTO.cs" />
@@ -136,6 +137,7 @@
     <Compile Include="Helpers\LayoutManager.cs" />
     <Compile Include="Interfaces\IAppointmentMapper.cs" />
     <Compile Include="Interfaces\IAppointmentRepository.cs" />
+    <Compile Include="Interfaces\IAuthenticationRepository.cs" />
     <Compile Include="Interfaces\IDatabaseHelper.cs" />
     <Compile Include="Interfaces\IDataConnection.cs" />
     <Compile Include="Forms\LoginForm.cs">

@@ -35,32 +35,32 @@ namespace Scheduling.Data.Repositories
         {
 
             string query = @"
-            SELECT
-                appointment.appointmentId,
-                appointment.customerId,
-                customer.customerName,
-                appointment.userId,
-                appointment.title,
-                appointment.description,
-                appointment.location,
-                appointment.contact,
-                appointment.type,
-                appointment.url,
-                appointment.start,
-                appointment.end,
-                appointment.createDate,
-                appointment.createdBy,
-                createdByUser.userName AS createdByUserName,
-                appointment.lastUpdate,
-                user.userName AS LastUpdatedByUserName
-            FROM
-                appointment
-            INNER JOIN
-                customer ON appointment.customerId = customer.customerId
-            LEFT JOIN
-                user AS createdByUser ON appointment.createdBy = createdByUser.userId
-            LEFT JOIN
-                user ON appointment.lastUpdateBy = user.userId;";
+            SELECT 
+    appointment.appointmentId,
+    appointment.customerId,
+    customer.customerName,
+    appointment.userId,
+    appointment.title,
+    appointment.description,
+    appointment.location,
+    appointment.contact,
+    appointment.type,
+    appointment.url,
+    appointment.start,
+    appointment.end,
+    appointment.createDate,
+    createdByUser.userName AS CreatedByUserName,
+    appointment.lastUpdate,
+    lastUpdatedByUser.userName AS LastUpdatedByUserName
+FROM 
+    appointment
+INNER JOIN 
+    customer ON appointment.customerId = customer.customerId
+LEFT JOIN 
+    user AS createdByUser ON appointment.createdBy = createdByUser.userId
+LEFT JOIN 
+    user AS lastUpdatedByUser ON appointment.lastUpdateBy = lastUpdatedByUser.userId;
+";
 
             DataTable dataTable = _databaseHelper.ExecuteSelectQuery(query);
 
@@ -83,9 +83,9 @@ namespace Scheduling.Data.Repositories
                     Location = row["location"].ToString(),
                     Contact = row["contact"].ToString(),
                     CreateDate = Convert.ToDateTime(row["createDate"]),
-                    CreatedBy = new User { Username = row["createdBy"].ToString(), UserId = Convert.ToInt32(row["createdByUser.userid"])},
+                    CreatedBy = new User { Username = row["createdByUserName"] != null ? row["createdByUserName"].ToString() : null},
                     LastUpdate = Convert.ToDateTime(row["lastUpdate"]),
-                    LastUpdatedBy = new User { Username = row["lastUpdateBy"].ToString() }
+                    LastUpdatedBy = new User { Username = row["LastUpdatedByUserName"].ToString() }
                 };
                 appointments.Add(appointment);        
             }

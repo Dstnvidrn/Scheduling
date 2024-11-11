@@ -1,5 +1,7 @@
-﻿using Scheduling.DTOs;
+﻿using Scheduling.Data.Repositories;
+using Scheduling.DTOs;
 using Scheduling.Interfaces;
+using Scheduling.Services.Mappers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,9 +15,11 @@ namespace Scheduling.Services
         private readonly IUserRepository _userRepository;
         private readonly IUserMapper _userMapper;
 
-        public UserService(IUserRepository userRepository, IUserMapper userMapper)
+        public UserService(IDatabaseHelper databaseHelper)
         {
-            _userRepository = userRepository;
+            _userRepository = new UserRepository(databaseHelper);
+            _userMapper = new UserMapper();
+
         }
 
         public int GetUserId(string username)

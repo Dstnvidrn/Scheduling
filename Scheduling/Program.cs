@@ -19,18 +19,14 @@ namespace Scheduling
         static void Main()
         {
             // Database connection
-            var _connectionString = ConfigurationManager.AppSettings["MySqlDatabaseConnection"];
+            var _connectionString = ConfigurationManager.ConnectionStrings["MySqlDatabaseConnection"].ConnectionString;
             var _connectionFactory = new DatabaseConnectionFactory(_connectionString);
             var _dataBaseHelper = new DatabaseHelper(_connectionFactory);
 
-            // Repository Setup
-            IUserRepository _userRepository = new UserRepository(_dataBaseHelper);
-            IUserMapper _userMapper = new UserMapper();
-            // Service Setup
-            UserService userService = new UserService(_userRepository, _userMapper);
+            
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new LoginForm(_));
+            Application.Run(new LoginForm(_dataBaseHelper));
         }
     }
 }

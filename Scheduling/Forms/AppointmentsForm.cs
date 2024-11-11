@@ -19,16 +19,16 @@ namespace Scheduling
         private int? _userId;
         private readonly IDatabase _database;
         private readonly AppointmentService _appointmentService;
+        private readonly IDatabaseHelper _databaseHelper;
         public AppointmentsForm()
         {
             InitializeComponent();
         }
-        public AppointmentsForm(MySqlDatabase database, int? userId)
+        public AppointmentsForm(IDatabaseHelper databaseHelper)
         {
             InitializeComponent();
-            _userId = userId;
-            _database = database;
-            _appointmentService = new AppointmentRepository(database);
+            _databaseHelper = databaseHelper;
+            _appointmentService = new AppointmentService(databaseHelper);
             dgvAppointments.Width = this.Width;
             dgvAppointments.Height = this.Height;
             pnlContainer.BackColor = ColorTranslator.FromHtml(Colors.BaseColor);
@@ -40,7 +40,7 @@ namespace Scheduling
         private void AppointmentsForm_Load(object sender, EventArgs e)
         {
             PopulateDataGridView();
-            RenameColumnHeaders();
+            //RenameColumnHeaders();
             LayoutManager.CenterSingleNestedControlsX(pnlContainer, tlpMenuOptions);
             LayoutManager.CenterSingleNestedControlsX(pnlContainer, tlpLogoutOption);
             LayoutManager.CenterSingleNestedControlsX(pnlContainer, lblAppointments);
@@ -50,29 +50,29 @@ namespace Scheduling
         }
         
         
-        private void RenameColumnHeaders()
-        {
-            dgvAppointments.AutoGenerateColumns = false;
-            //Rename table headers for greater readability
+       // private void RenameColumnHeaders()
+        //{
+        //    dgvAppointments.AutoGenerateColumns = false;
+        //    //Rename table headers for greater readability
             
-            dgvAppointments.Columns["customerName"].HeaderText = "Customer";
-            dgvAppointments.Columns["title"].HeaderText = "Title";
-            dgvAppointments.Columns["description"].HeaderText = "Description";
-            dgvAppointments.Columns["location"].HeaderText = "Location";
-            dgvAppointments.Columns["contact"].HeaderText = "Contact";
-            dgvAppointments.Columns["type"].HeaderText = "Type";
-            dgvAppointments.Columns["createDate"].HeaderText = "Created Date";
-            dgvAppointments.Columns["createdBy"].HeaderText = "Created By";
-            dgvAppointments.Columns["lastUpdate"].HeaderText = "Last Update";
-            dgvAppointments.Columns["updatedBy"].HeaderText = "Updated By";
-        }
+        //    dgvAppointments.Columns["customerName"].HeaderText = "Customer";
+        //    dgvAppointments.Columns["title"].HeaderText = "Title";
+        //    dgvAppointments.Columns["description"].HeaderText = "Description";
+        //    dgvAppointments.Columns["location"].HeaderText = "Location";
+        //    dgvAppointments.Columns["contact"].HeaderText = "Contact";
+        //    dgvAppointments.Columns["type"].HeaderText = "Type";
+        //    dgvAppointments.Columns["createDate"].HeaderText = "Created Date";
+        //    dgvAppointments.Columns["createdBy"].HeaderText = "Created By";
+        //    dgvAppointments.Columns["lastUpdate"].HeaderText = "Last Update";
+        //    dgvAppointments.Columns["updatedBy"].HeaderText = "Updated By";
+        //}
         private void PopulateDataGridView()
         {
             try
             {
-                List<AppointmentDTO> userData = _appointmentRepository.GetAppointments();
+                List<AppointmentDTO> appointments = _appointmentService.GetAllAppointments();
 
-                dgvAppointments.DataSource = userData;
+                dgvAppointments.DataSource = appointments;
             }
             catch (Exception ex)
             {
@@ -136,6 +136,11 @@ namespace Scheduling
             
 
             
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
