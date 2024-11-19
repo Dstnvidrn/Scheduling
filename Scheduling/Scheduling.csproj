@@ -111,6 +111,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\Database\DatabaseConnectionFactory.cs" />
+    <Compile Include="Data\Repositories\AddressRepository.cs" />
     <Compile Include="Data\Repositories\AppointmentRepository.cs" />
     <Compile Include="Data\Repositories\AuthenticationRepository.cs" />
     <Compile Include="Data\Repositories\CustomerRepository.cs" />
@@ -138,6 +139,7 @@
     <Compile Include="Interfaces\IAppointmentMapper.cs" />
     <Compile Include="Interfaces\IAppointmentRepository.cs" />
     <Compile Include="Interfaces\IAuthenticationRepository.cs" />
+    <Compile Include="Interfaces\ICustomerRepository.cs" />
     <Compile Include="Interfaces\IDatabaseHelper.cs" />
     <Compile Include="Interfaces\IDataConnection.cs" />
     <Compile Include="Forms\LoginForm.cs">
@@ -158,6 +160,7 @@
     <Compile Include="Models\User.cs" />
     <Compile Include="Services\AppointmentService.cs" />
     <Compile Include="Services\AuthenticationService.cs" />
+    <Compile Include="Services\CustomerService.cs" />
     <Compile Include="Services\LoginLogger.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -169,6 +172,7 @@
     <Compile Include="Services\LocalizationService.cs" />
     <Compile Include="Services\LocationService.cs" />
     <Compile Include="Services\Mappers\AppointmentMapper.cs" />
+    <Compile Include="Services\Mappers\CustomerMapper.cs" />
     <Compile Include="Services\Mappers\UserMapper.cs" />
     <Compile Include="Services\UserService.cs" />
     <EmbeddedResource Include="Forms\AppointmentsForm.resx">

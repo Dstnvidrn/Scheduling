@@ -2,16 +2,12 @@
 using System.Drawing;
 using System.Windows.Forms;
 using System.Configuration;
-using Scheduling.Data;
-using System.Data;
-using System.Net.Http;
 using System.Threading.Tasks;
 using Scheduling.Services;
-using System.Collections.Generic;
 using Scheduling.Logging;
 using Scheduling.Helpers;
-using Scheduling.Data.Repositories;
 using Scheduling.Interfaces;
+using Scheduling.DTOs;
 namespace Scheduling
 {
     public partial class LoginForm : Form
@@ -22,7 +18,7 @@ namespace Scheduling
         private AuthenticationService _authenticationService;
         private UserService _userService;
         private IDatabaseHelper _databaseHelper;
-        private bool isLoginClicked = false;
+        private UserDTO _loggedInUser;
 
         public  LoginForm(DatabaseHelper databaseHelper)
         {
@@ -35,7 +31,7 @@ namespace Scheduling
             
             LocalizationService.SetCulture(dropdownLanguage.SelectedItem.ToString());
             _userService = new UserService(_databaseHelper);
-            _authenticationService = new AuthenticationService(databaseHelper);
+            _authenticationService = new AuthenticationService(databaseHelper);           
            
         }
         private void LoadColors()
@@ -80,22 +76,24 @@ namespace Scheduling
 
         private async void btnLogin_Click(object sender, EventArgs e)
         {
-            btnLogin.Enabled = false;
+            
             string username = txtUsername.Text;
             string password = txtPassword.Text;
             int? userId = _userService.GetUserId(username);
+            _loggedInUser = _userService.GetUser(username);
             string selectedLanguage = dropdownLanguage.SelectedItem.ToString();
             // Verify login credentials
             if (_authenticationService.ValidateCredentials(username, password) && userId != null)
             {
                 // Log login attempt - SUCCESS
+                btnLogin.Enabled = false;
                 LoginLogger.LogLoginAttempt(username, true);
                 SetLabelMessage(tsslLoginStatus, true);
 
                 await Task.Delay(1200);
                 this.Hide();
 
-                using (Form appointmentForm = new AppointmentsForm(_databaseHelper))
+                using (Form appointmentForm = new AppointmentsForm(_databaseHelper, _loggedInUser))
                 {
                     appointmentForm.ShowDialog();
                     if (appointmentForm.DialogResult != DialogResult.OK)

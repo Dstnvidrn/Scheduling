@@ -11,7 +11,17 @@ namespace Scheduling.Services.Mappers
             return new UserDTO
             {
                 UserId = user.UserId,
-                Username = user.Username
+                Username = user.Username,
+               
+            };
+        }
+
+        public User MapToModel(UserDTO userDTO)
+        {
+            return new User
+            {
+                UserId = userDTO.UserId,
+                Username = userDTO.Username,
             };
         }
     }

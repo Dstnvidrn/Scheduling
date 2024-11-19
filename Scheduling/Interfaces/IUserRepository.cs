@@ -10,5 +10,7 @@ namespace Scheduling.Interfaces
     public interface IUserRepository
     {
         User GetUser(string username);
+
     }
+
 }

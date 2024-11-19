@@ -30,6 +30,7 @@
         {
             this.tableLayoutAppointments = new System.Windows.Forms.TableLayoutPanel();
             this.pnlContainer = new System.Windows.Forms.Panel();
+            this.lblLoggedInUser = new System.Windows.Forms.Label();
             this.lblCustomers = new System.Windows.Forms.Label();
             this.tlpCustomerOptions = new System.Windows.Forms.TableLayoutPanel();
             this.btnAddCustomer = new System.Windows.Forms.Button();
@@ -49,6 +50,7 @@
             this.pnlSearch = new System.Windows.Forms.Panel();
             this.txtAppointmentSearch = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.btnCustomers = new System.Windows.Forms.Button();
             this.tableLayoutAppointments.SuspendLayout();
             this.pnlContainer.SuspendLayout();
             this.tlpCustomerOptions.SuspendLayout();
@@ -81,6 +83,7 @@
             // 
             this.pnlContainer.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.pnlContainer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(72)))), ((int)(((byte)(87)))));
+            this.pnlContainer.Controls.Add(this.lblLoggedInUser);
             this.pnlContainer.Controls.Add(this.lblCustomers);
             this.pnlContainer.Controls.Add(this.tlpCustomerOptions);
             this.pnlContainer.Controls.Add(this.lblAppointments);
@@ -94,6 +97,17 @@
             this.pnlContainer.Size = new System.Drawing.Size(303, 807);
             this.pnlContainer.TabIndex = 0;
             this.pnlContainer.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlContainer_Paint);
+            // 
+            // lblLoggedInUser
+            // 
+            this.lblLoggedInUser.AutoSize = true;
+            this.lblLoggedInUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLoggedInUser.ForeColor = System.Drawing.Color.White;
+            this.lblLoggedInUser.Location = new System.Drawing.Point(32, 783);
+            this.lblLoggedInUser.Name = "lblLoggedInUser";
+            this.lblLoggedInUser.Size = new System.Drawing.Size(59, 15);
+            this.lblLoggedInUser.TabIndex = 9;
+            this.lblLoggedInUser.Text = "Test User";
             // 
             // lblCustomers
             // 
@@ -114,16 +128,16 @@
             this.tlpCustomerOptions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlpCustomerOptions.Controls.Add(this.btnAddCustomer, 0, 0);
             this.tlpCustomerOptions.Controls.Add(this.btnUpdateCustomer, 0, 1);
-            this.tlpCustomerOptions.Controls.Add(this.btnDeleteCustomer, 0, 2);
+            this.tlpCustomerOptions.Controls.Add(this.btnDeleteCustomer, 0, 3);
+            this.tlpCustomerOptions.Controls.Add(this.btnCustomers, 0, 2);
             this.tlpCustomerOptions.Location = new System.Drawing.Point(30, 416);
             this.tlpCustomerOptions.Name = "tlpCustomerOptions";
-            this.tlpCustomerOptions.RowCount = 3;
+            this.tlpCustomerOptions.RowCount = 4;
             this.tlpCustomerOptions.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tlpCustomerOptions.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tlpCustomerOptions.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tlpCustomerOptions.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpCustomerOptions.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpCustomerOptions.Size = new System.Drawing.Size(240, 158);
+            this.tlpCustomerOptions.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tlpCustomerOptions.Size = new System.Drawing.Size(240, 210);
             this.tlpCustomerOptions.TabIndex = 7;
             // 
             // btnAddCustomer
@@ -165,7 +179,7 @@
             this.btnDeleteCustomer.FlatAppearance.BorderSize = 0;
             this.btnDeleteCustomer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDeleteCustomer.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDeleteCustomer.Location = new System.Drawing.Point(5, 109);
+            this.btnDeleteCustomer.Location = new System.Drawing.Point(5, 161);
             this.btnDeleteCustomer.Name = "btnDeleteCustomer";
             this.btnDeleteCustomer.Size = new System.Drawing.Size(230, 44);
             this.btnDeleteCustomer.TabIndex = 2;
@@ -189,7 +203,7 @@
             this.tlpLogoutOption.ColumnCount = 1;
             this.tlpLogoutOption.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tlpLogoutOption.Controls.Add(this.btnLogout, 0, 0);
-            this.tlpLogoutOption.Location = new System.Drawing.Point(30, 732);
+            this.tlpLogoutOption.Location = new System.Drawing.Point(30, 715);
             this.tlpLogoutOption.Name = "tlpLogoutOption";
             this.tlpLogoutOption.RowCount = 1;
             this.tlpLogoutOption.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -368,7 +382,21 @@
             this.button1.TabIndex = 0;
             this.button1.Text = "&Search";
             this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // btnCustomers
+            // 
+            this.btnCustomers.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.btnCustomers.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnCustomers.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnCustomers.FlatAppearance.BorderSize = 0;
+            this.btnCustomers.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCustomers.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.btnCustomers.Location = new System.Drawing.Point(5, 109);
+            this.btnCustomers.Name = "btnCustomers";
+            this.btnCustomers.Size = new System.Drawing.Size(230, 44);
+            this.btnCustomers.TabIndex = 3;
+            this.btnCustomers.Text = "Customers";
+            this.btnCustomers.UseVisualStyleBackColor = false;
             // 
             // AppointmentsForm
             // 
@@ -420,5 +448,7 @@
         private System.Windows.Forms.Button btnAddCustomer;
         private System.Windows.Forms.Button btnUpdateCustomer;
         private System.Windows.Forms.Button btnDeleteCustomer;
+        private System.Windows.Forms.Label lblLoggedInUser;
+        private System.Windows.Forms.Button btnCustomers;
     }
 }

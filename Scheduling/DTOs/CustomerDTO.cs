@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Scheduling.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,15 @@ namespace Scheduling.DTOs
         public string CreatedBy { get; set; }
         public DateTime LastUpdate { get; set; } = DateTime.Now;
         public string LastUpdatedBy { get; set; }
+        public string CustomerAddress { get; set; }
+        public string CityName { get; set; }
+        public string Country { get; set; }
+        public string Postal { get; set; }
+        public  string CountryName { get; set; }
+        public string Street1 { get; set; }
+        public string Street2 { get; set; }
+        public string PhoneNumber { get; set; }
+
 
     }
 }

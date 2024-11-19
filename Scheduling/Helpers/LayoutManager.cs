@@ -44,6 +44,14 @@ namespace Scheduling.Helpers
             textBox.Text = text;
             textBox.ForeColor = ColorTranslator.FromHtml(hexColor);
         }
+        public static string Capitalize(params string[] strings)
+        {
+            for(int i = 0; i < strings.Length; i++)
+            {
+                strings[i] = $"{strings[i][0].ToString().ToUpper()}{strings[i].Substring(1)}";
+            }
+            return string.Join(" ", strings);
+        }
 
     }
 }

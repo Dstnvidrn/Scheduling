@@ -1,15 +1,9 @@
-﻿using Scheduling.Data.Repositories;
+﻿using Scheduling.DTOs;
 using Scheduling.Enums;
 using Scheduling.Helpers;
 using Scheduling.Interfaces;
+using Scheduling.Services;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Scheduling.Forms
@@ -17,12 +11,16 @@ namespace Scheduling.Forms
     public partial class CustomerForm : Form
     {
         private Mode _mode;
-        private readonly CustomerRepository _customerRepository;
+        private CustomerService _customerService;
+        private IDatabaseHelper _databaseHelper;
+        private UserDTO _loggedInUser;
         
-        public CustomerForm(IDatabase database, Mode mode)
+        public CustomerForm(IDatabaseHelper databaseHelper, Mode mode, UserDTO loggedInUser)
         {
             InitializeComponent();
-            _customerRepository = new CustomerRepository(database);
+            _databaseHelper = databaseHelper;
+            _loggedInUser = loggedInUser;
+            _customerService = new CustomerService(databaseHelper, loggedInUser);
             _mode = mode;
             this.Text = _mode == Mode.Create ? "Add Customer" : "Edit Customer";
             CenterControls();
@@ -39,8 +37,39 @@ namespace Scheduling.Forms
             // Center button controls
             LayoutManager.CenterSingleNestedControlsX(pnlCustomerMain, tplBtnControls);
         }
+        
+        private CustomerDTO PopulateCustomer()
+        {
+            return new CustomerDTO
+            {
+                Name = txtCustomername.Text,
+                Street1 = txtStreet1.Text,
+                Street2 = txtStreet2.Text,
+                PhoneNumber = txtPhoneNo.Text,
+                Postal = txtPostal.Text,
+                CityName = txtCity.Text,
+                CountryName = txtCountry.Text,
 
+
+            };
+        }
         private void btnCreate_Click(object sender, EventArgs e)
+        {
+            if(_customerService.CreateCustomer(PopulateCustomer()))
+            {
+                this.DialogResult = DialogResult.OK;
+                MessageBox.Show($"Customer {LayoutManager.Capitalize(txtCustomername.Text)} created.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information );
+                this.Close();
+            }
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.Cancel;
+            this.Close();
+        }
+
+        private void textBox5_TextChanged(object sender, EventArgs e)
         {
 
         }

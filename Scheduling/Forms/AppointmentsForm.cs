@@ -20,11 +20,12 @@ namespace Scheduling
         private readonly IDatabase _database;
         private readonly AppointmentService _appointmentService;
         private readonly IDatabaseHelper _databaseHelper;
+        private UserDTO _loggedinUser;
         public AppointmentsForm()
         {
             InitializeComponent();
         }
-        public AppointmentsForm(IDatabaseHelper databaseHelper)
+        public AppointmentsForm(IDatabaseHelper databaseHelper, UserDTO loggedInUser)
         {
             InitializeComponent();
             _databaseHelper = databaseHelper;
@@ -33,6 +34,7 @@ namespace Scheduling
             dgvAppointments.Height = this.Height;
             pnlContainer.BackColor = ColorTranslator.FromHtml(Colors.BaseColor);
             btnCreate.BackColor = ColorTranslator.FromHtml(Colors.CtaColor);
+            _loggedinUser = loggedInUser;
 
             
         }
@@ -47,6 +49,9 @@ namespace Scheduling
             LayoutManager.CenterSingleNestedControlsX(pnlContainer, lblCustomers);
             // Set placerholder text in search box
             LayoutManager.SetPlacholderText(txtAppointmentSearch, "Search", Colors.NeutalDarkColor);
+            lblLoggedInUser.Text = $"Logged in as: {LayoutManager.Capitalize(_loggedinUser.Username)}";
+
+
         }
         
         
@@ -124,7 +129,7 @@ namespace Scheduling
 
         private void btnAddCustomer_Click(object sender, EventArgs e)
         {
-            using(CustomerForm customerForm = new CustomerForm(_database, Mode.Create))
+            using(CustomerForm customerForm = new CustomerForm(_databaseHelper, Mode.Create, _loggedinUser))
             {
                 customerForm.ShowDialog();
 
@@ -133,14 +138,6 @@ namespace Scheduling
                     
                 }
             }
-            
-
-            
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

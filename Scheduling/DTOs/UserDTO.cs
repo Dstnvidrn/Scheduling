@@ -10,5 +10,6 @@ namespace Scheduling.DTOs
     {
         public string Username { get; set; }
         public int UserId { get; set; }
+        public DateTime CreateDate { get; set; } = DateTime.Now;
     }
 }
