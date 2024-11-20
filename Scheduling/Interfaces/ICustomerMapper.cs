@@ -4,12 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Scheduling.Enums
+namespace Scheduling.Interfaces
 {
-    public enum Mode
+    internal interface ICustomerMapper
     {
-        Create,
-        Edit,
-        Delete
     }
 }

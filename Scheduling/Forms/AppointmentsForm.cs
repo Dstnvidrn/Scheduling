@@ -16,8 +16,7 @@ namespace Scheduling
 {
     public partial class AppointmentsForm : Form
     {
-        private int? _userId;
-        private readonly IDatabase _database;
+        
         private readonly AppointmentService _appointmentService;
         private readonly IDatabaseHelper _databaseHelper;
         private UserDTO _loggedinUser;
@@ -30,11 +29,11 @@ namespace Scheduling
             InitializeComponent();
             _databaseHelper = databaseHelper;
             _appointmentService = new AppointmentService(databaseHelper);
-            dgvAppointments.Width = this.Width;
-            dgvAppointments.Height = this.Height;
             pnlContainer.BackColor = ColorTranslator.FromHtml(Colors.BaseColor);
             btnCreate.BackColor = ColorTranslator.FromHtml(Colors.CtaColor);
             _loggedinUser = loggedInUser;
+            dgvAppointments.Width = this.Width;
+            dgvAppointments.Height = this.Height;
 
             
         }
@@ -46,31 +45,12 @@ namespace Scheduling
             LayoutManager.CenterSingleNestedControlsX(pnlContainer, tlpMenuOptions);
             LayoutManager.CenterSingleNestedControlsX(pnlContainer, tlpLogoutOption);
             LayoutManager.CenterSingleNestedControlsX(pnlContainer, lblAppointments);
-            LayoutManager.CenterSingleNestedControlsX(pnlContainer, lblCustomers);
             // Set placerholder text in search box
             LayoutManager.SetPlacholderText(txtAppointmentSearch, "Search", Colors.NeutalDarkColor);
             lblLoggedInUser.Text = $"Logged in as: {LayoutManager.Capitalize(_loggedinUser.Username)}";
 
 
         }
-        
-        
-       // private void RenameColumnHeaders()
-        //{
-        //    dgvAppointments.AutoGenerateColumns = false;
-        //    //Rename table headers for greater readability
-            
-        //    dgvAppointments.Columns["customerName"].HeaderText = "Customer";
-        //    dgvAppointments.Columns["title"].HeaderText = "Title";
-        //    dgvAppointments.Columns["description"].HeaderText = "Description";
-        //    dgvAppointments.Columns["location"].HeaderText = "Location";
-        //    dgvAppointments.Columns["contact"].HeaderText = "Contact";
-        //    dgvAppointments.Columns["type"].HeaderText = "Type";
-        //    dgvAppointments.Columns["createDate"].HeaderText = "Created Date";
-        //    dgvAppointments.Columns["createdBy"].HeaderText = "Created By";
-        //    dgvAppointments.Columns["lastUpdate"].HeaderText = "Last Update";
-        //    dgvAppointments.Columns["updatedBy"].HeaderText = "Updated By";
-        //}
         private void PopulateDataGridView()
         {
             try
@@ -127,16 +107,24 @@ namespace Scheduling
 
         }
 
-        private void btnAddCustomer_Click(object sender, EventArgs e)
+        private void btnDeleteCustomer_Click(object sender, EventArgs e)
         {
-            using(CustomerForm customerForm = new CustomerForm(_databaseHelper, Mode.Create, _loggedinUser))
+            using (CustomerForm customerForm = new CustomerForm(_databaseHelper, Mode.Delete, _loggedinUser))
             {
                 customerForm.ShowDialog();
 
-                if (customerForm.DialogResult == DialogResult.OK)
-                {
-                    
-                }
+            }
+        }
+
+
+        
+
+        private void btnCustomers_Click_1(object sender, EventArgs e)
+        {
+            using (CustomerListForm customerListForm = new CustomerListForm(_databaseHelper, _loggedinUser))
+            {
+                customerListForm.ShowDialog();
+
             }
         }
     }

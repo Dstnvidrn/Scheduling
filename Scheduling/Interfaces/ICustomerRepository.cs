@@ -15,6 +15,8 @@ namespace Scheduling.Interfaces
         int GetOrCreateCountryId(City city);
         int GetOrCreateAddressId(Customer customer);
         int GetLastInsertId();
+        void DeleteCustomer(Customer customer);
+        List<Customer> GetAllCustomers();
 
 
     }

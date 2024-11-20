@@ -132,6 +132,12 @@
     <Compile Include="Forms\CustomerForm.Designer.cs">
       <DependentUpon>CustomerForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\CustomerListForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CustomerListForm.Designer.cs">
+      <DependentUpon>CustomerListForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Helpers\Colors.cs" />
     <Compile Include="Data\Database\MySqlDatabase.cs" />
     <Compile Include="Helpers\DatabaseHelper.cs" />
@@ -139,6 +145,7 @@
     <Compile Include="Interfaces\IAppointmentMapper.cs" />
     <Compile Include="Interfaces\IAppointmentRepository.cs" />
     <Compile Include="Interfaces\IAuthenticationRepository.cs" />
+    <Compile Include="Interfaces\ICustomerMapper.cs" />
     <Compile Include="Interfaces\ICustomerRepository.cs" />
     <Compile Include="Interfaces\IDatabaseHelper.cs" />
     <Compile Include="Interfaces\IDataConnection.cs" />
@@ -180,6 +187,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\CustomerForm.resx">
       <DependentUpon>CustomerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CustomerListForm.resx">
+      <DependentUpon>CustomerListForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>

@@ -23,6 +23,7 @@ namespace Scheduling.Forms
             _customerService = new CustomerService(databaseHelper, loggedInUser);
             _mode = mode;
             this.Text = _mode == Mode.Create ? "Add Customer" : "Edit Customer";
+            btnCreate.Text = _mode == Mode.Delete ? "Delete" : _mode == Mode.Edit ? "Update" : "Create";
             CenterControls();
 
         }
@@ -55,11 +56,17 @@ namespace Scheduling.Forms
         }
         private void btnCreate_Click(object sender, EventArgs e)
         {
-            if(_customerService.CreateCustomer(PopulateCustomer()))
+
+            if(_customerService.CreateCustomer(PopulateCustomer()) && _mode == Mode.Create)
             {
                 this.DialogResult = DialogResult.OK;
                 MessageBox.Show($"Customer {LayoutManager.Capitalize(txtCustomername.Text)} created.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information );
                 this.Close();
+            }
+            else if (_mode == Mode.Delete && _customerService.DeleteCustomer(PopulateCustomer()))
+            {
+                this.DialogResult= DialogResult.OK;
+                MessageBox.Show($"Customer {LayoutManager.Capitalize(txtCustomername.Text)} updated.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
