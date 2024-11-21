@@ -89,7 +89,7 @@
             this.lblCustomers.AutoSize = true;
             this.lblCustomers.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCustomers.ForeColor = System.Drawing.Color.White;
-            this.lblCustomers.Location = new System.Drawing.Point(86, 46);
+            this.lblCustomers.Location = new System.Drawing.Point(81, 148);
             this.lblCustomers.Name = "lblCustomers";
             this.lblCustomers.Size = new System.Drawing.Size(115, 25);
             this.lblCustomers.TabIndex = 8;
@@ -104,7 +104,7 @@
             this.tlpCustomerOptions.Controls.Add(this.btnAddCustomer, 0, 0);
             this.tlpCustomerOptions.Controls.Add(this.btnUpdateCustomer, 0, 1);
             this.tlpCustomerOptions.Controls.Add(this.btnDeleteCustomer, 0, 2);
-            this.tlpCustomerOptions.Location = new System.Drawing.Point(26, 79);
+            this.tlpCustomerOptions.Location = new System.Drawing.Point(21, 181);
             this.tlpCustomerOptions.Name = "tlpCustomerOptions";
             this.tlpCustomerOptions.RowCount = 3;
             this.tlpCustomerOptions.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
@@ -143,6 +143,7 @@
             this.btnUpdateCustomer.TabIndex = 1;
             this.btnUpdateCustomer.Text = "Edit";
             this.btnUpdateCustomer.UseVisualStyleBackColor = false;
+            this.btnUpdateCustomer.Click += new System.EventHandler(this.btnUpdateCustomer_Click);
             // 
             // btnDeleteCustomer
             // 
@@ -225,11 +226,10 @@
             this.dgvCustomers.MultiSelect = false;
             this.dgvCustomers.Name = "dgvCustomers";
             this.dgvCustomers.ReadOnly = true;
-            this.dgvCustomers.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
+            this.dgvCustomers.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
             this.dgvCustomers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvCustomers.Size = new System.Drawing.Size(1121, 755);
             this.dgvCustomers.TabIndex = 4;
-            this.dgvCustomers.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCustomers_CellContentClick);
             // 
             // pnlSearch
             // 

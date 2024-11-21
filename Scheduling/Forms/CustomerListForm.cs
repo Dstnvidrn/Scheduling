@@ -72,16 +72,6 @@ namespace Scheduling.Forms
             // Set placerholder text in search box
             LayoutManager.SetPlacholderText(txtAppointmentSearch, "Search", Colors.NeutalDarkColor);
         }
-
-        private void btnCustomerListCnl_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dgvCustomers_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
         private void LoadCustomers()
         {
             dgvCustomers.DataSource = _customerService.GetAllCustomers();
@@ -100,14 +90,16 @@ namespace Scheduling.Forms
                     Street1 = selectedRow.Cells["Street1"].Value?.ToString(),
                     Street2 = selectedRow.Cells["Street2"].Value?.ToString(),
                     CityName = selectedRow.Cells["CityName"].Value?.ToString(),
-                    CountryName = selectedRow.Cells["CountryName"].Value?.ToString(),
-                    Active = Convert.ToBoolean(selectedRow.Cells["Active"].Value)
+                    Country = selectedRow.Cells["Country"].Value?.ToString(),
+                    Active = Convert.ToBoolean(selectedRow.Cells["Active"].Value),
+                    Postal = selectedRow.Cells["Postal"].Value?.ToString(),
+                    PhoneNumber = selectedRow.Cells["PhoneNumber"].Value?.ToString()
                 };
 
                 return customerDTO;
             }
 
-            return null; // No row selected
+            return null;
         }
 
         private void btnDeleteCustomer_Click_1(object sender, EventArgs e)
@@ -135,6 +127,22 @@ namespace Scheduling.Forms
             {
                 MessageBox.Show("Please select a row to delete.");
             }
+        }
+
+        private void btnUpdateCustomer_Click(object sender, EventArgs e)
+        {
+            CustomerDTO customerDTO = GetSelectedCustomerDTO();
+            using(CustomerForm customerForm = new CustomerForm(_databaseHelper, Mode.Edit, _loggedinUser, customerDTO))
+            {
+                customerForm.ShowDialog();
+                LoadCustomers();
+            }
+        }
+
+        private void btnCustomerListCnl_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.Cancel;
+            this.Close();
         }
     }
 }

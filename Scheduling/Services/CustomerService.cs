@@ -1,6 +1,7 @@
 ﻿using Scheduling.Data.Repositories;
 using Scheduling.DTOs;
 using Scheduling.Interfaces;
+using Scheduling.Models;
 using Scheduling.Services.Mappers;
 using System;
 using System.Collections.Generic;
@@ -53,7 +54,9 @@ namespace Scheduling.Services
                 return false;
             }
         }
-
-
+        public void UpdateCustomer(CustomerDTO customerDTO)
+        {
+            _customerRepository.UpdateCustomer(_customerMapper.MapToModel(customerDTO, _loggedInUser));
+        }
     }
 }

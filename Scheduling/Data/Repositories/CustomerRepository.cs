@@ -1,14 +1,8 @@
-﻿using Scheduling.DTOs;
-using Scheduling.Helpers;
-using Scheduling.Interfaces;
+﻿using Scheduling.Interfaces;
 using Scheduling.Models;
-using Scheduling.Services.Mappers;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Scheduling.Data.Repositories
 {
@@ -270,9 +264,11 @@ namespace Scheduling.Data.Repositories
             customer.createDate,
             customer.createdBy,
             customer.lastUpdate,
-            customer.lastUpdateBy,
+            customer.lastUpdateBy AS 'Updated By',
             address.address AS AddressStreet,
             address.address2 AS AddressStreet2,
+            address.postalCode AS Postal,
+            address.phone,
             city.cityId,
             city.city AS CityName,
             country.countryId,
@@ -288,7 +284,6 @@ namespace Scheduling.Data.Repositories
 
             var customers = new List<Customer>();
             DataTable result = _databaseHelper.ExecuteSelectQuery(query);
-            User user = new User();
             foreach (DataRow row in result.Rows)
             {
                 var customer = new Customer
@@ -297,9 +292,10 @@ namespace Scheduling.Data.Repositories
                     CustomerName = row["customerName"].ToString(),
                     Address = new Address
                     {
-                        AddressId = Convert.ToInt32(row["addressId"]),
                         Street1 = row["AddressStreet"].ToString(),
                         Street2 = row["AddressStreet2"].ToString(),
+                        PostalCode = row["Postal"].ToString(),
+                        PhoneNumber = row["phone"].ToString(),
                         City = new City
                         {
                             Id = Convert.ToInt32(row["cityId"]),
@@ -315,7 +311,7 @@ namespace Scheduling.Data.Repositories
                     CreateDate = Convert.ToDateTime(row["createDate"]),
                     CreatedBy = new User { Username = row["createdBy"].ToString() },
                     LastUpdate = Convert.ToDateTime(row["lastUpdate"]),
-                    UpdatedBy = new User { Username = row["lastUpdateBy"].ToString() }
+                    UpdatedBy = new User { Username = row["Updated By"].ToString() }
                 };
 
                 customers.Add(customer);
@@ -323,5 +319,113 @@ namespace Scheduling.Data.Repositories
 
             return customers;
         }
+        public void UpdateCustomer(Customer customer)
+        {
+            string query = @"
+                UPDATE customer
+                SET 
+                    customerName = @customerName,
+                    active = @active,
+                    lastUpdate = @lastUpdate,
+                    lastUpdateBy = @lastUpdateBy
+                WHERE customerId = @customerId";
+
+            var parameters = new[]
+            {
+            _databaseHelper.CreateParameter("@customerName", customer.CustomerName),
+            _databaseHelper.CreateParameter("@active", customer.IsActive ? 1 : 0),
+            _databaseHelper.CreateParameter("@lastUpdateBy", customer.UpdatedBy.Username),
+            _databaseHelper.CreateParameter("@lastUpdate", DateTime.Now),
+            _databaseHelper.CreateParameter("@customerId", customer.CustomerId)
+            };
+
+            _databaseHelper.ExecuteNonQuery(query, parameters);
+
+            // Update related tables
+            UpdateAddress(customer);
+            UpdateCity(customer);
+            UpdateCountry(customer);
+        }
+    
+        private void UpdateAddress(Customer customer)
+        {
+            string query = @"
+            UPDATE address
+            SET 
+                address = @street1,
+                address2 = @street2,
+                phone = @phone,
+                postalCode = @postal,
+                lastUpdateBy = @updateBy,
+                lastUpdate = @lastUpdate
+            WHERE addressId = (
+                SELECT addressId FROM customer WHERE customerId = @customerId
+            )";
+
+            var parameters = new[]
+            {
+            _databaseHelper.CreateParameter("@street1", customer.Address.Street1),
+            _databaseHelper.CreateParameter("@street2", customer.Address.Street2),
+            _databaseHelper.CreateParameter("@phone", customer.Address.PhoneNumber),
+            _databaseHelper.CreateParameter("@postal", customer.Address.PostalCode),
+            _databaseHelper.CreateParameter("@updateBy", customer.UpdatedBy.Username),
+            _databaseHelper.CreateParameter("@lastUpdate", customer.LastUpdate),
+            _databaseHelper.CreateParameter("@customerId", customer.CustomerId)
+        };
+
+            _databaseHelper.ExecuteNonQuery(query, parameters);
+        }
+        private void UpdateCity(Customer customer)
+        {
+            string query = @"
+                UPDATE city
+                SET 
+                    city = @cityName,
+                    lastUpdate = @lastUpdate,
+                    lastUpdateBy = @lastUpdateBy
+                WHERE cityId = (
+                    SELECT cityId 
+                    FROM address
+                    WHERE addressId = (SELECT addressId FROM customer WHERE customerId = @customerId))";
+
+            var parameters = new[]
+            {
+                _databaseHelper.CreateParameter("@cityName", customer.CustomerName),
+                _databaseHelper.CreateParameter("@customerId", customer.CustomerId),
+                _databaseHelper.CreateParameter("@lastUpdate", customer.LastUpdate),
+                _databaseHelper.CreateParameter("@lastUpdateBy", customer.UpdatedBy.Username)
+            };
+
+            _databaseHelper.ExecuteNonQuery(query, parameters);
+        }
+
+        private void UpdateCountry(Customer customer)
+        {
+            string query = @"
+                UPDATE country
+                SET 
+                    country = @countryName
+                WHERE countryId = (
+                    SELECT countryId 
+                    FROM city
+                    WHERE cityId = (
+                        SELECT cityId 
+                        FROM address
+                        WHERE addressId = (
+                            SELECT addressId FROM customer WHERE customerId = @customerId
+                        )
+                    )
+                )";
+
+            var parameters = new[]
+            {
+                _databaseHelper.CreateParameter("@countryName", customer.Address.City.Country.CountryName),
+                _databaseHelper.CreateParameter("@customerId", customer.CustomerId)
+            };
+
+            _databaseHelper.ExecuteNonQuery(query, parameters);
+        }
+
+
     }
 }

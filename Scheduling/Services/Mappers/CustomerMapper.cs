@@ -39,7 +39,7 @@ namespace Scheduling.Services.Mappers
                         CreatedBy = user,
                         Country = new Country
                         {
-                            CountryName = customerDTO.CountryName,
+                            CountryName = customerDTO.Country,
                             CreatedBy = user
                         }
                     },
@@ -60,8 +60,13 @@ namespace Scheduling.Services.Mappers
                     Street1 = customer.Address?.Street1,
                     Street2 = customer.Address?.Street2,
                     CityName = customer.Address?.City?.CityName,
-                    CountryName = customer.Address?.City?.Country?.CountryName,
-                    Active = customer.IsActive
+                    Country = customer.Address?.City?.Country?.CountryName,
+                    Active = customer.IsActive,
+                    Postal = customer.Address.PostalCode,
+                    PhoneNumber = customer.Address.PhoneNumber,
+                    LastUpdatedBy = customer.UpdatedBy.Username,
+                    LastUpdate = customer.LastUpdate,
+                    CreatedBy = customer.CreatedBy.Username
                 };
 
                 customerDTOs.Add(customerDTO);

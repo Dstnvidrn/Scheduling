@@ -320,6 +320,7 @@
             this.Controls.Add(this.pnlCustomerMain);
             this.Name = "CustomerForm";
             this.Text = "CustomerForm";
+            this.Load += new System.EventHandler(this.CustomerForm_Load);
             this.pnlCustomerControls.ResumeLayout(false);
             this.tlpCustomerFields.ResumeLayout(false);
             this.tlpCustomerFields.PerformLayout();

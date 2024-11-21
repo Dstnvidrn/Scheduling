@@ -17,6 +17,7 @@ namespace Scheduling.Interfaces
         int GetLastInsertId();
         void DeleteCustomer(Customer customer);
         List<Customer> GetAllCustomers();
+        void UpdateCustomer(Customer customer);
 
 
     }
