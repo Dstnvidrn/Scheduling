@@ -1,4 +1,5 @@
-﻿using Scheduling.Models;
+﻿using Scheduling.DTOs;
+using Scheduling.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,5 +24,6 @@ namespace Scheduling.Interfaces
 
         // Delete an appointment
         void DeleteAppointment(int id);
+        bool IsOverlappingAppointment(int customerId, DateTime start, DateTime end, int? appointmentId = null);
     }
 }

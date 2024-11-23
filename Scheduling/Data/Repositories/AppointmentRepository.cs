@@ -96,7 +96,26 @@ LEFT JOIN
         {
             throw new NotImplementedException();
         }
+        public bool IsOverlappingAppointment(int customerId, DateTime start, DateTime end, int? appointmentId = null)
+        {
+            string query = @"
+                SELECT COUNT(*) 
+                FROM appointment 
+                WHERE customerId = @customerId 
+                AND ((@start BETWEEN start AND end) OR (@end BETWEEN start AND end))
+                AND (@start < end AND @end > start)
+                AND (@appointmentId IS NULL OR appointmentId != @appointmentId)";
+            var parameters = new[]
+            {
+                _databaseHelper.CreateParameter("@customerId", customerId),
+                _databaseHelper.CreateParameter("@start", start),
+                _databaseHelper.CreateParameter("@end", end),
+                _databaseHelper.CreateParameter("@appointmentId", appointmentId ?? (object)DBNull.Value)
+            };
 
-        
+            DataTable result = _databaseHelper.ExecuteSelectQuery(query, parameters);
+            return Convert.ToInt32(result.Rows[0][0]) > 0;
+        }
+
     }
 }

@@ -42,12 +42,12 @@
             this.lblType = new System.Windows.Forms.Label();
             this.lblStartDate = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.txtTitle = new System.Windows.Forms.TextBox();
+            this.txtDescription = new System.Windows.Forms.TextBox();
+            this.dateTimeStart = new System.Windows.Forms.DateTimePicker();
+            this.dateTimeEnd = new System.Windows.Forms.DateTimePicker();
+            this.cmbType = new System.Windows.Forms.ComboBox();
+            this.cmbCustomer = new System.Windows.Forms.ComboBox();
             this.tblMain.SuspendLayout();
             this.panel1.SuspendLayout();
             this.pnlBtns.SuspendLayout();
@@ -138,6 +138,7 @@
             this.BtnOperation.Size = new System.Drawing.Size(260, 51);
             this.BtnOperation.TabIndex = 7;
             this.BtnOperation.UseVisualStyleBackColor = false;
+            this.BtnOperation.Click += new System.EventHandler(this.BtnOperation_Click);
             // 
             // pnlMiddle
             // 
@@ -162,12 +163,12 @@
             this.tblInputs.Controls.Add(this.lblType, 0, 3);
             this.tblInputs.Controls.Add(this.lblStartDate, 0, 4);
             this.tblInputs.Controls.Add(this.label7, 0, 5);
-            this.tblInputs.Controls.Add(this.textBox1, 1, 1);
-            this.tblInputs.Controls.Add(this.textBox2, 1, 2);
-            this.tblInputs.Controls.Add(this.dateTimePicker1, 1, 4);
-            this.tblInputs.Controls.Add(this.dateTimePicker2, 1, 5);
-            this.tblInputs.Controls.Add(this.comboBox1, 1, 3);
-            this.tblInputs.Controls.Add(this.comboBox2, 1, 0);
+            this.tblInputs.Controls.Add(this.txtTitle, 1, 1);
+            this.tblInputs.Controls.Add(this.txtDescription, 1, 2);
+            this.tblInputs.Controls.Add(this.dateTimeStart, 1, 4);
+            this.tblInputs.Controls.Add(this.dateTimeEnd, 1, 5);
+            this.tblInputs.Controls.Add(this.cmbType, 1, 3);
+            this.tblInputs.Controls.Add(this.cmbCustomer, 1, 0);
             this.tblInputs.Location = new System.Drawing.Point(75, 0);
             this.tblInputs.Name = "tblInputs";
             this.tblInputs.RowCount = 6;
@@ -190,7 +191,7 @@
             this.lblCustomer.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.lblCustomer.Size = new System.Drawing.Size(158, 24);
             this.lblCustomer.TabIndex = 0;
-            this.lblCustomer.Text = "Customer";
+            this.lblCustomer.Text = "Customer*";
             this.lblCustomer.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // lblTitle
@@ -203,7 +204,7 @@
             this.lblTitle.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.lblTitle.Size = new System.Drawing.Size(158, 24);
             this.lblTitle.TabIndex = 1;
-            this.lblTitle.Text = "Title";
+            this.lblTitle.Text = "Title*";
             this.lblTitle.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // lblDescription
@@ -216,7 +217,7 @@
             this.lblDescription.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.lblDescription.Size = new System.Drawing.Size(158, 24);
             this.lblDescription.TabIndex = 2;
-            this.lblDescription.Text = "Description";
+            this.lblDescription.Text = "Description*";
             this.lblDescription.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // lblType
@@ -229,7 +230,7 @@
             this.lblType.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.lblType.Size = new System.Drawing.Size(158, 24);
             this.lblType.TabIndex = 3;
-            this.lblType.Text = "Type";
+            this.lblType.Text = "Type*";
             this.lblType.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // lblStartDate
@@ -242,7 +243,7 @@
             this.lblStartDate.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.lblStartDate.Size = new System.Drawing.Size(158, 24);
             this.lblStartDate.TabIndex = 4;
-            this.lblStartDate.Text = "Start Date/Time";
+            this.lblStartDate.Text = "Start Date/Time*";
             this.lblStartDate.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // label7
@@ -255,83 +256,83 @@
             this.label7.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.label7.Size = new System.Drawing.Size(158, 24);
             this.label7.TabIndex = 5;
-            this.label7.Text = "End Date/Time";
+            this.label7.Text = "End Date/Time*";
             this.label7.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // textBox1
+            // txtTitle
             // 
-            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(174, 71);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(10, 3, 10, 3);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(473, 26);
-            this.textBox1.TabIndex = 2;
+            this.txtTitle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTitle.Location = new System.Drawing.Point(174, 71);
+            this.txtTitle.Margin = new System.Windows.Forms.Padding(10, 3, 10, 3);
+            this.txtTitle.Name = "txtTitle";
+            this.txtTitle.Size = new System.Drawing.Size(473, 26);
+            this.txtTitle.TabIndex = 2;
             // 
-            // textBox2
+            // txtDescription
             // 
-            this.textBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.Location = new System.Drawing.Point(174, 115);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(10, 3, 10, 3);
-            this.textBox2.Multiline = true;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(473, 50);
-            this.textBox2.TabIndex = 3;
+            this.txtDescription.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtDescription.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtDescription.Location = new System.Drawing.Point(174, 115);
+            this.txtDescription.Margin = new System.Windows.Forms.Padding(10, 3, 10, 3);
+            this.txtDescription.Multiline = true;
+            this.txtDescription.Name = "txtDescription";
+            this.txtDescription.Size = new System.Drawing.Size(473, 50);
+            this.txtDescription.TabIndex = 3;
             // 
-            // dateTimePicker1
+            // dateTimeStart
             // 
-            this.dateTimePicker1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.dateTimePicker1.CustomFormat = "MM/dd/yyyy hh:mm tt";
-            this.dateTimePicker1.DropDownAlign = System.Windows.Forms.LeftRightAlignment.Right;
-            this.dateTimePicker1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker1.Location = new System.Drawing.Point(174, 239);
-            this.dateTimePicker1.Margin = new System.Windows.Forms.Padding(10, 3, 10, 3);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(473, 26);
-            this.dateTimePicker1.TabIndex = 5;
+            this.dateTimeStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.dateTimeStart.CustomFormat = "MM/dd/yyyy hh:mm tt";
+            this.dateTimeStart.DropDownAlign = System.Windows.Forms.LeftRightAlignment.Right;
+            this.dateTimeStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateTimeStart.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimeStart.Location = new System.Drawing.Point(174, 239);
+            this.dateTimeStart.Margin = new System.Windows.Forms.Padding(10, 3, 10, 3);
+            this.dateTimeStart.Name = "dateTimeStart";
+            this.dateTimeStart.Size = new System.Drawing.Size(473, 26);
+            this.dateTimeStart.TabIndex = 5;
             // 
-            // dateTimePicker2
+            // dateTimeEnd
             // 
-            this.dateTimePicker2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.dateTimePicker2.CustomFormat = "MM/dd/yyyy hh:mm tt";
-            this.dateTimePicker2.DropDownAlign = System.Windows.Forms.LeftRightAlignment.Right;
-            this.dateTimePicker2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker2.Location = new System.Drawing.Point(174, 295);
-            this.dateTimePicker2.Margin = new System.Windows.Forms.Padding(10, 3, 10, 3);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(473, 26);
-            this.dateTimePicker2.TabIndex = 6;
+            this.dateTimeEnd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.dateTimeEnd.CustomFormat = "MM/dd/yyyy hh:mm tt";
+            this.dateTimeEnd.DropDownAlign = System.Windows.Forms.LeftRightAlignment.Right;
+            this.dateTimeEnd.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateTimeEnd.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimeEnd.Location = new System.Drawing.Point(174, 295);
+            this.dateTimeEnd.Margin = new System.Windows.Forms.Padding(10, 3, 10, 3);
+            this.dateTimeEnd.Name = "dateTimeEnd";
+            this.dateTimeEnd.Size = new System.Drawing.Size(473, 26);
+            this.dateTimeEnd.TabIndex = 6;
             // 
-            // comboBox1
+            // cmbType
             // 
-            this.comboBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
+            this.cmbType.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbType.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbType.FormattingEnabled = true;
+            this.cmbType.Items.AddRange(new object[] {
             "Test1",
             "Test2"});
-            this.comboBox1.Location = new System.Drawing.Point(174, 185);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(10, 3, 10, 3);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(473, 28);
-            this.comboBox1.TabIndex = 4;
+            this.cmbType.Location = new System.Drawing.Point(174, 185);
+            this.cmbType.Margin = new System.Windows.Forms.Padding(10, 3, 10, 3);
+            this.cmbType.Name = "cmbType";
+            this.cmbType.Size = new System.Drawing.Size(473, 28);
+            this.cmbType.TabIndex = 4;
             // 
-            // comboBox2
+            // cmbCustomer
             // 
-            this.comboBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Items.AddRange(new object[] {
+            this.cmbCustomer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbCustomer.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbCustomer.FormattingEnabled = true;
+            this.cmbCustomer.Items.AddRange(new object[] {
             "test1",
             "test1"});
-            this.comboBox2.Location = new System.Drawing.Point(174, 17);
-            this.comboBox2.Margin = new System.Windows.Forms.Padding(10, 3, 10, 3);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(473, 28);
-            this.comboBox2.TabIndex = 1;
+            this.cmbCustomer.Location = new System.Drawing.Point(174, 17);
+            this.cmbCustomer.Margin = new System.Windows.Forms.Padding(10, 3, 10, 3);
+            this.cmbCustomer.Name = "cmbCustomer";
+            this.cmbCustomer.Size = new System.Drawing.Size(473, 28);
+            this.cmbCustomer.TabIndex = 1;
             // 
             // AppointmentManager
             // 
@@ -371,11 +372,11 @@
         private System.Windows.Forms.Label lblType;
         private System.Windows.Forms.Label lblStartDate;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.TextBox txtTitle;
+        private System.Windows.Forms.TextBox txtDescription;
+        private System.Windows.Forms.DateTimePicker dateTimeStart;
+        private System.Windows.Forms.DateTimePicker dateTimeEnd;
+        private System.Windows.Forms.ComboBox cmbType;
+        private System.Windows.Forms.ComboBox cmbCustomer;
     }
 }

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Scheduling.Services.Mappers
 {
-    public class AppointmentMapper : IAppointmentMapper
+    public class AppointmentMapper
     {
         public AppointmentDTO MapToDTO(Appointment appointment)
         {
@@ -25,6 +25,10 @@ namespace Scheduling.Services.Mappers
                 End = appointment.End,
                 LastUpdate = appointment.LastUpdate,
                 UpdatedBy = appointment.LastUpdatedBy.Username,
+                CustomerId = appointment.CustomerId,
+                Contact = appointment.Contact,
+                Type = appointment.Type
+
             };
         }
 
@@ -33,9 +37,27 @@ namespace Scheduling.Services.Mappers
             return appointments.Select(MapToDTO).ToList();
         }
 
-        public Appointment MapToModel(AppointmentDTO appointmentDTO)
+        public Appointment MapToModel(AppointmentDTO appointmentDTO, User loggedInUser)
         {
-            throw new NotImplementedException();
+            return new Appointment
+            {
+                AppointmentId = appointmentDTO.AppointmentId,
+                CustomerName = appointmentDTO.CustomerName,
+                Title = appointmentDTO.Title,
+                Description = appointmentDTO.Description,
+                Location = appointmentDTO.Location,
+                CreateDate = appointmentDTO.CreateDate,
+                Start = appointmentDTO.Start,
+                End = appointmentDTO.End,
+                LastUpdate = appointmentDTO.LastUpdate,
+                LastUpdatedBy = loggedInUser,
+                Contact = appointmentDTO.Contact,
+                Type = appointmentDTO.Type,
+                CustomerId = appointmentDTO.CustomerId,
+                CreatedBy = loggedInUser,
+                URL = appointmentDTO.URL
+
+            };
         }
     }
 }
