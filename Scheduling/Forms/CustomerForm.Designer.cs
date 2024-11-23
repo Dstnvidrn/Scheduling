@@ -104,9 +104,9 @@
             this.lblCustomerName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCustomerName.Location = new System.Drawing.Point(3, 18);
             this.lblCustomerName.Name = "lblCustomerName";
-            this.lblCustomerName.Size = new System.Drawing.Size(104, 16);
+            this.lblCustomerName.Size = new System.Drawing.Size(109, 16);
             this.lblCustomerName.TabIndex = 0;
-            this.lblCustomerName.Text = "Customer Name";
+            this.lblCustomerName.Text = "Customer Name*";
             this.lblCustomerName.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
             // lblCountry
@@ -116,9 +116,9 @@
             this.lblCountry.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCountry.Location = new System.Drawing.Point(3, 283);
             this.lblCountry.Name = "lblCountry";
-            this.lblCountry.Size = new System.Drawing.Size(104, 16);
+            this.lblCountry.Size = new System.Drawing.Size(109, 16);
             this.lblCountry.TabIndex = 5;
-            this.lblCountry.Text = "Country";
+            this.lblCountry.Text = "Country*";
             this.lblCountry.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
             // lblCity
@@ -128,9 +128,9 @@
             this.lblCity.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCity.Location = new System.Drawing.Point(3, 177);
             this.lblCity.Name = "lblCity";
-            this.lblCity.Size = new System.Drawing.Size(104, 16);
+            this.lblCity.Size = new System.Drawing.Size(109, 16);
             this.lblCity.TabIndex = 3;
-            this.lblCity.Text = "City";
+            this.lblCity.Text = "City*";
             this.lblCity.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
             // lblStreetAdd1
@@ -140,9 +140,9 @@
             this.lblStreetAdd1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblStreetAdd1.Location = new System.Drawing.Point(3, 71);
             this.lblStreetAdd1.Name = "lblStreetAdd1";
-            this.lblStreetAdd1.Size = new System.Drawing.Size(104, 16);
+            this.lblStreetAdd1.Size = new System.Drawing.Size(109, 16);
             this.lblStreetAdd1.TabIndex = 1;
-            this.lblStreetAdd1.Text = "Street Address";
+            this.lblStreetAdd1.Text = "Street Address*";
             this.lblStreetAdd1.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
             // lblStreetAdd2
@@ -152,7 +152,7 @@
             this.lblStreetAdd2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblStreetAdd2.Location = new System.Drawing.Point(3, 124);
             this.lblStreetAdd2.Name = "lblStreetAdd2";
-            this.lblStreetAdd2.Size = new System.Drawing.Size(104, 16);
+            this.lblStreetAdd2.Size = new System.Drawing.Size(109, 16);
             this.lblStreetAdd2.TabIndex = 2;
             this.lblStreetAdd2.Text = "Address 2";
             this.lblStreetAdd2.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -164,9 +164,9 @@
             this.lblPhoneNo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPhoneNo.Location = new System.Drawing.Point(3, 337);
             this.lblPhoneNo.Name = "lblPhoneNo";
-            this.lblPhoneNo.Size = new System.Drawing.Size(104, 16);
+            this.lblPhoneNo.Size = new System.Drawing.Size(109, 16);
             this.lblPhoneNo.TabIndex = 6;
-            this.lblPhoneNo.Text = "Phone No.";
+            this.lblPhoneNo.Text = "Phone No.*";
             this.lblPhoneNo.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
             // lblPostal
@@ -176,16 +176,16 @@
             this.lblPostal.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPostal.Location = new System.Drawing.Point(3, 230);
             this.lblPostal.Name = "lblPostal";
-            this.lblPostal.Size = new System.Drawing.Size(104, 16);
+            this.lblPostal.Size = new System.Drawing.Size(109, 16);
             this.lblPostal.TabIndex = 5;
-            this.lblPostal.Text = "Postal Code";
+            this.lblPostal.Text = "Postal Code*";
             this.lblPostal.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
             // txtCustomername
             // 
             this.txtCustomername.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtCustomername.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCustomername.Location = new System.Drawing.Point(120, 13);
+            this.txtCustomername.Location = new System.Drawing.Point(125, 13);
             this.txtCustomername.Margin = new System.Windows.Forms.Padding(10, 3, 10, 3);
             this.txtCustomername.Name = "txtCustomername";
             this.txtCustomername.Size = new System.Drawing.Size(360, 26);
@@ -195,7 +195,7 @@
             // 
             this.txtStreet1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtStreet1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtStreet1.Location = new System.Drawing.Point(120, 66);
+            this.txtStreet1.Location = new System.Drawing.Point(125, 66);
             this.txtStreet1.Margin = new System.Windows.Forms.Padding(10, 3, 10, 3);
             this.txtStreet1.Name = "txtStreet1";
             this.txtStreet1.Size = new System.Drawing.Size(360, 26);
@@ -205,7 +205,7 @@
             // 
             this.txtStreet2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtStreet2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtStreet2.Location = new System.Drawing.Point(120, 119);
+            this.txtStreet2.Location = new System.Drawing.Point(125, 119);
             this.txtStreet2.Margin = new System.Windows.Forms.Padding(10, 3, 10, 3);
             this.txtStreet2.Name = "txtStreet2";
             this.txtStreet2.Size = new System.Drawing.Size(360, 26);
@@ -215,7 +215,7 @@
             // 
             this.txtCity.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtCity.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCity.Location = new System.Drawing.Point(120, 172);
+            this.txtCity.Location = new System.Drawing.Point(125, 172);
             this.txtCity.Margin = new System.Windows.Forms.Padding(10, 3, 10, 3);
             this.txtCity.Name = "txtCity";
             this.txtCity.Size = new System.Drawing.Size(360, 26);
@@ -225,7 +225,7 @@
             // 
             this.txtPostal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtPostal.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPostal.Location = new System.Drawing.Point(120, 225);
+            this.txtPostal.Location = new System.Drawing.Point(125, 225);
             this.txtPostal.Margin = new System.Windows.Forms.Padding(10, 3, 10, 3);
             this.txtPostal.Name = "txtPostal";
             this.txtPostal.Size = new System.Drawing.Size(360, 26);
@@ -236,7 +236,7 @@
             // 
             this.txtCountry.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtCountry.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCountry.Location = new System.Drawing.Point(120, 278);
+            this.txtCountry.Location = new System.Drawing.Point(125, 278);
             this.txtCountry.Margin = new System.Windows.Forms.Padding(10, 3, 10, 3);
             this.txtCountry.Name = "txtCountry";
             this.txtCountry.Size = new System.Drawing.Size(360, 26);
@@ -246,7 +246,7 @@
             // 
             this.txtPhoneNo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtPhoneNo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPhoneNo.Location = new System.Drawing.Point(120, 332);
+            this.txtPhoneNo.Location = new System.Drawing.Point(125, 332);
             this.txtPhoneNo.Margin = new System.Windows.Forms.Padding(10, 3, 10, 3);
             this.txtPhoneNo.Name = "txtPhoneNo";
             this.txtPhoneNo.Size = new System.Drawing.Size(360, 26);

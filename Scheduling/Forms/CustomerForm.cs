@@ -78,7 +78,7 @@ namespace Scheduling.Forms
         private void btnCreate_Click(object sender, EventArgs e)
         {
 
-            if(_mode == Mode.Create)
+            if(_mode == Mode.Create && !ValidateForm())
             {
                 _customerService.CreateCustomer(PopulateCustomerDTO());
                 this.DialogResult = DialogResult.OK;
@@ -87,7 +87,7 @@ namespace Scheduling.Forms
             }
             else if (_mode == Mode.Edit)
             {
-                if (!ValidateInput())
+                if (!ValidateForm())
                 {
                     return;
                 }
@@ -116,7 +116,37 @@ namespace Scheduling.Forms
 
             }
         }
+        private bool ValidateForm()
+        {
+            // Validate each required text box
+            if (!IsTextBoxValid(txtCustomername, "Customer Name is required."))
+                return false;
 
+            if (!IsTextBoxValid(txtStreet1, "Street is required."))
+                return false;
+
+            if (!IsTextBoxValid(txtCity, "City is required."))
+                return false;
+
+            if (!IsTextBoxValid(txtCountry, "Country is required."))
+                return false;
+            if (!IsTextBoxValid(txtPostal, "Postal code is required."))
+                return false;
+            if (!IsTextBoxValid(txtPhoneNo, "Phone number is required."))
+                return false;
+            return true; // All validations passed
+        }
+        private bool IsTextBoxValid(TextBox textBox, string errorMessage)
+        {
+            if (string.IsNullOrWhiteSpace(textBox.Text))
+            {
+                MessageBox.Show(errorMessage, "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                
+                textBox.Focus();
+                return false;
+            }
+            return true;
+        }
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
@@ -136,18 +166,6 @@ namespace Scheduling.Forms
                 PopulateCustomerForm(_selectedCustomerDTO);
             }
         }
-        private bool ValidateInput()
-        {
-            if (string.IsNullOrWhiteSpace(txtCustomername.Text) ||
-                string.IsNullOrWhiteSpace(txtStreet1.Text) ||
-                string.IsNullOrWhiteSpace(txtCity.Text) ||
-                string.IsNullOrWhiteSpace(txtCountry.Text) ||
-                string.IsNullOrWhiteSpace(txtPostal.Text))
-            {
-                MessageBox.Show("All fields are required.");
-                return false;
-            }
-            return true;
-        }
+        
     }
 }
