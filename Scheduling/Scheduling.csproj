@@ -120,11 +120,11 @@
     <Compile Include="DTOs\CustomerDTO.cs" />
     <Compile Include="DTOs\UserDTO.cs" />
     <Compile Include="Enums\Mode.cs" />
-    <Compile Include="Forms\AppointmentManger.cs">
+    <Compile Include="Forms\AppointmentManager.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\AppointmentManger.Designer.cs">
-      <DependentUpon>AppointmentManger.cs</DependentUpon>
+    <Compile Include="Forms\AppointmentManager.Designer.cs">
+      <DependentUpon>AppointmentManager.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\AppointmentsForm.cs">
       <SubType>Form</SubType>
@@ -188,8 +188,8 @@
     <Compile Include="Services\Mappers\CustomerMapper.cs" />
     <Compile Include="Services\Mappers\UserMapper.cs" />
     <Compile Include="Services\UserService.cs" />
-    <EmbeddedResource Include="Forms\AppointmentManger.resx">
-      <DependentUpon>AppointmentManger.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\AppointmentManager.resx">
+      <DependentUpon>AppointmentManager.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\AppointmentsForm.resx">
       <DependentUpon>AppointmentsForm.cs</DependentUpon>

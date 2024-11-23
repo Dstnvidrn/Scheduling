@@ -67,7 +67,10 @@ namespace Scheduling
 
         private void btnCreate_Click(object sender, EventArgs e)
         {
-
+            using (AppointmentManager appointmentManager = new AppointmentManager(Mode.Create, _loggedinUser))
+            {
+                appointmentManager.ShowDialog();
+            }
         }
 
         private void dgvAppointments_CellContentClick(object sender, DataGridViewCellEventArgs e)
