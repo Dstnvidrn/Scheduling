@@ -137,7 +137,7 @@
             this.btnLogout.Location = new System.Drawing.Point(5, 5);
             this.btnLogout.Name = "btnLogout";
             this.btnLogout.Size = new System.Drawing.Size(230, 53);
-            this.btnLogout.TabIndex = 4;
+            this.btnLogout.TabIndex = 8;
             this.btnLogout.Text = "&Logout";
             this.btnLogout.UseVisualStyleBackColor = false;
             this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
@@ -178,7 +178,7 @@
             this.btnCustomers.Location = new System.Drawing.Point(5, 237);
             this.btnCustomers.Name = "btnCustomers";
             this.btnCustomers.Size = new System.Drawing.Size(234, 50);
-            this.btnCustomers.TabIndex = 4;
+            this.btnCustomers.TabIndex = 5;
             this.btnCustomers.Text = "Customers";
             this.btnCustomers.UseVisualStyleBackColor = false;
             this.btnCustomers.Click += new System.EventHandler(this.btnCustomers_Click_1);
@@ -194,7 +194,7 @@
             this.btnDelete.Location = new System.Drawing.Point(5, 179);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(234, 50);
-            this.btnDelete.TabIndex = 1;
+            this.btnDelete.TabIndex = 4;
             this.btnDelete.Text = "Delete";
             this.btnDelete.UseVisualStyleBackColor = false;
             // 
@@ -209,7 +209,7 @@
             this.btnEdit.Location = new System.Drawing.Point(5, 121);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(234, 50);
-            this.btnEdit.TabIndex = 2;
+            this.btnEdit.TabIndex = 3;
             this.btnEdit.Text = "&Edit";
             this.btnEdit.UseVisualStyleBackColor = false;
             // 
@@ -224,7 +224,7 @@
             this.btnCreate.Location = new System.Drawing.Point(5, 5);
             this.btnCreate.Name = "btnCreate";
             this.btnCreate.Size = new System.Drawing.Size(234, 50);
-            this.btnCreate.TabIndex = 0;
+            this.btnCreate.TabIndex = 1;
             this.btnCreate.Text = "&Create";
             this.btnCreate.UseVisualStyleBackColor = false;
             this.btnCreate.Click += new System.EventHandler(this.btnCreate_Click);
@@ -240,7 +240,7 @@
             this.btnDetails.Location = new System.Drawing.Point(5, 63);
             this.btnDetails.Name = "btnDetails";
             this.btnDetails.Size = new System.Drawing.Size(234, 50);
-            this.btnDetails.TabIndex = 3;
+            this.btnDetails.TabIndex = 2;
             this.btnDetails.Text = "Details";
             this.btnDetails.UseVisualStyleBackColor = false;
             this.btnDetails.Click += new System.EventHandler(this.btnDetails_Click);
@@ -298,7 +298,7 @@
             this.txtAppointmentSearch.Location = new System.Drawing.Point(832, 5);
             this.txtAppointmentSearch.Name = "txtAppointmentSearch";
             this.txtAppointmentSearch.Size = new System.Drawing.Size(175, 26);
-            this.txtAppointmentSearch.TabIndex = 1;
+            this.txtAppointmentSearch.TabIndex = 6;
             this.txtAppointmentSearch.Enter += new System.EventHandler(this.txtAppointmentSearch_Enter);
             this.txtAppointmentSearch.Leave += new System.EventHandler(this.txtAppointmentSearch_Exit);
             // 
@@ -312,7 +312,7 @@
             this.button1.Location = new System.Drawing.Point(1013, 5);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(100, 26);
-            this.button1.TabIndex = 0;
+            this.button1.TabIndex = 7;
             this.button1.Text = "&Search";
             this.button1.UseVisualStyleBackColor = false;
             // 
