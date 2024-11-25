@@ -10,14 +10,38 @@ namespace Scheduling.Data.Repositories
     public class AppointmentRepository : IAppointmentRepository
     {
         private readonly IDatabaseHelper _databaseHelper;
+        private readonly ICustomerRepository _customerRepository;
         public AppointmentRepository(IDatabaseHelper databaseHelper) 
         {
             _databaseHelper = databaseHelper;
+            _customerRepository = new CustomerRepository(_databaseHelper);
         }
 
         public void CreateAppointment(Appointment appointment)
         {
-            throw new NotImplementedException();
+            string query = @"
+                INSERT INTO appointment
+                (customerId, userId, title, description, type, start, end, createDate, createdBy, lastUpdate, lastUpdateBy, location, url, contact)
+                VALUES
+                (@customerId, @userId, @title, @description, @type, @start, @end, NOW(), @createdBy, NOW(), @lastUpdateBy, @location, @url, @contact)";
+
+            var parameters = new[]
+            {
+                _databaseHelper.CreateParameter("@customerId", appointment.CustomerId),
+                _databaseHelper.CreateParameter("@userId", appointment.UserId),
+                _databaseHelper.CreateParameter("@title", appointment.Title),
+                _databaseHelper.CreateParameter("@description", appointment.Description),
+                _databaseHelper.CreateParameter("@type", appointment.Type),
+                _databaseHelper.CreateParameter("@start", appointment.Start),
+                _databaseHelper.CreateParameter("@end", appointment.End),
+                _databaseHelper.CreateParameter("@createdBy", appointment.CreatedBy.Username),
+                _databaseHelper.CreateParameter("@lastUpdateBy", appointment.LastUpdatedBy.Username),
+                _databaseHelper.CreateParameter("@location", appointment.Location),
+                _databaseHelper.CreateParameter("@url", appointment.URL),
+                _databaseHelper.CreateParameter("@contact", appointment.Contact)
+        };
+
+            _databaseHelper.ExecuteNonQuery(query, parameters);
         }
 
         public void DeleteAppointment(int id)
@@ -36,31 +60,31 @@ namespace Scheduling.Data.Repositories
 
             string query = @"
             SELECT 
-    appointment.appointmentId,
-    appointment.customerId,
-    customer.customerName,
-    appointment.userId,
-    appointment.title,
-    appointment.description,
-    appointment.location,
-    appointment.contact,
-    appointment.type,
-    appointment.url,
-    appointment.start,
-    appointment.end,
-    appointment.createDate,
-    createdByUser.userName AS CreatedByUserName,
-    appointment.lastUpdate,
-    lastUpdatedByUser.userName AS LastUpdatedByUserName
-FROM 
-    appointment
-INNER JOIN 
-    customer ON appointment.customerId = customer.customerId
-LEFT JOIN 
-    user AS createdByUser ON appointment.createdBy = createdByUser.userId
-LEFT JOIN 
-    user AS lastUpdatedByUser ON appointment.lastUpdateBy = lastUpdatedByUser.userId;
-";
+                appointment.appointmentId,
+                appointment.customerId,
+                customer.customerName,
+                appointment.userId,
+                appointment.title,
+                appointment.description,
+                appointment.location,
+                appointment.contact,
+                appointment.type,
+                appointment.url,
+                appointment.start,
+                appointment.end,
+                appointment.createDate,
+                createdByUser.userName AS CreatedByUserName,
+                appointment.lastUpdate,
+                lastUpdatedByUser.userName AS LastUpdatedByUserName
+            FROM 
+                appointment
+            INNER JOIN 
+                customer ON appointment.customerId = customer.customerId
+            LEFT JOIN 
+                user AS createdByUser ON appointment.createdBy = createdByUser.userId
+            LEFT JOIN 
+                user AS lastUpdatedByUser ON appointment.lastUpdateBy = lastUpdatedByUser.userId;
+            ";
 
             DataTable dataTable = _databaseHelper.ExecuteSelectQuery(query);
 

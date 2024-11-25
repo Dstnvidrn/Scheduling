@@ -22,6 +22,7 @@ namespace Scheduling.Services
         {
             _repository = new AppointmentRepository(databaseHelper);
             _appointmentMapper = new AppointmentMapper();
+            _userMapper = new UserMapper();
         }
 
         public List<AppointmentDTO> GetAllAppointments()
@@ -30,7 +31,7 @@ namespace Scheduling.Services
 
             return _appointmentMapper.MapToDTOs(appointments);
         }
-
+        
         public void AddAppointment(AppointmentDTO appointment, UserDTO loggedInUser)
         {
             try

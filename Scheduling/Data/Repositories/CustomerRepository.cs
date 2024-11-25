@@ -3,6 +3,7 @@ using Scheduling.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Windows.Forms;
 
 namespace Scheduling.Data.Repositories
 {
@@ -12,10 +13,6 @@ namespace Scheduling.Data.Repositories
         public CustomerRepository(IDatabaseHelper databaseHelper)
         {
             _databaseHelper = databaseHelper;
-        }
-        public Customer GetCustomerById(int customerId)
-        {
-            return null;
         }
 
 
@@ -38,6 +35,54 @@ namespace Scheduling.Data.Repositories
                 _databaseHelper.CreateParameter("@LastUpdatedBy", customer.UpdatedBy.Username)
             };
             _databaseHelper.ExecuteNonQuery(query, parameters);
+        }
+
+        public Customer GetCustomerById(int customerId)
+        {
+
+            string query = @"
+        SELECT 
+            * FROM customer WHERE customerId = @customerId";
+
+            var parameters = new[]
+            {
+                    _databaseHelper.CreateParameter("@customerId", customerId),
+                };
+
+            DataTable result = _databaseHelper.ExecuteSelectQuery(query);
+
+            var customer = new Customer
+            {
+                CustomerId = Convert.ToInt32(result.Rows[0]["customerId"]),
+                CustomerName = result.Rows[0]["customerName"].ToString(),
+                Address = new Address
+                {
+                    Street1 = result.Rows[0]["AddressStreet"].ToString(),
+                    Street2 = result.Rows[0]["AddressStreet2"].ToString(),
+                    PostalCode = result.Rows[0]["Postal"].ToString(),
+                    PhoneNumber = result.Rows[0]["phone"].ToString(),
+                    City = new City
+                    {
+                        Id = Convert.ToInt32(result.Rows[0]["cityId"]),
+                        CityName = result.Rows[0]["CityName"].ToString(),
+                        Country = new Country
+                        {
+                            Id = Convert.ToInt32(result.Rows[0]["countryId"]),
+                            CountryName = result.Rows[0]["CountryName"].ToString()
+                        }
+                    }
+                },
+                IsActive = Convert.ToBoolean(result.Rows[0]["active"]),
+                CreateDate = Convert.ToDateTime(result.Rows[0]["createDate"]),
+                CreatedBy = new User { Username = result.Rows[0]["createdBy"].ToString() },
+                LastUpdate = Convert.ToDateTime(result.Rows[0]["lastUpdate"]),
+                UpdatedBy = new User { Username = result.Rows[0]["Updated By"].ToString() }
+            };
+
+
+
+            MessageBox.Show(customer.Address.PhoneNumber);
+            return customer;
 
         }
         public void DeleteCustomer(Customer customer)
@@ -426,6 +471,22 @@ namespace Scheduling.Data.Repositories
             _databaseHelper.ExecuteNonQuery(query, parameters);
         }
 
+        public List<KeyValuePair<int, string>> GetCustomerIdAndName()
+        {
+            string query = @"SELECT customerId, customerName FROM customer";
+            var result = _databaseHelper.ExecuteSelectQuery(query);
 
+            var customers = new List<KeyValuePair<int, string>>();
+            foreach (DataRow row in result.Rows)
+            {
+                customers.Add(new KeyValuePair<int, string>(
+                    Convert.ToInt32(row["customerId"]),
+                    row["customerName"].ToString()
+                ));
+            }
+
+            return customers;
+        }
+        
     }
 }

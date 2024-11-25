@@ -55,7 +55,9 @@ namespace Scheduling.Services.Mappers
                 Type = appointmentDTO.Type,
                 CustomerId = appointmentDTO.CustomerId,
                 CreatedBy = loggedInUser,
-                URL = appointmentDTO.URL
+                URL = appointmentDTO.URL,
+                UserId = loggedInUser.UserId,
+
 
             };
         }

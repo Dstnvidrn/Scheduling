@@ -26,6 +26,10 @@ namespace Scheduling.Services
         {
             return _customerMapper.MapToCustomerDTO(_customerRepository.GetAllCustomers());
         }
+        public List<KeyValuePair<int, string>> GetCustomerIDAndName()
+        {
+            return _customerRepository.GetCustomerIdAndName();
+        }
 
         public bool CreateCustomer(CustomerDTO customerDTO)
         {

@@ -18,7 +18,8 @@ namespace Scheduling.Interfaces
         void DeleteCustomer(Customer customer);
         List<Customer> GetAllCustomers();
         void UpdateCustomer(Customer customer);
-
+        List<KeyValuePair<int, string>> GetCustomerIdAndName();
+        Customer GetCustomerById(int customerId);
 
     }
 }

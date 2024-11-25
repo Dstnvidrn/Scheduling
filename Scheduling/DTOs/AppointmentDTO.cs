@@ -10,6 +10,7 @@ namespace Scheduling.DTOs
     {
         public string CustomerName { get; set; }
         public int CustomerId { get; set; }
+        public int UserId { get; set; }
         public int AppointmentId { get; set; }
         public string Description { get; set; }
         public string Title { get; set; }
