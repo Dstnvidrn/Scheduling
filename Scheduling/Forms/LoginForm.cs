@@ -98,11 +98,13 @@ namespace Scheduling
                     appointmentForm.ShowDialog();
                     if (appointmentForm.DialogResult != DialogResult.OK)
                     {
-                        this.Close();                
+                        this.Close();             
                     }
-                    this.Show();
+
                     btnLogin.Enabled = true;
+                    this.Show();
                 }
+                    
 
             }
             else

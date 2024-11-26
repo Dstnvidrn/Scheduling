@@ -1,6 +1,7 @@
 ﻿using Scheduling.Data.Repositories;
 using Scheduling.DTOs;
 using Scheduling.Interfaces;
+using Scheduling.Models;
 using Scheduling.Services.Mappers;
 using System;
 using System.Collections.Generic;
@@ -31,7 +32,13 @@ namespace Scheduling.Services
 
             return _appointmentMapper.MapToDTOs(appointments);
         }
-        
+        public void UpdateAppointment(AppointmentDTO appointmentDTO, UserDTO loggedinUser)
+        {
+
+
+            // Call repository to update the appointment
+            _repository.UpdateAppointment(_appointmentMapper.MapToModel(appointmentDTO, _userMapper.MapToModel(loggedinUser)));
+        }
         public void AddAppointment(AppointmentDTO appointment, UserDTO loggedInUser)
         {
             try

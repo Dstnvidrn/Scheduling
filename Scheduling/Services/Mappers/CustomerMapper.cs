@@ -11,6 +11,7 @@ namespace Scheduling.Services.Mappers
         {
             UserMapper userMapper = new UserMapper();
             User user = userMapper.MapToModel(loggedInUser);
+            user.UserId = loggedInUser.UserId;
             Customer newCustomer = new Customer
             {
                 CustomerId = customerDTO.Id,

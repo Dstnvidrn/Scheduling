@@ -52,8 +52,8 @@
             this.lblURL = new System.Windows.Forms.Label();
             this.txtLocation = new System.Windows.Forms.TextBox();
             this.txtURL = new System.Windows.Forms.TextBox();
-            this.lblContact = new System.Windows.Forms.Label();
             this.txtContact = new System.Windows.Forms.TextBox();
+            this.lblContact = new System.Windows.Forms.Label();
             this.tblMain.SuspendLayout();
             this.panel1.SuspendLayout();
             this.pnlBtns.SuspendLayout();
@@ -341,6 +341,7 @@
             this.cmbCustomer.Name = "cmbCustomer";
             this.cmbCustomer.Size = new System.Drawing.Size(225, 28);
             this.cmbCustomer.TabIndex = 1;
+            this.cmbCustomer.SelectedIndexChanged += new System.EventHandler(this.cmbCustomer_SelectedIndexChanged);
             // 
             // lblLocation
             // 
@@ -386,27 +387,27 @@
             this.txtURL.Size = new System.Drawing.Size(226, 26);
             this.txtURL.TabIndex = 10;
             // 
+            // txtContact
+            // 
+            this.txtContact.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtContact.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtContact.Location = new System.Drawing.Point(540, 126);
+            this.txtContact.Margin = new System.Windows.Forms.Padding(10, 3, 10, 3);
+            this.txtContact.Name = "txtContact";
+            this.txtContact.Size = new System.Drawing.Size(226, 26);
+            this.txtContact.TabIndex = 12;
+            // 
             // lblContact
             // 
             this.lblContact.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.lblContact.AutoSize = true;
             this.lblContact.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblContact.Location = new System.Drawing.Point(430, 123);
+            this.lblContact.Location = new System.Drawing.Point(411, 127);
             this.lblContact.Name = "lblContact";
-            this.lblContact.Size = new System.Drawing.Size(71, 20);
+            this.lblContact.Size = new System.Drawing.Size(116, 24);
             this.lblContact.TabIndex = 11;
             this.lblContact.Text = "Contact*";
             this.lblContact.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // txtContact
-            // 
-            this.txtContact.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtContact.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtContact.Location = new System.Drawing.Point(531, 122);
-            this.txtContact.Margin = new System.Windows.Forms.Padding(10, 3, 10, 3);
-            this.txtContact.Name = "txtContact";
-            this.txtContact.Size = new System.Drawing.Size(262, 26);
-            this.txtContact.TabIndex = 12;
             // 
             // AppointmentManager
             // 

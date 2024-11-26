@@ -120,7 +120,7 @@ namespace Scheduling.Forms
 
                     // Refresh the grid (re-fetch data from the database)
                     LoadCustomers();
-                    this.Close();
+
                 }
             }
             else

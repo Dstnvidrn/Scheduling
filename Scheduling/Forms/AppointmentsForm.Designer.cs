@@ -212,6 +212,7 @@
             this.btnEdit.TabIndex = 3;
             this.btnEdit.Text = "&Edit";
             this.btnEdit.UseVisualStyleBackColor = false;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
             // btnCreate
             // 
@@ -271,12 +272,16 @@
             // 
             // dgvAppointments
             // 
+            this.dgvAppointments.AllowUserToAddRows = false;
             this.dgvAppointments.AllowUserToResizeColumns = false;
             this.dgvAppointments.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvAppointments.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvAppointments.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvAppointments.Location = new System.Drawing.Point(3, 43);
+            this.dgvAppointments.MultiSelect = false;
             this.dgvAppointments.Name = "dgvAppointments";
+            this.dgvAppointments.ReadOnly = true;
+            this.dgvAppointments.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvAppointments.Size = new System.Drawing.Size(1200, 755);
             this.dgvAppointments.TabIndex = 4;
             // 

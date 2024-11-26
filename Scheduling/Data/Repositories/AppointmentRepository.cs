@@ -118,7 +118,44 @@ namespace Scheduling.Data.Repositories
 
         public void UpdateAppointment(Appointment appointment)
         {
-            throw new NotImplementedException();
+            string query = @"
+                UPDATE appointment
+                SET 
+                    customerId = @customerId,
+                    title = @title,
+                    description = @description,
+                    type = @type,
+                    start = @start,
+                    end = @end,
+                    lastUpdate = NOW(),
+                    lastUpdateBy = @lastUpdateBy,
+                    contact = @contact,
+                    url = @url,
+                    location = @location,
+                    userId = @userId,
+                    createDate = @createDate,
+                    createdBy = @createdBy
+                WHERE appointmentId = @appointmentId";
+
+            var parameters = new[]
+            {
+                _databaseHelper.CreateParameter("@customerId", appointment.CustomerId),
+                _databaseHelper.CreateParameter("@title", appointment.Title),
+                _databaseHelper.CreateParameter("@description", appointment.Description),
+                _databaseHelper.CreateParameter("@type", appointment.Type),
+                _databaseHelper.CreateParameter("@start", appointment.Start),
+                _databaseHelper.CreateParameter("@end", appointment.End),
+                _databaseHelper.CreateParameter("@lastUpdateBy", appointment.LastUpdatedBy.Username),
+                _databaseHelper.CreateParameter("@appointmentId", appointment.AppointmentId),
+                _databaseHelper.CreateParameter("@contact", appointment.Contact),
+                _databaseHelper.CreateParameter("@url", appointment.URL),
+                _databaseHelper.CreateParameter("@location", appointment.Location),
+                _databaseHelper.CreateParameter("@createDate", appointment.CreateDate),
+                _databaseHelper.CreateParameter("@createdBy", appointment.CreatedBy.Username),
+                _databaseHelper.CreateParameter("@userId", appointment.UserId),
+    };
+
+            _databaseHelper.ExecuteNonQuery(query, parameters);
         }
         public bool IsOverlappingAppointment(int customerId, DateTime start, DateTime end, int? appointmentId = null)
         {

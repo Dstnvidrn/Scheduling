@@ -2,6 +2,7 @@
 using Scheduling.Enums;
 using Scheduling.Helpers;
 using Scheduling.Interfaces;
+using Scheduling.Models;
 using Scheduling.Services;
 using System;
 using System.Data;
@@ -16,12 +17,24 @@ namespace Scheduling.Forms
         private IDatabaseHelper _databaseHelper;
         private CustomerService _customerService;
         private UserDTO _loggedInUser;
+        private AppointmentDTO _selectedAppointmentDTO;
+        private Mode _mode;
         public AppointmentManager(Mode mode, UserDTO loggedInUser, IDatabaseHelper databaseHelper)
         {
             InitializeComponent();
             AdjustLayout();
-            _loggedInUser = loggedInUser;
-            if (mode == Mode.Create) { BtnOperation.Text = "Create"; }
+            _mode = mode;
+            _loggedInUser = loggedInUser;            
+            _databaseHelper = databaseHelper;
+            _appointmentService = new AppointmentService(databaseHelper);
+            _customerService = new CustomerService(databaseHelper, loggedInUser);
+        }public AppointmentManager(Mode mode, AppointmentDTO selectedAppointment,UserDTO loggedInUser, IDatabaseHelper databaseHelper)
+        {
+            InitializeComponent();
+            AdjustLayout();
+            _mode = mode;
+            _selectedAppointmentDTO = selectedAppointment;
+            _loggedInUser = loggedInUser;            
             _databaseHelper = databaseHelper;
             _appointmentService = new AppointmentService(databaseHelper);
             _customerService = new CustomerService(databaseHelper, loggedInUser);
@@ -82,29 +95,116 @@ namespace Scheduling.Forms
                 
         }
 
-        
+        private void PopulateFormFromSelected(AppointmentDTO appointmentDTO)
+        {
+            txtContact.Text = appointmentDTO.Contact;
+            txtDescription.Text = appointmentDTO.Description;
+            txtTitle.Text = appointmentDTO.Title;
+            txtLocation.Text = appointmentDTO.Location;
+            txtURL.Text = appointmentDTO.URL;
+            cmbCustomer.SelectedValue = appointmentDTO.CustomerName;
+            cmbType.SelectedValue = appointmentDTO.Type;
+            dateTimeStart.Value = appointmentDTO.Start;
+            dateTimeEnd.Value = appointmentDTO.End;
+            cmbCustomer.SelectedValue = appointmentDTO.CustomerId;
+            cmbType.SelectedItem = appointmentDTO.Type;
+        }
+
+
 
         private void AppointmentManger_Load(object sender, EventArgs e)
         {
+
             // Populate Customer ComboBox
+            PopulateCustomerComboBox();
+
+            // Populate Type ComboBox
+            PopulateTypeComboBox();
+
+         
+            if (_mode == Mode.Create) 
+            { 
+                BtnOperation.Text = "Create"; 
+            }
+
+            else if (_mode == Mode.Edit) 
+            { 
+                BtnOperation.Text = "Update";
+                PopulateFormFromSelected(_selectedAppointmentDTO); 
+            }
+        }
+        private void PopulateCustomerComboBox()
+        {
+            // Fetch customer data from the service
             var customers = _customerService.GetCustomerIDAndName();
             cmbCustomer.DataSource = new BindingSource(customers, null);
-            cmbCustomer.DisplayMember = "Value";
-            cmbCustomer.ValueMember = "Key";
+            cmbCustomer.DisplayMember = "Value"; // CustomerName
+            cmbCustomer.ValueMember = "Key";    // CustomerId
 
+            // Debug customer data
+            foreach (var customer in customers)
+            {
+                Console.WriteLine($"CustomerId: {customer.Key}, CustomerName: {customer.Value}");
+            }
+
+           
+
+        }
+        private void PopulateTypeComboBox()
+        {
+            // Populate predefined types
             cmbType.Items.Add("Consultation");
             cmbType.Items.Add("Follow-up");
             cmbType.Items.Add("Meeting");
             cmbType.Items.Add("Review");
-        }
 
+            
+        }
         private void BtnOperation_Click(object sender, EventArgs e)
         {
+            AppointmentDTO appointmentDTO = new AppointmentDTO();
             if (ValidateBusinessHours(dateTimeStart.Value,dateTimeEnd.Value) && ValidateFields()) 
             {
-                
-                _appointmentService.AddAppointment(CreateCustomer(), _loggedInUser);
-                this.Close();
+                if (_mode == Mode.Create)
+                {
+                    _appointmentService.AddAppointment(CreateCustomer(), _loggedInUser);
+                    this.Close();
+
+                }
+                else if (_mode == Mode.Edit)
+                {
+                    try
+                    {
+                        // Update appointment data
+                        appointmentDTO.CustomerId = (int)cmbCustomer.SelectedValue;
+                        appointmentDTO.Title = txtTitle.Text;
+                        appointmentDTO.Description = txtDescription.Text;
+                        appointmentDTO.Type = cmbType.SelectedItem.ToString();
+                        appointmentDTO.Start = dateTimeStart.Value;
+                        appointmentDTO.End = dateTimeEnd.Value;
+                        appointmentDTO.CustomerName = cmbCustomer.SelectedItem.ToString();
+                        appointmentDTO.Contact = txtContact.Text;
+                        appointmentDTO.Location = txtLocation.Text;
+                        appointmentDTO.UserId = _loggedInUser.UserId;
+                        appointmentDTO.AppointmentId = _selectedAppointmentDTO.AppointmentId;
+                        appointmentDTO.URL = txtURL.Text;
+
+
+                        // Send updated data to the service
+                        _appointmentService.UpdateAppointment(appointmentDTO, _loggedInUser);
+                        MessageBox.Show("Appointment updated successfully!");
+                        this.DialogResult = DialogResult.OK;
+                        this.Close();
+                    }
+                    catch (ArgumentException ex)
+                    {
+                        MessageBox.Show($"Validation Error: {ex.Message}");
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"An error occurred: {ex.Message}");
+                    }
+                }
 
                 
             }
@@ -128,6 +228,9 @@ namespace Scheduling.Forms
             };
         }
 
+        private void cmbCustomer_SelectedIndexChanged(object sender, EventArgs e)
+        {
 
+        }
     }
 }

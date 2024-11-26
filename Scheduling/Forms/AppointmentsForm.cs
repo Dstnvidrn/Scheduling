@@ -131,5 +131,54 @@ namespace Scheduling
 
             }
         }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            if (dgvAppointments.SelectedRows.Count > 0)
+            {
+                // Retrieve selected appointment from DataGridView
+                var selectedAppointment = GetSelectedAppointmentFromGrid();
+
+                // Open the AppointmentForm for editing
+                using (AppointmentManager appointmentForm = new AppointmentManager(Mode.Edit, selectedAppointment, _loggedinUser, _databaseHelper))
+                {
+
+                    if (appointmentForm.ShowDialog() == DialogResult.OK)
+                    {
+                        // Refresh the appointment list after editing
+                        PopulateDataGridView();
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select an appointment to edit.");
+            }
+        }
+        private AppointmentDTO GetSelectedAppointmentFromGrid()
+        {
+            var selectedRow = dgvAppointments.SelectedRows[0];
+
+
+            AppointmentDTO appointment = new AppointmentDTO();
+
+                    appointment.AppointmentId = Convert.ToInt32(selectedRow.Cells["AppointmentId"].Value);
+                    appointment.CustomerId = Convert.ToInt32(selectedRow.Cells["CustomerId"].Value);
+                    appointment.CustomerName = selectedRow.Cells["CustomerName"].Value.ToString();
+                    appointment.Title = selectedRow.Cells["Title"].Value.ToString();
+                    appointment.Description = selectedRow.Cells["Description"].Value.ToString();
+                    appointment.Type = selectedRow.Cells["Type"].Value.ToString();
+                    appointment.Start = Convert.ToDateTime(selectedRow.Cells["Start"].Value);
+                    appointment.End = Convert.ToDateTime(selectedRow.Cells["End"].Value);
+                    appointment.Location = selectedRow.Cells["Location"].Value.ToString();
+                    appointment.Contact = selectedRow.Cells["Contact"].Value.ToString();
+                    appointment.URL = selectedRow.Cells["URL"].Value.ToString();
+
+
+
+            return appointment;
+            
+
+        }
     }
 }

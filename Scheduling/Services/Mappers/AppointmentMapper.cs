@@ -27,7 +27,11 @@ namespace Scheduling.Services.Mappers
                 UpdatedBy = appointment.LastUpdatedBy.Username,
                 CustomerId = appointment.CustomerId,
                 Contact = appointment.Contact,
-                Type = appointment.Type
+                Type = appointment.Type,
+                URL = appointment.URL,
+                AppointmentId = appointment.AppointmentId,
+                UserId = appointment.UserId,
+                
 
             };
         }
