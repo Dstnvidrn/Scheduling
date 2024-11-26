@@ -73,16 +73,7 @@ namespace Scheduling
                 PopulateDataGridView();
             }
         }
-
-        private void dgvAppointments_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void btnDetails_Click(object sender, EventArgs e)
-        {
-
-        }
+      
 
         private void btnLogout_Click(object sender, EventArgs e)
         {
@@ -104,11 +95,6 @@ namespace Scheduling
             {
                 LayoutManager.SetPlacholderText((sender as TextBox), "Search", Colors.NeutalDarkColor);
             }
-        }
-
-        private void pnlContainer_Paint(object sender, PaintEventArgs e)
-        {
-
         }
 
         private void btnDeleteCustomer_Click(object sender, EventArgs e)

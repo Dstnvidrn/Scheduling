@@ -87,7 +87,6 @@
             this.pnlContainer.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.pnlContainer.Size = new System.Drawing.Size(303, 807);
             this.pnlContainer.TabIndex = 0;
-            this.pnlContainer.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlContainer_Paint);
             // 
             // lblLoggedInUser
             // 
