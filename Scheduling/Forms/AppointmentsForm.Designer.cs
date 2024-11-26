@@ -39,7 +39,6 @@
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnCreate = new System.Windows.Forms.Button();
-            this.btnDetails = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tlpDataTable = new System.Windows.Forms.TableLayoutPanel();
             this.dgvAppointments = new System.Windows.Forms.DataGridView();
@@ -150,21 +149,20 @@
             this.tlpMenuOptions.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Inset;
             this.tlpMenuOptions.ColumnCount = 1;
             this.tlpMenuOptions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpMenuOptions.Controls.Add(this.btnCustomers, 0, 4);
-            this.tlpMenuOptions.Controls.Add(this.btnDelete, 0, 3);
-            this.tlpMenuOptions.Controls.Add(this.btnEdit, 0, 2);
+            this.tlpMenuOptions.Controls.Add(this.btnCustomers, 0, 3);
+            this.tlpMenuOptions.Controls.Add(this.btnDelete, 0, 2);
+            this.tlpMenuOptions.Controls.Add(this.btnEdit, 0, 1);
             this.tlpMenuOptions.Controls.Add(this.btnCreate, 0, 0);
-            this.tlpMenuOptions.Controls.Add(this.btnDetails, 0, 1);
             this.tlpMenuOptions.Location = new System.Drawing.Point(30, 215);
             this.tlpMenuOptions.Name = "tlpMenuOptions";
             this.tlpMenuOptions.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.tlpMenuOptions.RowCount = 5;
-            this.tlpMenuOptions.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tlpMenuOptions.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tlpMenuOptions.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tlpMenuOptions.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tlpMenuOptions.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tlpMenuOptions.Size = new System.Drawing.Size(244, 292);
+            this.tlpMenuOptions.RowCount = 4;
+            this.tlpMenuOptions.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tlpMenuOptions.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tlpMenuOptions.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tlpMenuOptions.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tlpMenuOptions.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpMenuOptions.Size = new System.Drawing.Size(244, 234);
             this.tlpMenuOptions.TabIndex = 4;
             // 
             // btnCustomers
@@ -175,7 +173,7 @@
             this.btnCustomers.FlatAppearance.BorderSize = 0;
             this.btnCustomers.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCustomers.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.btnCustomers.Location = new System.Drawing.Point(5, 237);
+            this.btnCustomers.Location = new System.Drawing.Point(5, 179);
             this.btnCustomers.Name = "btnCustomers";
             this.btnCustomers.Size = new System.Drawing.Size(234, 50);
             this.btnCustomers.TabIndex = 5;
@@ -191,7 +189,7 @@
             this.btnDelete.FlatAppearance.BorderSize = 0;
             this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDelete.Location = new System.Drawing.Point(5, 179);
+            this.btnDelete.Location = new System.Drawing.Point(5, 121);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(234, 50);
             this.btnDelete.TabIndex = 4;
@@ -206,7 +204,7 @@
             this.btnEdit.FlatAppearance.BorderSize = 0;
             this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnEdit.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEdit.Location = new System.Drawing.Point(5, 121);
+            this.btnEdit.Location = new System.Drawing.Point(5, 63);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(234, 50);
             this.btnEdit.TabIndex = 3;
@@ -229,22 +227,6 @@
             this.btnCreate.Text = "&Create";
             this.btnCreate.UseVisualStyleBackColor = false;
             this.btnCreate.Click += new System.EventHandler(this.btnCreate_Click);
-            // 
-            // btnDetails
-            // 
-            this.btnDetails.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.btnDetails.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnDetails.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnDetails.FlatAppearance.BorderSize = 0;
-            this.btnDetails.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDetails.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDetails.Location = new System.Drawing.Point(5, 63);
-            this.btnDetails.Name = "btnDetails";
-            this.btnDetails.Size = new System.Drawing.Size(234, 50);
-            this.btnDetails.TabIndex = 2;
-            this.btnDetails.Text = "Details";
-            this.btnDetails.UseVisualStyleBackColor = false;
-            this.btnDetails.Click += new System.EventHandler(this.btnDetails_Click);
             // 
             // panel1
             // 
@@ -354,7 +336,6 @@
         private System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnCreate;
-        private System.Windows.Forms.Button btnDetails;
         private System.Windows.Forms.TableLayoutPanel tlpMenuOptions;
         private System.Windows.Forms.TableLayoutPanel tlpLogoutOption;
         private System.Windows.Forms.Button btnLogout;
