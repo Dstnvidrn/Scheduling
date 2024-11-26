@@ -148,6 +148,7 @@ namespace Scheduling
                         // Refresh the appointment list after editing
                         PopulateDataGridView();
                     }
+                    PopulateDataGridView();
                 }
             }
             else
@@ -179,6 +180,42 @@ namespace Scheduling
             return appointment;
             
 
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            // Ensure an appointment is selected
+            if (dgvAppointments.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Please select an appointment to delete.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            var selectedAppointment = GetSelectedAppointmentFromGrid();
+
+            // Confirm deletion
+            var confirmResult = MessageBox.Show(
+                $"Are you sure you want to delete the appointment '{selectedAppointment.Title}'?",
+                "Confirm Delete",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question
+            );
+
+            if (confirmResult == DialogResult.Yes)
+            {
+                try
+                {
+                    _appointmentService.DeleteAppointment(selectedAppointment.AppointmentId);
+                    MessageBox.Show("Appointment deleted successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    // Refresh the grid
+                    PopulateDataGridView();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"An error occurred while deleting the appointment: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
     }
 }

@@ -46,7 +46,14 @@ namespace Scheduling.Data.Repositories
 
         public void DeleteAppointment(int id)
         {
-            throw new NotImplementedException();
+            string query = "DELETE FROM appointment WHERE appointmentId = @appointmentId";
+
+            var parameters = new[]
+            {
+                _databaseHelper.CreateParameter("@appointmentId", id)
+            };
+
+            _databaseHelper.ExecuteNonQuery(query, parameters);
         }
 
         public AppointmentsForm GetAppointmentById(int id)

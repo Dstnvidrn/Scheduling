@@ -55,6 +55,15 @@ namespace Scheduling.Services
             }
         }
 
+        public void DeleteAppointment(int appointmentId) {
+            if (appointmentId <= 0)
+            {
+                throw new ArgumentException("Invalid appointment ID.");
+            }
+
+            // Call the repository to delete the appointment
+            _repository.DeleteAppointment(appointmentId);
+        }
 
         public bool ValidateAppointment(AppointmentDTO appointment)
         {
