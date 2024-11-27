@@ -11,6 +11,7 @@ using Scheduling.DTOs;
 using Scheduling.Forms;
 using Scheduling.Enums;
 using Scheduling.Services;
+using System.Linq;
 
 namespace Scheduling
 {
@@ -19,19 +20,17 @@ namespace Scheduling
         
         private readonly AppointmentService _appointmentService;
         private readonly IDatabaseHelper _databaseHelper;
-        private UserDTO _loggedinUser;
         public AppointmentsForm()
         {
             InitializeComponent();
         }
-        public AppointmentsForm(IDatabaseHelper databaseHelper, UserDTO loggedInUser)
+        public AppointmentsForm(IDatabaseHelper databaseHelper)
         {
             InitializeComponent();
             _databaseHelper = databaseHelper;
             _appointmentService = new AppointmentService(databaseHelper);
             pnlContainer.BackColor = ColorTranslator.FromHtml(Colors.BaseColor);
             btnCreate.BackColor = ColorTranslator.FromHtml(Colors.CtaColor);
-            _loggedinUser = loggedInUser;
             dgvAppointments.Width = this.Width;
             dgvAppointments.Height = this.Height;
 
@@ -47,17 +46,20 @@ namespace Scheduling
             LayoutManager.CenterSingleNestedControlsX(pnlContainer, lblAppointments);
             // Set placerholder text in search box
             LayoutManager.SetPlacholderText(txtAppointmentSearch, "Search", Colors.NeutalDarkColor);
-            lblLoggedInUser.Text = $"Logged in as: {LayoutManager.Capitalize(_loggedinUser.Username)}";
-
-
+            lblLoggedInUser.Text = $"Logged in as: {LayoutManager.Capitalize(GlobalUserInfo.CurrentLoggedInUser.Username)}";
+            CheckUpcomingAppointments(GlobalUserInfo.CurrentLoggedInUser.UserId);
         }
+
         private void PopulateDataGridView()
         {
             try
             {
-                List<AppointmentDTO> appointments = _appointmentService.GetAllAppointments();
+                List<AppointmentDTO> appointments = _appointmentService.GetAppointmentsForDisplay(GlobalUserInfo.CurrentLoggedInUser.UserId);
 
                 dgvAppointments.DataSource = appointments;
+                dgvAppointments.Columns["userId"].Visible = false;
+                dgvAppointments.Columns["appointmentId"].Visible = false;
+                dgvAppointments.Columns["customerId"].Visible = false;
             }
             catch (Exception ex)
             {
@@ -67,7 +69,7 @@ namespace Scheduling
 
         private void btnCreate_Click(object sender, EventArgs e)
         {
-            using (AppointmentManager appointmentManager = new AppointmentManager(Mode.Create, _loggedinUser, _databaseHelper))
+            using (AppointmentManager appointmentManager = new AppointmentManager(Mode.Create, GlobalUserInfo.CurrentLoggedInUser, _databaseHelper))
             {
                 appointmentManager.ShowDialog();
                 PopulateDataGridView();
@@ -99,7 +101,7 @@ namespace Scheduling
 
         private void btnDeleteCustomer_Click(object sender, EventArgs e)
         {
-            using (CustomerForm customerForm = new CustomerForm(_databaseHelper, Mode.Delete, _loggedinUser))
+            using (CustomerForm customerForm = new CustomerForm(_databaseHelper, Mode.Delete))
             {
                 customerForm.ShowDialog();
 
@@ -111,7 +113,7 @@ namespace Scheduling
 
         private void btnCustomers_Click_1(object sender, EventArgs e)
         {
-            using (CustomerListForm customerListForm = new CustomerListForm(_databaseHelper, _loggedinUser))
+            using (CustomerListForm customerListForm = new CustomerListForm(_databaseHelper))
             {
                 customerListForm.ShowDialog();
 
@@ -126,7 +128,7 @@ namespace Scheduling
                 var selectedAppointment = GetSelectedAppointmentFromGrid();
 
                 // Open the AppointmentForm for editing
-                using (AppointmentManager appointmentForm = new AppointmentManager(Mode.Edit, selectedAppointment, _loggedinUser, _databaseHelper))
+                using (AppointmentManager appointmentForm = new AppointmentManager(Mode.Edit, selectedAppointment, GlobalUserInfo.CurrentLoggedInUser, _databaseHelper))
                 {
 
                     if (appointmentForm.ShowDialog() == DialogResult.OK)
@@ -203,5 +205,18 @@ namespace Scheduling
                 }
             }
         }
+
+        private void CheckUpcomingAppointments(int userId)
+        {
+            var upcomingAppointments = _appointmentService.GetUpcomingAppointments(userId);
+
+            if (upcomingAppointments.Any())
+            {
+                MessageBox.Show($"You have an upcoming appointment: {upcomingAppointments[0].Title} at {upcomingAppointments[0].Start}.",
+                    "Upcoming Appointment", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+
     }
 }

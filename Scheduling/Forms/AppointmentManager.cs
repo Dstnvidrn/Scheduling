@@ -16,28 +16,25 @@ namespace Scheduling.Forms
         private AppointmentService _appointmentService;
         private IDatabaseHelper _databaseHelper;
         private CustomerService _customerService;
-        private UserDTO _loggedInUser;
         private AppointmentDTO _selectedAppointmentDTO;
         private Mode _mode;
         public AppointmentManager(Mode mode, UserDTO loggedInUser, IDatabaseHelper databaseHelper)
         {
             InitializeComponent();
             AdjustLayout();
-            _mode = mode;
-            _loggedInUser = loggedInUser;            
+            _mode = mode;          
             _databaseHelper = databaseHelper;
             _appointmentService = new AppointmentService(databaseHelper);
-            _customerService = new CustomerService(databaseHelper, loggedInUser);
+            _customerService = new CustomerService(databaseHelper);
         }public AppointmentManager(Mode mode, AppointmentDTO selectedAppointment,UserDTO loggedInUser, IDatabaseHelper databaseHelper)
         {
             InitializeComponent();
             AdjustLayout();
             _mode = mode;
-            _selectedAppointmentDTO = selectedAppointment;
-            _loggedInUser = loggedInUser;            
+            _selectedAppointmentDTO = selectedAppointment;           
             _databaseHelper = databaseHelper;
             _appointmentService = new AppointmentService(databaseHelper);
-            _customerService = new CustomerService(databaseHelper, loggedInUser);
+            _customerService = new CustomerService(databaseHelper);
         }
         private void AdjustLayout()
         {
@@ -167,7 +164,7 @@ namespace Scheduling.Forms
             {
                 if (_mode == Mode.Create)
                 {
-                    _appointmentService.AddAppointment(CreateCustomer(), _loggedInUser);
+                    _appointmentService.AddAppointment(CreateAppointment());
                     this.Close();
 
                 }
@@ -185,13 +182,13 @@ namespace Scheduling.Forms
                         appointmentDTO.CustomerName = cmbCustomer.SelectedItem.ToString();
                         appointmentDTO.Contact = txtContact.Text;
                         appointmentDTO.Location = txtLocation.Text;
-                        appointmentDTO.UserId = _loggedInUser.UserId;
+                        appointmentDTO.UserId = GlobalUserInfo.CurrentLoggedInUser.UserId;
                         appointmentDTO.AppointmentId = _selectedAppointmentDTO.AppointmentId;
                         appointmentDTO.URL = txtURL.Text;
 
 
                         // Send updated data to the service
-                        _appointmentService.UpdateAppointment(appointmentDTO, _loggedInUser);
+                        _appointmentService.UpdateAppointment(appointmentDTO);
                         MessageBox.Show("Appointment updated successfully!");
                         this.DialogResult = DialogResult.OK;
                         this.Close();
@@ -209,7 +206,7 @@ namespace Scheduling.Forms
                 
             }
         }
-        private AppointmentDTO CreateCustomer()
+        private AppointmentDTO CreateAppointment()
 
         {
             return new AppointmentDTO
@@ -218,9 +215,9 @@ namespace Scheduling.Forms
                 Title = txtTitle.Text,
                 Description = txtDescription.Text,
                 Type = cmbType.SelectedItem.ToString(),
-                Start = dateTimeStart.Value,
-                End = dateTimeEnd.Value,
-                UserId = _loggedInUser.UserId,
+                Start = DateTime.SpecifyKind(dateTimeStart.Value, DateTimeKind.Local),
+                End = DateTime.SpecifyKind(dateTimeEnd.Value, DateTimeKind.Local),
+                UserId = GlobalUserInfo.CurrentLoggedInUser.UserId,
                 Location = txtLocation.Text,
                 URL = txtURL.Text,
                 Contact = txtContact.Text,

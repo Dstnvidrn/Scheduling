@@ -14,9 +14,9 @@ namespace Scheduling.DTOs
         public string Name { get; set; }
         //public int AddressId { get; set; }
         public bool Active { get; set; } = true;
-        public DateTime CreateDate { get; set; } = DateTime.Now;
+        public DateTime CreateDate { get; set; } = DateTime.UtcNow;
         public string CreatedBy { get; set; }
-        public DateTime LastUpdate { get; set; } = DateTime.Now;
+        public DateTime LastUpdate { get; set; } = DateTime.UtcNow;
         public string LastUpdatedBy { get; set; }
         public string CityName { get; set; }
         public string Country { get; set; }

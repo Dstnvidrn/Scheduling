@@ -14,9 +14,9 @@ namespace Scheduling.Models
         public City City { get; set; }
         public string PostalCode { get; set; }
         public string PhoneNumber { get; set; }
-        public DateTime CreateDate { get; set; } = DateTime.Now;
+        public DateTime CreateDate { get; set; } = DateTime.UtcNow;
         public User CreatedBy { get; set; }
-        public DateTime LastUpdate { get; set; } = DateTime.Now;
+        public DateTime LastUpdate { get; set; } = DateTime.UtcNow;
         public User LastUpdatedBy { get; set; } 
 
     }

@@ -13,14 +13,12 @@ namespace Scheduling.Forms
     {
         private Mode _mode;
         private CustomerService _customerService;
-        private UserDTO _loggedInUser;
         private CustomerDTO _selectedCustomerDTO;
         
-        public CustomerForm(IDatabaseHelper databaseHelper, Mode mode, UserDTO loggedInUser)
+        public CustomerForm(IDatabaseHelper databaseHelper, Mode mode)
         {
             InitializeComponent();
-            _loggedInUser = loggedInUser;
-            _customerService = new CustomerService(databaseHelper, loggedInUser);
+            _customerService = new CustomerService(databaseHelper);
             _mode = mode;
             this.Text = _mode == Mode.Create ? "Add Customer" : "Edit Customer";
             btnCreate.Text = _mode == Mode.Delete ? "Delete" : _mode == Mode.Edit ? "Update" : "Create";
@@ -29,8 +27,7 @@ namespace Scheduling.Forms
         }public CustomerForm(IDatabaseHelper databaseHelper, Mode mode, UserDTO loggedInUser, CustomerDTO selectedCustomerDTO)
         {
             InitializeComponent();
-            _loggedInUser = loggedInUser;
-            _customerService = new CustomerService(databaseHelper, loggedInUser);
+            _customerService = new CustomerService(databaseHelper);
             _mode = mode;
             _selectedCustomerDTO = selectedCustomerDTO;
             this.Text = _mode == Mode.Create ? "Add Customer" : "Edit Customer";
@@ -98,7 +95,7 @@ namespace Scheduling.Forms
                 _selectedCustomerDTO.Country = txtCountry.Text;
                 _selectedCustomerDTO.Street1 = txtStreet1.Text;
                 _selectedCustomerDTO.Street2 = txtStreet2.Text == null ? "" : txtStreet2.Text;
-                _selectedCustomerDTO.LastUpdatedBy = _loggedInUser.Username;
+                _selectedCustomerDTO.LastUpdatedBy = GlobalUserInfo.CurrentLoggedInUser.Username;
                 _selectedCustomerDTO.LastUpdate = DateTime.Now;
 
                 try

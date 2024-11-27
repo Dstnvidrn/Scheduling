@@ -1,4 +1,5 @@
-﻿using Scheduling.DTOs;
+﻿using Mysqlx.Resultset;
+using Scheduling.DTOs;
 using Scheduling.Interfaces;
 using Scheduling.Models;
 using System;
@@ -56,11 +57,6 @@ namespace Scheduling.Data.Repositories
             _databaseHelper.ExecuteNonQuery(query, parameters);
         }
 
-        public AppointmentsForm GetAppointmentById(int id)
-        {
-            throw new NotImplementedException();
-            
-        }
 
         public List<Appointment> GetAppointments()
         {
@@ -183,6 +179,76 @@ namespace Scheduling.Data.Repositories
 
             DataTable result = _databaseHelper.ExecuteSelectQuery(query, parameters);
             return Convert.ToInt32(result.Rows[0][0]) > 0;
+        }
+
+        public List<AppointmentDTO> GetAllAppointments()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Appointment> GetAppointmentsByUser(int userId)
+        {
+            string query = @"
+                SELECT 
+                    a.appointmentId,
+                    a.customerId,
+                    c.customerName,
+                    a.userId,
+                    a.title,
+                    a.description,
+                    a.type,
+                    a.start,
+                    a.end,
+                    a.location,
+                    a.contact,
+                    a.url,
+                    a.createDate,
+                    a.createdBy,
+                    a.lastUpdate,
+                    a.lastUpdateBy
+                FROM 
+                    appointment a
+                INNER JOIN 
+                    customer c ON a.customerId = c.customerId
+                WHERE 
+                    a.userId = @userId;";
+
+            var parameters = new[]
+            {
+                _databaseHelper.CreateParameter("@userId", userId)
+            };
+
+            var appointments = new List<Appointment>();
+
+            var dataTable = _databaseHelper.ExecuteSelectQuery(query, parameters);
+
+            foreach (DataRow row in dataTable.Rows)
+            {
+                var appointment = new Appointment
+                {
+                    AppointmentId = Convert.ToInt32(row["appointmentId"]),
+                    CustomerId = Convert.ToInt32(row["customerId"]),
+                    CustomerName = row["customerName"].ToString(),
+                    //UserId = Convert.ToInt32(row["userId"]),
+                    Title = row["title"].ToString(),
+                    Description = row["Description"].ToString(),
+                    Type = row["type"].ToString(),
+                    Start = Convert.ToDateTime(row["start"]),
+                    End = Convert.ToDateTime(row["end"]),
+                    Location = row["location"].ToString(),
+                    Contact = row["contact"].ToString(),
+                    URL = row["URL"].ToString(),
+                    CreateDate = Convert.ToDateTime(row["createDate"]),
+                    CreatedBy = new User { Username = row["createdBy"] != null ? row["createdBy"].ToString() : null },
+                    LastUpdate = Convert.ToDateTime(row["lastUpdate"]),
+                    LastUpdatedBy = new User { Username = row["lastUpdateBy"].ToString() }
+
+
+                };
+                appointments.Add(appointment);
+            }
+
+            return appointments;
         }
 
     }

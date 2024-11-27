@@ -1,5 +1,6 @@
 ﻿using Scheduling.Data.Repositories;
 using Scheduling.DTOs;
+using Scheduling.Helpers;
 using Scheduling.Interfaces;
 using Scheduling.Models;
 using Scheduling.Services.Mappers;
@@ -14,13 +15,11 @@ namespace Scheduling.Services
         private IDatabaseHelper _databaseHelper;
         private ICustomerRepository _customerRepository;
         private CustomerMapper _customerMapper;
-        private UserDTO _loggedInUser;
-        public CustomerService(IDatabaseHelper databaseHelper, UserDTO loggedInUser)
+        public CustomerService(IDatabaseHelper databaseHelper)
         {
             _databaseHelper = databaseHelper;
             _customerRepository = new CustomerRepository(_databaseHelper);
             _customerMapper = new CustomerMapper();
-            _loggedInUser = loggedInUser;
         }
         public List<CustomerDTO> GetAllCustomers()
         {
@@ -35,7 +34,7 @@ namespace Scheduling.Services
         {
            try
             {
-                _customerRepository.AddCustomer(_customerMapper.MapToModel(customerDTO, _loggedInUser));
+                _customerRepository.AddCustomer(_customerMapper.MapToModel(customerDTO, GlobalUserInfo.CurrentLoggedInUser));
                 return true;
             }
             catch (Exception ex)
@@ -48,7 +47,7 @@ namespace Scheduling.Services
         {
             try
             {
-                _customerRepository.DeleteCustomer(_customerMapper.MapToModel(customerDTO, _loggedInUser));
+                _customerRepository.DeleteCustomer(_customerMapper.MapToModel(customerDTO, GlobalUserInfo.CurrentLoggedInUser));
                 return true;
             }
             catch(Exception ex)
@@ -60,7 +59,7 @@ namespace Scheduling.Services
         }
         public void UpdateCustomer(CustomerDTO customerDTO)
         {
-            _customerRepository.UpdateCustomer(_customerMapper.MapToModel(customerDTO, _loggedInUser));
+            _customerRepository.UpdateCustomer(_customerMapper.MapToModel(customerDTO, GlobalUserInfo.CurrentLoggedInUser));
         }
     }
 }

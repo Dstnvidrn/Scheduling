@@ -14,7 +14,7 @@ namespace Scheduling.Interfaces
         List<Appointment> GetAppointments();
 
         // Retrieve a appointment by ID
-        AppointmentsForm GetAppointmentById(int id);
+       
 
         // Create new appointment
         void CreateAppointment(Appointment appointment);
@@ -25,5 +25,6 @@ namespace Scheduling.Interfaces
         // Delete an appointment
         void DeleteAppointment(int id);
         bool IsOverlappingAppointment(int customerId, DateTime start, DateTime end, int? appointmentId = null);
+        List<Appointment> GetAppointmentsByUser(int userId);
     }
 }

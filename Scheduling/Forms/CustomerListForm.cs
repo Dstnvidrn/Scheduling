@@ -20,20 +20,18 @@ namespace Scheduling.Forms
 
         private readonly CustomerService _customerService;
         private readonly IDatabaseHelper _databaseHelper;
-        private UserDTO _loggedinUser;
         private Mode _mode;
         public CustomerListForm()
         {
             InitializeComponent();
         }
-        public CustomerListForm(IDatabaseHelper databaseHelper, UserDTO loggedInUser)
+        public CustomerListForm(IDatabaseHelper databaseHelper)
         {
             InitializeComponent();
             _databaseHelper = databaseHelper;
-            _customerService = new CustomerService(databaseHelper, loggedInUser);
+            _customerService = new CustomerService(databaseHelper);
             pnlContainer.BackColor = ColorTranslator.FromHtml(Colors.BaseColor);
             btnAddCustomer.BackColor = ColorTranslator.FromHtml(Colors.CtaColor);
-            _loggedinUser = loggedInUser;
         }
 
         private void PopulateDataGridView()
@@ -52,7 +50,7 @@ namespace Scheduling.Forms
 
         private void btnAddCustomer_Click(object sender, EventArgs e)
         {
-            using (CustomerForm customerForm = new CustomerForm(_databaseHelper, Mode.Create, _loggedinUser))
+            using (CustomerForm customerForm = new CustomerForm(_databaseHelper, Mode.Create))
             {
                 customerForm.ShowDialog();
                 LoadCustomers();
@@ -132,7 +130,7 @@ namespace Scheduling.Forms
         private void btnUpdateCustomer_Click(object sender, EventArgs e)
         {
             CustomerDTO customerDTO = GetSelectedCustomerDTO();
-            using(CustomerForm customerForm = new CustomerForm(_databaseHelper, Mode.Edit, _loggedinUser, customerDTO))
+            using(CustomerForm customerForm = new CustomerForm(_databaseHelper, Mode.Edit, GlobalUserInfo.CurrentLoggedInUser, customerDTO))
             {
                 customerForm.ShowDialog();
                 LoadCustomers();

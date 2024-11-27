@@ -147,6 +147,7 @@
     <Compile Include="Helpers\Colors.cs" />
     <Compile Include="Data\Database\MySqlDatabase.cs" />
     <Compile Include="Helpers\DatabaseHelper.cs" />
+    <Compile Include="Helpers\GlobalUserInfo.cs" />
     <Compile Include="Helpers\LayoutManager.cs" />
     <Compile Include="Interfaces\IAppointmentMapper.cs" />
     <Compile Include="Interfaces\IAppointmentRepository.cs" />
@@ -170,6 +171,7 @@
     <Compile Include="Models\City.cs" />
     <Compile Include="Models\Country.cs" />
     <Compile Include="Models\Customer.cs" />
+    <Compile Include="Models\LocationData.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Services\AppointmentService.cs" />
     <Compile Include="Services\AuthenticationService.cs" />

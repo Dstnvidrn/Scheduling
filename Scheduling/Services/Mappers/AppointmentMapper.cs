@@ -23,14 +23,14 @@ namespace Scheduling.Services.Mappers
                 CreatedBy = appointment.CreatedBy.Username,
                 Start = appointment.Start,
                 End = appointment.End,
-                LastUpdate = appointment.LastUpdate,
+                LastUpdate = appointment.LastUpdate ,
                 UpdatedBy = appointment.LastUpdatedBy.Username,
                 CustomerId = appointment.CustomerId,
                 Contact = appointment.Contact,
                 Type = appointment.Type,
                 URL = appointment.URL,
                 AppointmentId = appointment.AppointmentId,
-                UserId = appointment.UserId,
+                //UserId = appointment.UserId,
                 
 
             };

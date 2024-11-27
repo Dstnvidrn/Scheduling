@@ -81,6 +81,7 @@ namespace Scheduling
             string password = txtPassword.Text;
             int? userId = _userService.GetUserId(username);
             _loggedInUser = _userService.GetUser(username);
+            GlobalUserInfo.CurrentLoggedInUser = _loggedInUser;
             string selectedLanguage = dropdownLanguage.SelectedItem.ToString();
             // Verify login credentials
             if (_authenticationService.ValidateCredentials(username, password) && userId != null)
@@ -92,8 +93,7 @@ namespace Scheduling
 
                 await Task.Delay(1200);
                 this.Hide();
-
-                using (Form appointmentForm = new AppointmentsForm(_databaseHelper, _loggedInUser))
+                using (Form appointmentForm = new AppointmentsForm(_databaseHelper))
                 {
                     appointmentForm.ShowDialog();
                     if (appointmentForm.DialogResult != DialogResult.OK)
@@ -127,6 +127,7 @@ namespace Scheduling
             {
                 MessageBox.Show($"Error occurred: {ex.Message}");
             }
+            GlobalUserInfo.CurrentUserInfo = userInfo;
             return userInfo;
         }
 
