@@ -160,16 +160,18 @@ namespace Scheduling.Forms
         private void BtnOperation_Click(object sender, EventArgs e)
         {
             AppointmentDTO appointmentDTO = new AppointmentDTO();
-            if (ValidateBusinessHours(dateTimeStart.Value,dateTimeEnd.Value) && ValidateFields()) 
+            if (ValidateBusinessHours(DateTime.SpecifyKind(dateTimeStart.Value, DateTimeKind.Local), DateTime.SpecifyKind(dateTimeEnd.Value, DateTimeKind.Local)) && ValidateFields()) 
             {
                 if (_mode == Mode.Create)
                 {
-                    _appointmentService.AddAppointment(CreateAppointment());
+                    _appointmentService.AddAppointment(CollectAppointmentDetails());
                     this.Close();
 
                 }
                 else if (_mode == Mode.Edit)
                 {
+                    DateTime startTime = DateTime.SpecifyKind(dateTimeStart.Value, DateTimeKind.Local);
+                    DateTime endTime = DateTime.SpecifyKind(dateTimeEnd.Value, DateTimeKind.Local);
                     try
                     {
                         // Update appointment data
@@ -177,8 +179,8 @@ namespace Scheduling.Forms
                         appointmentDTO.Title = txtTitle.Text;
                         appointmentDTO.Description = txtDescription.Text;
                         appointmentDTO.Type = cmbType.SelectedItem.ToString();
-                        appointmentDTO.Start = dateTimeStart.Value;
-                        appointmentDTO.End = dateTimeEnd.Value;
+                        appointmentDTO.Start = startTime;
+                        appointmentDTO.End = endTime;
                         appointmentDTO.CustomerName = cmbCustomer.SelectedItem.ToString();
                         appointmentDTO.Contact = txtContact.Text;
                         appointmentDTO.Location = txtLocation.Text;
@@ -206,24 +208,30 @@ namespace Scheduling.Forms
                 
             }
         }
-        private AppointmentDTO CreateAppointment()
+        
 
+        private AppointmentDTO CollectAppointmentDetails()
         {
+            // Retrieve and explicitly specify the kind of DateTime values
+            DateTime startTime = DateTime.SpecifyKind(dateTimeStart.Value, DateTimeKind.Local);
+            DateTime endTime = DateTime.SpecifyKind(dateTimeEnd.Value, DateTimeKind.Local);
+
+            // Create and return the DTO
             return new AppointmentDTO
             {
-                CustomerId = (int)cmbCustomer.SelectedValue,
                 Title = txtTitle.Text,
                 Description = txtDescription.Text,
+                Start = startTime,
+                End = endTime,
+                CustomerId = (int)cmbCustomer.SelectedValue,
                 Type = cmbType.SelectedItem.ToString(),
-                Start = DateTime.SpecifyKind(dateTimeStart.Value, DateTimeKind.Local),
-                End = DateTime.SpecifyKind(dateTimeEnd.Value, DateTimeKind.Local),
-                UserId = GlobalUserInfo.CurrentLoggedInUser.UserId,
                 Location = txtLocation.Text,
-                URL = txtURL.Text,
                 Contact = txtContact.Text,
-                
+                URL = txtURL.Text,
+                UserId = GlobalUserInfo.CurrentLoggedInUser.UserId,
             };
         }
+
 
         private void cmbCustomer_SelectedIndexChanged(object sender, EventArgs e)
         {
