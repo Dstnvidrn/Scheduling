@@ -2,6 +2,7 @@
 using Scheduling.DTOs;
 using Scheduling.Helpers;
 using Scheduling.Interfaces;
+using Scheduling.Models;
 using Scheduling.Services.Mappers;
 using System;
 using System.Collections.Generic;
@@ -32,12 +33,21 @@ namespace Scheduling.Services
         }
 
 
-
+        private DateTime EnsureDateTimeKind(DateTime dateTime, DateTimeKind kind)
+        {
+            return dateTime.Kind == DateTimeKind.Unspecified
+                ? DateTime.SpecifyKind(dateTime, kind)
+                : dateTime;
+        }
 
         public void AddAppointment(AppointmentDTO appointmentDTO)
         {
             try
             {
+
+                // Ensure times are local before conversion
+                appointmentDTO.Start = EnsureDateTimeKind(appointmentDTO.Start, DateTimeKind.Local);
+                appointmentDTO.End = EnsureDateTimeKind(appointmentDTO.End, DateTimeKind.Local);
                 // Convert Start and End times to UTC
                 appointmentDTO.Start = ConvertToUtc(appointmentDTO.Start);
                 appointmentDTO.End = ConvertToUtc(appointmentDTO.End);
@@ -61,25 +71,41 @@ namespace Scheduling.Services
         {
             try
             {
-                // Convert Start and End times to UTC
+
+                // Ensure times are local before conversion
+                appointmentDTO.Start = EnsureDateTimeKind(appointmentDTO.Start, DateTimeKind.Local);
+                appointmentDTO.End = EnsureDateTimeKind(appointmentDTO.End, DateTimeKind.Local);
+                appointmentDTO.LastUpdate = EnsureDateTimeKind(appointmentDTO.LastUpdate, DateTimeKind.Local);
+                // Ensure the times are in UTC
                 appointmentDTO.Start = ConvertToUtc(appointmentDTO.Start);
                 appointmentDTO.End = ConvertToUtc(appointmentDTO.End);
+                appointmentDTO.LastUpdate = ConvertToUtc(appointmentDTO.LastUpdate);
 
-                // Validate appointment
-                if (!ValidateAppointment(appointmentDTO))
-                    return;
+                // Fetch existing appointment to preserve createDate
+                var existingAppointment = _repository.GetAppointmentById(appointmentDTO.AppointmentId);
 
-                // Map to model and update
-                var appointmentModel = _appointmentMapper.MapToModel(appointmentDTO, _userMapper.MapToModel(GlobalUserInfo.CurrentLoggedInUser));
-                _repository.UpdateAppointment(appointmentModel);
+                if (existingAppointment == null)
+                {
+                    throw new Exception("Appointment not found.");
+                }
 
+                // Map DTO to Appointment model
+                var appointment = _appointmentMapper.MapToModel(appointmentDTO, _userMapper.MapToModel(GlobalUserInfo.CurrentLoggedInUser));
 
+                // Preserve original createDate from the existing appointment
+                appointment.CreateDate = existingAppointment.CreateDate;
+
+                // Update the appointment
+                _repository.UpdateAppointment(appointment);
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"An error occurred while updating the appointment: {ex.Message}");
             }
         }
+
+
+
 
 
 
@@ -99,11 +125,15 @@ namespace Scheduling.Services
         // Get appointments for display (converted to user's local time)
         public List<AppointmentDTO> GetAppointmentsForDisplay(int userId)
         {
+
+            // Get user's time zone
+            TimeZoneInfo userTimeZone = GetUserTimeZone();
             var appointments = _repository.GetAppointmentsByUser(userId);
             return _appointmentMapper.MapToDTOs(appointments).Select(appointment =>
             {
-                appointment.Start = ConvertFromUtc(appointment.Start);
-                appointment.End = ConvertFromUtc(appointment.End);
+                appointment.Start = ConvertFromUtc(appointment.Start, userTimeZone);
+                appointment.End = ConvertFromUtc(appointment.End, userTimeZone);
+                appointment.LastUpdate = ConvertFromUtc(appointment.LastUpdate, userTimeZone);
                 return appointment;
             }).ToList();
         }
@@ -259,7 +289,7 @@ namespace Scheduling.Services
                     .ToList();
 
                 // Convert times to user's time zone
-                return _appointmentMapper.MapToDTOs(upcomingAppointments)
+                return _appointmentMapper.MapToDTOs(upcomingAppointments)  // Lambda used here to map appointments to DTO object more streamline
                     .Select(a =>
                     {
                         a.Start = ConvertFromUtc(a.Start, userTimeZone);
@@ -302,7 +332,7 @@ namespace Scheduling.Services
         {
             var appointments = _repository.GetAppointments();
 
-            return appointments
+            return appointments // Lambda used here to make getting and grouping appointments more streamline
                 .GroupBy(a => a.CustomerName)
                 .ToDictionary(g => g.Key, g => g.Count());
         }

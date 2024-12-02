@@ -228,6 +228,8 @@ namespace Scheduling.Forms
                 Contact = txtContact.Text,
                 URL = txtURL.Text,
                 UserId = GlobalUserInfo.CurrentLoggedInUser.UserId,
+                CreateDate = DateTime.Now,
+                LastUpdate = DateTime.Now
             };
         }
 

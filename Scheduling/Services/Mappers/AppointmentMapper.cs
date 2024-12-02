@@ -1,6 +1,8 @@
 ﻿using Scheduling.DTOs;
 using Scheduling.Models;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 
 namespace Scheduling.Services.Mappers
@@ -61,5 +63,32 @@ namespace Scheduling.Services.Mappers
 
             };
         }
+        public static Appointment MapFromDataRow(DataRow row)
+        {
+            User user = new User()
+            {
+                Username = row["lastUpdateBy"].ToString(),
+                UserId = Convert.ToInt32(row["userId"])
+            };
+            return new Appointment
+            {
+                AppointmentId = Convert.ToInt32(row["appointmentId"]),
+                CustomerId = Convert.ToInt32(row["customerId"]),
+                UserId = user.UserId,
+                Title = row["title"].ToString(),
+                Description = row["description"].ToString(),
+                Type = row["type"].ToString(),
+                Start = DateTime.SpecifyKind(Convert.ToDateTime(row["start"]), DateTimeKind.Utc),
+                End = DateTime.SpecifyKind(Convert.ToDateTime(row["end"]), DateTimeKind.Utc),
+                Location = row["location"].ToString(),
+                Contact = row["contact"].ToString(),
+                URL = row["url"].ToString(),
+                CreateDate = DateTime.SpecifyKind(Convert.ToDateTime(row["createDate"]), DateTimeKind.Utc),
+                CreatedBy = user,
+                LastUpdate = DateTime.SpecifyKind(Convert.ToDateTime(row["lastUpdate"]), DateTimeKind.Utc),
+                LastUpdatedBy = user
+            };
+        }
+
     }
 }

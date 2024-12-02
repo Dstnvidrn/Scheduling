@@ -1,6 +1,7 @@
 ﻿using Scheduling.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
 
 namespace Scheduling.Interfaces
 {
@@ -22,5 +23,6 @@ namespace Scheduling.Interfaces
         void DeleteAppointment(int id);
         bool IsOverlappingAppointment(int customerId, DateTime start, DateTime end, int? appointmentId = null);
         List<Appointment> GetAppointmentsByUser(int userId);
+        Appointment GetAppointmentById(int appointmentId);
     }
 }

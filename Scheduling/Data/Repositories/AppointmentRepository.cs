@@ -1,6 +1,8 @@
-﻿using Scheduling.DTOs;
+﻿using Mysqlx.Resultset;
+using Scheduling.DTOs;
 using Scheduling.Interfaces;
 using Scheduling.Models;
+using Scheduling.Services.Mappers;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -23,7 +25,7 @@ namespace Scheduling.Data.Repositories
                 INSERT INTO appointment
                 (customerId, userId, title, description, type, start, end, createDate, createdBy, lastUpdate, lastUpdateBy, location, url, contact)
                 VALUES
-                (@customerId, @userId, @title, @description, @type, @start, @end, NOW(), @createdBy, NOW(), @lastUpdateBy, @location, @url, @contact)";
+                (@customerId, @userId, @title, @description, @type, @start, @end, @createDate, @createdBy, @lastUpdate, @lastUpdateBy, @location, @url, @contact)";
 
             var parameters = new[]
             {
@@ -34,8 +36,10 @@ namespace Scheduling.Data.Repositories
                 _databaseHelper.CreateParameter("@type", appointment.Type),
                 _databaseHelper.CreateParameter("@start", appointment.Start),
                 _databaseHelper.CreateParameter("@end", appointment.End),
+                _databaseHelper.CreateParameter("@createDate", appointment.CreateDate),
                 _databaseHelper.CreateParameter("@createdBy", appointment.CreatedBy.Username),
                 _databaseHelper.CreateParameter("@lastUpdateBy", appointment.LastUpdatedBy.Username),
+                _databaseHelper.CreateParameter("@lastUpdate", appointment.LastUpdate),
                 _databaseHelper.CreateParameter("@location", appointment.Location),
                 _databaseHelper.CreateParameter("@url", appointment.URL),
                 _databaseHelper.CreateParameter("@contact", appointment.Contact)
@@ -129,15 +133,13 @@ namespace Scheduling.Data.Repositories
                     type = @type,
                     start = @start,
                     end = @end,
-                    lastUpdate = NOW(),
+                    lastUpdate = @lastUpdate,
                     lastUpdateBy = @lastUpdateBy,
                     contact = @contact,
                     url = @url,
                     location = @location,
-                    userId = @userId,
-                    createDate = @createDate,
-                    createdBy = @createdBy
-                WHERE appointmentId = @appointmentId";
+                    userId = @userId
+                WHERE appointmentId = @appointmentId;";
 
             var parameters = new[]
             {
@@ -147,13 +149,12 @@ namespace Scheduling.Data.Repositories
                 _databaseHelper.CreateParameter("@type", appointment.Type),
                 _databaseHelper.CreateParameter("@start", appointment.Start),
                 _databaseHelper.CreateParameter("@end", appointment.End),
+                _databaseHelper.CreateParameter("@lastUpdate", DateTime.UtcNow),
                 _databaseHelper.CreateParameter("@lastUpdateBy", appointment.LastUpdatedBy.Username),
                 _databaseHelper.CreateParameter("@appointmentId", appointment.AppointmentId),
                 _databaseHelper.CreateParameter("@contact", appointment.Contact),
                 _databaseHelper.CreateParameter("@url", appointment.URL),
                 _databaseHelper.CreateParameter("@location", appointment.Location),
-                _databaseHelper.CreateParameter("@createDate", appointment.CreateDate),
-                _databaseHelper.CreateParameter("@createdBy", appointment.CreatedBy.Username),
                 _databaseHelper.CreateParameter("@userId", appointment.UserId),
     };
 
@@ -249,6 +250,33 @@ namespace Scheduling.Data.Repositories
 
             return appointments;
         }
+        public Appointment GetAppointmentById(int appointmentId)
+        {
+            string query = @"
+        SELECT 
+            appointmentId, customerId, userId, title, description, type, start, end,
+            location, contact, url, createDate, createdBy, lastUpdate, lastUpdateBy
+        FROM appointment
+        WHERE appointmentId = @appointmentId;";
+
+            var parameters = new[]
+            {
+        _databaseHelper.CreateParameter("@appointmentId", appointmentId)
+    };
+
+            DataTable result = _databaseHelper.ExecuteSelectQuery(query, parameters);
+
+            if (result.Rows.Count > 0)
+            {
+                // Map the first DataRow to an Appointment object
+                return AppointmentMapper.MapFromDataRow(result.Rows[0]);
+            }
+
+            return null; // Return null if no appointment is found
+        }
+
+
+
 
     }
 }
