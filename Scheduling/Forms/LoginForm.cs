@@ -23,13 +23,11 @@ namespace Scheduling
         public  LoginForm(DatabaseHelper databaseHelper)
         {
             InitializeComponent();
-            LoadColors();           
-            dropdownLanguage.SelectedItem = "EN";
+            LoadColors();
             _databaseHelper = databaseHelper;
             _locationService = new LocationService();
             // Repository Setup
             
-            LocalizationService.SetCulture(dropdownLanguage.SelectedItem.ToString());
             _userService = new UserService(_databaseHelper);
             _authenticationService = new AuthenticationService(databaseHelper);           
            
@@ -76,16 +74,15 @@ namespace Scheduling
 
         private async void btnLogin_Click(object sender, EventArgs e)
         {
-            
             string username = txtUsername.Text;
             string password = txtPassword.Text;
-            int? userId = _userService.GetUserId(username);
-            _loggedInUser = _userService.GetUser(username);
-            GlobalUserInfo.CurrentLoggedInUser = _loggedInUser;
-            string selectedLanguage = dropdownLanguage.SelectedItem.ToString();
+            
             // Verify login credentials
-            if (_authenticationService.ValidateCredentials(username, password) && userId != null)
+            if (_authenticationService.ValidateCredentials(username, password))
             {
+                _loggedInUser = _userService.GetUser(username);
+                int? userId = _userService.GetUserId(username);
+                GlobalUserInfo.CurrentLoggedInUser = _loggedInUser;
                 // Log login attempt - SUCCESS
                 btnLogin.Enabled = false;
                 LoginLogger.LogLoginAttempt(username, true);
@@ -107,13 +104,16 @@ namespace Scheduling
                     
 
             }
-            else
             {
+                // Display localized error message
+                string errorMessage = LocalizationService.GetDualMessage("LoginError");
+                MessageBox.Show(errorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
                 // Log login attempt - FAIL
                 LoginLogger.LogLoginAttempt(username, false);
                 SetLabelMessage(tsslLoginStatus, false);
             }
-            
+
         }
         private async Task<UserInfo> GetUserInfo(string url)
         {
@@ -152,13 +152,12 @@ namespace Scheduling
         }
         private void dropdownLanguage_SelectedIndexChanged(object sender, EventArgs e)
         {
-            LocalizationService.SetCulture(dropdownLanguage.SelectedItem.ToString().ToLower());
-            tsslLoginStatus.Text = LocalizationService.GetMessage("Standby");
+           
         }
         private void SetLabelMessage(ToolStripLabel label, bool isSuccess)
         {
             // Retrieve the message based on the selected language
-            string message = isSuccess ? LocalizationService.GetMessage("LoginSuccess") : LocalizationService.GetMessage("LoginError");// Default to English if language is not found
+            string message = isSuccess ? LocalizationService.GetMessage("LoginSuccess", "en") : LocalizationService.GetDualMessage("LoginError");// Default to English if language is not found
             string backgroundColorHex = isSuccess ? "#D4EDDA" : "#F8D7DA";
             string textColorHex = isSuccess ? "#155724" : "#721C24";
             int xLocation = isSuccess ? 423 : 345;

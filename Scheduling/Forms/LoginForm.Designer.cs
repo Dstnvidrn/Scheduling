@@ -29,9 +29,7 @@
         private void InitializeComponent()
         {
             this.lblState = new System.Windows.Forms.Label();
-            this.dropdownLanguage = new System.Windows.Forms.ComboBox();
             this.pnlLoginLeft = new System.Windows.Forms.Panel();
-            this.lblLangSelect = new System.Windows.Forms.Label();
             this.lblUserCountry = new System.Windows.Forms.Label();
             this.lblUserCity = new System.Windows.Forms.Label();
             this.pbLocationIcon = new System.Windows.Forms.PictureBox();
@@ -39,6 +37,7 @@
             this.pnlLoginImage = new System.Windows.Forms.Panel();
             this.pbLoginIcon = new System.Windows.Forms.PictureBox();
             this.pnlLoginControls = new System.Windows.Forms.Panel();
+            this.passwordIcon = new System.Windows.Forms.PictureBox();
             this.lnklblCancel = new System.Windows.Forms.LinkLabel();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.tsslLoginStatus = new System.Windows.Forms.ToolStripStatusLabel();
@@ -46,16 +45,15 @@
             this.usernameIcon = new System.Windows.Forms.PictureBox();
             this.btnLogin = new System.Windows.Forms.Button();
             this.txtUsername = new System.Windows.Forms.TextBox();
-            this.passwordIcon = new System.Windows.Forms.PictureBox();
             this.pnlLoginLeft.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbLocationIcon)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.pnlLoginImage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbLoginIcon)).BeginInit();
             this.pnlLoginControls.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.passwordIcon)).BeginInit();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.usernameIcon)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.passwordIcon)).BeginInit();
             this.SuspendLayout();
             // 
             // lblState
@@ -69,46 +67,18 @@
             this.lblState.TabIndex = 9;
             this.lblState.Text = "State";
             // 
-            // dropdownLanguage
-            // 
-            this.dropdownLanguage.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.dropdownLanguage.BackColor = System.Drawing.Color.White;
-            this.dropdownLanguage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.dropdownLanguage.FormattingEnabled = true;
-            this.dropdownLanguage.Items.AddRange(new object[] {
-            "EN",
-            "ES",
-            "FR"});
-            this.dropdownLanguage.Location = new System.Drawing.Point(12, 373);
-            this.dropdownLanguage.Name = "dropdownLanguage";
-            this.dropdownLanguage.Size = new System.Drawing.Size(75, 21);
-            this.dropdownLanguage.TabIndex = 13;
-            this.dropdownLanguage.SelectedIndexChanged += new System.EventHandler(this.dropdownLanguage_SelectedIndexChanged);
-            // 
             // pnlLoginLeft
             // 
             this.pnlLoginLeft.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(72)))), ((int)(((byte)(87)))));
-            this.pnlLoginLeft.Controls.Add(this.lblLangSelect);
             this.pnlLoginLeft.Controls.Add(this.lblUserCountry);
             this.pnlLoginLeft.Controls.Add(this.lblUserCity);
             this.pnlLoginLeft.Controls.Add(this.pbLocationIcon);
-            this.pnlLoginLeft.Controls.Add(this.dropdownLanguage);
             this.pnlLoginLeft.Controls.Add(this.lblState);
             this.pnlLoginLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlLoginLeft.Location = new System.Drawing.Point(0, 0);
             this.pnlLoginLeft.Name = "pnlLoginLeft";
             this.pnlLoginLeft.Size = new System.Drawing.Size(236, 406);
             this.pnlLoginLeft.TabIndex = 17;
-            // 
-            // lblLangSelect
-            // 
-            this.lblLangSelect.AutoSize = true;
-            this.lblLangSelect.ForeColor = System.Drawing.SystemColors.ControlLight;
-            this.lblLangSelect.Location = new System.Drawing.Point(9, 357);
-            this.lblLangSelect.Name = "lblLangSelect";
-            this.lblLangSelect.Size = new System.Drawing.Size(91, 13);
-            this.lblLangSelect.TabIndex = 17;
-            this.lblLangSelect.Text = "Select Language:";
             // 
             // lblUserCountry
             // 
@@ -197,6 +167,18 @@
             this.pnlLoginControls.Size = new System.Drawing.Size(415, 197);
             this.pnlLoginControls.TabIndex = 1;
             // 
+            // passwordIcon
+            // 
+            this.passwordIcon.BackColor = System.Drawing.Color.Transparent;
+            this.passwordIcon.Image = global::Scheduling.Properties.Resources.password_icon;
+            this.passwordIcon.Location = new System.Drawing.Point(94, 70);
+            this.passwordIcon.Name = "passwordIcon";
+            this.passwordIcon.Size = new System.Drawing.Size(26, 26);
+            this.passwordIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.passwordIcon.TabIndex = 37;
+            this.passwordIcon.TabStop = false;
+            this.passwordIcon.WaitOnLoad = true;
+            // 
             // lnklblCancel
             // 
             this.lnklblCancel.AutoSize = true;
@@ -276,18 +258,6 @@
             this.txtUsername.TabIndex = 29;
             this.txtUsername.WordWrap = false;
             // 
-            // passwordIcon
-            // 
-            this.passwordIcon.BackColor = System.Drawing.Color.Transparent;
-            this.passwordIcon.Image = global::Scheduling.Properties.Resources.password_icon;
-            this.passwordIcon.Location = new System.Drawing.Point(94, 70);
-            this.passwordIcon.Name = "passwordIcon";
-            this.passwordIcon.Size = new System.Drawing.Size(26, 26);
-            this.passwordIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.passwordIcon.TabIndex = 37;
-            this.passwordIcon.TabStop = false;
-            this.passwordIcon.WaitOnLoad = true;
-            // 
             // LoginForm
             // 
             this.AcceptButton = this.btnLogin;
@@ -312,22 +282,20 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbLoginIcon)).EndInit();
             this.pnlLoginControls.ResumeLayout(false);
             this.pnlLoginControls.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.passwordIcon)).EndInit();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.usernameIcon)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.passwordIcon)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
         private System.Windows.Forms.Label lblState;
-        private System.Windows.Forms.ComboBox dropdownLanguage;
         private System.Windows.Forms.Panel pnlLoginLeft;
         private System.Windows.Forms.PictureBox pbLocationIcon;
         private System.Windows.Forms.Label lblUserCity;
         private System.Windows.Forms.Label lblUserCountry;
-        private System.Windows.Forms.Label lblLangSelect;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Panel pnlLoginImage;
         private System.Windows.Forms.PictureBox pbLoginIcon;
