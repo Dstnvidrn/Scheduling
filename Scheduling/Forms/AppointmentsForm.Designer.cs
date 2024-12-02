@@ -41,18 +41,30 @@
             this.btnCreate = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tlpDataTable = new System.Windows.Forms.TableLayoutPanel();
-            this.dgvAppointments = new System.Windows.Forms.DataGridView();
             this.pnlSearch = new System.Windows.Forms.Panel();
             this.txtAppointmentSearch = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.TabControlAppointments = new System.Windows.Forms.TabControl();
+            this.All = new System.Windows.Forms.TabPage();
+            this.Montly = new System.Windows.Forms.TabPage();
+            this.dgvAppointments = new System.Windows.Forms.DataGridView();
+            this.Weekly = new System.Windows.Forms.TabPage();
+            this.dgvMonthAppoint = new System.Windows.Forms.DataGridView();
+            this.dgvWeekAppoint = new System.Windows.Forms.DataGridView();
             this.tableLayoutAppointments.SuspendLayout();
             this.pnlContainer.SuspendLayout();
             this.tlpLogoutOption.SuspendLayout();
             this.tlpMenuOptions.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tlpDataTable.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvAppointments)).BeginInit();
             this.pnlSearch.SuspendLayout();
+            this.TabControlAppointments.SuspendLayout();
+            this.All.SuspendLayout();
+            this.Montly.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvAppointments)).BeginInit();
+            this.Weekly.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvMonthAppoint)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvWeekAppoint)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutAppointments
@@ -241,7 +253,7 @@
             // 
             this.tlpDataTable.ColumnCount = 1;
             this.tlpDataTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpDataTable.Controls.Add(this.dgvAppointments, 0, 1);
+            this.tlpDataTable.Controls.Add(this.TabControlAppointments, 0, 1);
             this.tlpDataTable.Controls.Add(this.pnlSearch, 0, 0);
             this.tlpDataTable.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpDataTable.Location = new System.Drawing.Point(0, 0);
@@ -251,21 +263,6 @@
             this.tlpDataTable.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tlpDataTable.Size = new System.Drawing.Size(1206, 801);
             this.tlpDataTable.TabIndex = 4;
-            // 
-            // dgvAppointments
-            // 
-            this.dgvAppointments.AllowUserToAddRows = false;
-            this.dgvAppointments.AllowUserToResizeColumns = false;
-            this.dgvAppointments.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvAppointments.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvAppointments.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvAppointments.Location = new System.Drawing.Point(3, 43);
-            this.dgvAppointments.MultiSelect = false;
-            this.dgvAppointments.Name = "dgvAppointments";
-            this.dgvAppointments.ReadOnly = true;
-            this.dgvAppointments.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvAppointments.Size = new System.Drawing.Size(1200, 755);
-            this.dgvAppointments.TabIndex = 4;
             // 
             // pnlSearch
             // 
@@ -303,6 +300,95 @@
             this.button1.Text = "&Search";
             this.button1.UseVisualStyleBackColor = false;
             // 
+            // TabControlAppointments
+            // 
+            this.TabControlAppointments.Controls.Add(this.All);
+            this.TabControlAppointments.Controls.Add(this.Montly);
+            this.TabControlAppointments.Controls.Add(this.Weekly);
+            this.TabControlAppointments.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.TabControlAppointments.Location = new System.Drawing.Point(3, 43);
+            this.TabControlAppointments.Name = "TabControlAppointments";
+            this.TabControlAppointments.SelectedIndex = 0;
+            this.TabControlAppointments.Size = new System.Drawing.Size(1200, 755);
+            this.TabControlAppointments.TabIndex = 10;
+            // 
+            // All
+            // 
+            this.All.Controls.Add(this.dgvAppointments);
+            this.All.Location = new System.Drawing.Point(4, 22);
+            this.All.Name = "All";
+            this.All.Padding = new System.Windows.Forms.Padding(3);
+            this.All.Size = new System.Drawing.Size(1192, 729);
+            this.All.TabIndex = 0;
+            this.All.Text = "All";
+            this.All.UseVisualStyleBackColor = true;
+            // 
+            // Montly
+            // 
+            this.Montly.Controls.Add(this.dgvMonthAppoint);
+            this.Montly.Location = new System.Drawing.Point(4, 22);
+            this.Montly.Name = "Montly";
+            this.Montly.Padding = new System.Windows.Forms.Padding(3);
+            this.Montly.Size = new System.Drawing.Size(1192, 729);
+            this.Montly.TabIndex = 1;
+            this.Montly.Text = "Monthly";
+            this.Montly.UseVisualStyleBackColor = true;
+            // 
+            // dgvAppointments
+            // 
+            this.dgvAppointments.AllowUserToAddRows = false;
+            this.dgvAppointments.AllowUserToResizeColumns = false;
+            this.dgvAppointments.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvAppointments.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvAppointments.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvAppointments.Location = new System.Drawing.Point(3, 3);
+            this.dgvAppointments.MultiSelect = false;
+            this.dgvAppointments.Name = "dgvAppointments";
+            this.dgvAppointments.ReadOnly = true;
+            this.dgvAppointments.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvAppointments.Size = new System.Drawing.Size(1186, 723);
+            this.dgvAppointments.TabIndex = 5;
+            // 
+            // Weekly
+            // 
+            this.Weekly.Controls.Add(this.dgvWeekAppoint);
+            this.Weekly.Location = new System.Drawing.Point(4, 22);
+            this.Weekly.Name = "Weekly";
+            this.Weekly.Size = new System.Drawing.Size(1192, 729);
+            this.Weekly.TabIndex = 2;
+            this.Weekly.Text = "Weekly";
+            this.Weekly.UseVisualStyleBackColor = true;
+            // 
+            // dgvMonthAppoint
+            // 
+            this.dgvMonthAppoint.AllowUserToAddRows = false;
+            this.dgvMonthAppoint.AllowUserToResizeColumns = false;
+            this.dgvMonthAppoint.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvMonthAppoint.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvMonthAppoint.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvMonthAppoint.Location = new System.Drawing.Point(3, 3);
+            this.dgvMonthAppoint.MultiSelect = false;
+            this.dgvMonthAppoint.Name = "dgvMonthAppoint";
+            this.dgvMonthAppoint.ReadOnly = true;
+            this.dgvMonthAppoint.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvMonthAppoint.Size = new System.Drawing.Size(1186, 723);
+            this.dgvMonthAppoint.TabIndex = 5;
+            // 
+            // dgvWeekAppoint
+            // 
+            this.dgvWeekAppoint.AllowUserToAddRows = false;
+            this.dgvWeekAppoint.AllowUserToResizeColumns = false;
+            this.dgvWeekAppoint.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvWeekAppoint.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvWeekAppoint.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvWeekAppoint.Location = new System.Drawing.Point(0, 0);
+            this.dgvWeekAppoint.MultiSelect = false;
+            this.dgvWeekAppoint.Name = "dgvWeekAppoint";
+            this.dgvWeekAppoint.ReadOnly = true;
+            this.dgvWeekAppoint.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvWeekAppoint.Size = new System.Drawing.Size(1192, 729);
+            this.dgvWeekAppoint.TabIndex = 5;
+            // 
             // AppointmentsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -321,9 +407,15 @@
             this.tlpMenuOptions.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.tlpDataTable.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvAppointments)).EndInit();
             this.pnlSearch.ResumeLayout(false);
             this.pnlSearch.PerformLayout();
+            this.TabControlAppointments.ResumeLayout(false);
+            this.All.ResumeLayout(false);
+            this.Montly.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvAppointments)).EndInit();
+            this.Weekly.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvMonthAppoint)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvWeekAppoint)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -342,11 +434,17 @@
         private System.Windows.Forms.Label lblAppointments;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TableLayoutPanel tlpDataTable;
-        private System.Windows.Forms.DataGridView dgvAppointments;
         private System.Windows.Forms.Panel pnlSearch;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox txtAppointmentSearch;
         private System.Windows.Forms.Label lblLoggedInUser;
         private System.Windows.Forms.Button btnCustomers;
+        private System.Windows.Forms.TabControl TabControlAppointments;
+        private System.Windows.Forms.TabPage All;
+        private System.Windows.Forms.DataGridView dgvAppointments;
+        private System.Windows.Forms.TabPage Montly;
+        private System.Windows.Forms.TabPage Weekly;
+        private System.Windows.Forms.DataGridView dgvMonthAppoint;
+        private System.Windows.Forms.DataGridView dgvWeekAppoint;
     }
 }

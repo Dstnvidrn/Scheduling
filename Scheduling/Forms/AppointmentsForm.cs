@@ -48,6 +48,8 @@ namespace Scheduling
             LayoutManager.SetPlacholderText(txtAppointmentSearch, "Search", Colors.NeutalDarkColor);
             lblLoggedInUser.Text = $"Logged in as: {LayoutManager.Capitalize(GlobalUserInfo.CurrentLoggedInUser.Username)}";
             CheckUpcomingAppointments(GlobalUserInfo.CurrentLoggedInUser.UserId);
+            LoadMonthlyAppointments();
+            LoadWeeklyAppointments();
         }
 
         private void PopulateDataGridView()
@@ -65,6 +67,24 @@ namespace Scheduling
             {
                 MessageBox.Show($"Error loading data: {ex.Message}");
             }
+        }
+        private void LoadMonthlyAppointments()
+        {
+            var appointments = _appointmentService.GetAppointmentsForDisplay(GlobalUserInfo.CurrentLoggedInUser.UserId)
+                .Where(a => a.Start.Month == DateTime.Now.Month && a.Start.Year == DateTime.Now.Year)
+                .ToList();
+            dgvMonthAppoint.DataSource = appointments;
+        }
+
+        private void LoadWeeklyAppointments()
+        {
+            var currentWeekStart = DateTime.Now.AddDays(-(int)DateTime.Now.DayOfWeek);
+            var currentWeekEnd = currentWeekStart.AddDays(7);
+
+            var appointments = _appointmentService.GetAppointmentsForDisplay(GlobalUserInfo.CurrentLoggedInUser.UserId)
+                .Where(a => a.Start >= currentWeekStart && a.Start < currentWeekEnd)
+                .ToList();
+            dgvWeekAppoint.DataSource = appointments;
         }
 
         private void btnCreate_Click(object sender, EventArgs e)
