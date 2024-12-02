@@ -2,7 +2,6 @@
 using Scheduling.Enums;
 using Scheduling.Helpers;
 using Scheduling.Interfaces;
-using Scheduling.Models;
 using Scheduling.Services;
 using System;
 using System.Windows.Forms;
@@ -14,7 +13,7 @@ namespace Scheduling.Forms
         private Mode _mode;
         private CustomerService _customerService;
         private CustomerDTO _selectedCustomerDTO;
-        
+
         public CustomerForm(IDatabaseHelper databaseHelper, Mode mode)
         {
             InitializeComponent();
@@ -24,7 +23,8 @@ namespace Scheduling.Forms
             btnCreate.Text = _mode == Mode.Delete ? "Delete" : _mode == Mode.Edit ? "Update" : "Create";
             CenterControls();
 
-        }public CustomerForm(IDatabaseHelper databaseHelper, Mode mode, UserDTO loggedInUser, CustomerDTO selectedCustomerDTO)
+        }
+        public CustomerForm(IDatabaseHelper databaseHelper, Mode mode, UserDTO loggedInUser, CustomerDTO selectedCustomerDTO)
         {
             InitializeComponent();
             _customerService = new CustomerService(databaseHelper);
@@ -46,7 +46,7 @@ namespace Scheduling.Forms
             // Center button controls
             LayoutManager.CenterSingleNestedControlsX(pnlCustomerMain, tplBtnControls);
         }
-        
+
         private CustomerDTO PopulateCustomerDTO()
         {
             return new CustomerDTO
@@ -75,11 +75,11 @@ namespace Scheduling.Forms
         private void btnCreate_Click(object sender, EventArgs e)
         {
 
-            if(_mode == Mode.Create && !ValidateForm())
+            if (_mode == Mode.Create && !ValidateForm())
             {
                 _customerService.CreateCustomer(PopulateCustomerDTO());
                 this.DialogResult = DialogResult.OK;
-                MessageBox.Show($"Customer {LayoutManager.Capitalize(txtCustomername.Text)} created.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information );
+                MessageBox.Show($"Customer {LayoutManager.Capitalize(txtCustomername.Text)} created.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Close();
             }
             else if (_mode == Mode.Edit)
@@ -105,7 +105,7 @@ namespace Scheduling.Forms
                     this.DialogResult = DialogResult.OK;
                     this.Close();
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     MessageBox.Show($"An error occurred while updating the customer: {ex.Message}");
                 }
@@ -138,7 +138,7 @@ namespace Scheduling.Forms
             if (string.IsNullOrWhiteSpace(textBox.Text))
             {
                 MessageBox.Show(errorMessage, "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                
+
                 textBox.Focus();
                 return false;
             }
@@ -159,10 +159,10 @@ namespace Scheduling.Forms
         {
             if (_mode == Mode.Edit)
             {
-                
+
                 PopulateCustomerForm(_selectedCustomerDTO);
             }
         }
-        
+
     }
 }

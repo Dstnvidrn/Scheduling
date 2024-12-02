@@ -1,11 +1,7 @@
 ﻿using Scheduling.DTOs;
-using Scheduling.Interfaces;
 using Scheduling.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Scheduling.Services.Mappers
 {
@@ -23,7 +19,7 @@ namespace Scheduling.Services.Mappers
                 CreatedBy = appointment.CreatedBy.Username,
                 Start = appointment.Start,
                 End = appointment.End,
-                LastUpdate = appointment.LastUpdate ,
+                LastUpdate = appointment.LastUpdate,
                 UpdatedBy = appointment.LastUpdatedBy.Username,
                 CustomerId = appointment.CustomerId,
                 Contact = appointment.Contact,
@@ -31,7 +27,7 @@ namespace Scheduling.Services.Mappers
                 URL = appointment.URL,
                 AppointmentId = appointment.AppointmentId,
                 //UserId = appointment.UserId,
-                
+
 
             };
         }

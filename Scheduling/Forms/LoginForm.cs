@@ -1,13 +1,13 @@
-﻿using System;
-using System.Drawing;
-using System.Windows.Forms;
-using System.Configuration;
-using System.Threading.Tasks;
-using Scheduling.Services;
-using Scheduling.Logging;
+﻿using Scheduling.DTOs;
 using Scheduling.Helpers;
 using Scheduling.Interfaces;
-using Scheduling.DTOs;
+using Scheduling.Logging;
+using Scheduling.Services;
+using System;
+using System.Configuration;
+using System.Drawing;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 namespace Scheduling
 {
     public partial class LoginForm : Form
@@ -20,17 +20,17 @@ namespace Scheduling
         private IDatabaseHelper _databaseHelper;
         private UserDTO _loggedInUser;
 
-        public  LoginForm(DatabaseHelper databaseHelper)
+        public LoginForm(DatabaseHelper databaseHelper)
         {
             InitializeComponent();
             LoadColors();
             _databaseHelper = databaseHelper;
             _locationService = new LocationService();
             // Repository Setup
-            
+
             _userService = new UserService(_databaseHelper);
-            _authenticationService = new AuthenticationService(databaseHelper);           
-           
+            _authenticationService = new AuthenticationService(databaseHelper);
+
         }
         private void LoadColors()
         {
@@ -44,17 +44,17 @@ namespace Scheduling
             lblUserCountry.ForeColor = ColorTranslator.FromHtml(Colors.NeutralLightColor);
         }
 
-       private void CenterControls()
+        private void CenterControls()
         {
             // Center Login icon
             LayoutManager.CenterDuoNestedControlsX(pnlLoginImage, passwordIcon, pbLoginIcon, 10);
             // Center Username icon and textbox
             LayoutManager.CenterDuoNestedControlsX(pnlLoginControls, usernameIcon, txtUsername, 10);
             // Center password icon and textbox
-            LayoutManager.CenterDuoNestedControlsX(pnlLoginControls,passwordIcon, txtPassword, 10);
-            
+            LayoutManager.CenterDuoNestedControlsX(pnlLoginControls, passwordIcon, txtPassword, 10);
+
             // Center login button to allign with text boxes
-            LayoutManager.CenterDuoNestedControlsX(pnlLoginControls, passwordIcon, btnLogin,10);
+            LayoutManager.CenterDuoNestedControlsX(pnlLoginControls, passwordIcon, btnLogin, 10);
             // Center cancel link label
             LayoutManager.CenterSingleNestedControlsXMargins(pnlLoginControls, lnklblCancel, passwordIcon.Width + 10, 0);
 
@@ -68,7 +68,7 @@ namespace Scheduling
             LayoutManager.CenterSingleNestedControlsX(pnlLoginLeft, lblState);
             // Center Country label
             LayoutManager.CenterSingleNestedControlsX(pnlLoginLeft, lblUserCountry);
-           
+
 
         }
 
@@ -76,7 +76,7 @@ namespace Scheduling
         {
             string username = txtUsername.Text;
             string password = txtPassword.Text;
-            
+
             // Verify login credentials
             if (_authenticationService.ValidateCredentials(username, password))
             {
@@ -95,13 +95,13 @@ namespace Scheduling
                     appointmentForm.ShowDialog();
                     if (appointmentForm.DialogResult != DialogResult.OK)
                     {
-                        this.Close();             
+                        this.Close();
                     }
 
                     btnLogin.Enabled = true;
                     this.Show();
                 }
-                    
+
 
             }
             else
@@ -122,7 +122,7 @@ namespace Scheduling
             try
             {
                 userInfo = await _locationService.GetUserInfo(url);
-                
+
             }
             catch (Exception ex)
             {
@@ -132,7 +132,7 @@ namespace Scheduling
             return userInfo;
         }
 
-         
+
         private void UpdateLocationLabels(UserInfo userInfo)
         {
 
@@ -153,7 +153,7 @@ namespace Scheduling
         }
         private void dropdownLanguage_SelectedIndexChanged(object sender, EventArgs e)
         {
-           
+
         }
         private void SetLabelMessage(ToolStripLabel label, bool isSuccess)
         {

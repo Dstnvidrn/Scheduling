@@ -1,13 +1,7 @@
 ﻿using Scheduling.Interfaces;
 using Scheduling.Models;
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Data.Common;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace Scheduling.Data.Repositories
 {
@@ -20,7 +14,7 @@ namespace Scheduling.Data.Repositories
         {
             _databaseHelper = databaseHelper;
         }
-        
+
 
         public User GetUser(string username)
         {
@@ -42,7 +36,7 @@ namespace Scheduling.Data.Repositories
                     CreateDate = Convert.ToDateTime(result.Rows[0]["createDate"]),
                     CreatedBy = new User { Username = result.Rows[0]["createdBy"].ToString() },
                     LastUpdate = Convert.ToDateTime(result.Rows[0]["lastUpdate"]),
-                    UpdatedBy = new User { Username = result.Rows[0]["lastUpdateBy"].ToString()},
+                    UpdatedBy = new User { Username = result.Rows[0]["lastUpdateBy"].ToString() },
 
                 };
             }

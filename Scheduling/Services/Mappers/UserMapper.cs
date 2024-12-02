@@ -12,7 +12,7 @@ namespace Scheduling.Services.Mappers
             {
                 UserId = user.UserId,
                 Username = user.Username,
-               
+
             };
         }
 

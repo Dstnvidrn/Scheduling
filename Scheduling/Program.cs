@@ -1,9 +1,5 @@
 ﻿using Scheduling.Data;
-using Scheduling.Data.Repositories;
 using Scheduling.Helpers;
-using Scheduling.Interfaces;
-using Scheduling.Services;
-using Scheduling.Services.Mappers;
 using System;
 using System.Configuration;
 using System.Windows.Forms;
@@ -23,7 +19,7 @@ namespace Scheduling
             var _connectionFactory = new DatabaseConnectionFactory(_connectionString);
             var _dataBaseHelper = new DatabaseHelper(_connectionFactory);
 
-            
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new LoginForm(_dataBaseHelper));

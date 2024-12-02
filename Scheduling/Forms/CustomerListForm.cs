@@ -5,12 +5,7 @@ using Scheduling.Interfaces;
 using Scheduling.Services;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Scheduling.Forms
@@ -58,7 +53,7 @@ namespace Scheduling.Forms
             }
         }
 
-        
+
 
         private void CustomerListForm_Load(object sender, EventArgs e)
         {
@@ -84,7 +79,7 @@ namespace Scheduling.Forms
                 var customerDTO = new CustomerDTO
                 {
                     Id = Convert.ToInt32(selectedRow.Cells["Id"].Value),
-                    Name= selectedRow.Cells["Name"].Value?.ToString(),
+                    Name = selectedRow.Cells["Name"].Value?.ToString(),
                     Street1 = selectedRow.Cells["Street1"].Value?.ToString(),
                     Street2 = selectedRow.Cells["Street2"].Value?.ToString(),
                     CityName = selectedRow.Cells["CityName"].Value?.ToString(),
@@ -130,7 +125,7 @@ namespace Scheduling.Forms
         private void btnUpdateCustomer_Click(object sender, EventArgs e)
         {
             CustomerDTO customerDTO = GetSelectedCustomerDTO();
-            using(CustomerForm customerForm = new CustomerForm(_databaseHelper, Mode.Edit, GlobalUserInfo.CurrentLoggedInUser, customerDTO))
+            using (CustomerForm customerForm = new CustomerForm(_databaseHelper, Mode.Edit, GlobalUserInfo.CurrentLoggedInUser, customerDTO))
             {
                 customerForm.ShowDialog();
                 LoadCustomers();

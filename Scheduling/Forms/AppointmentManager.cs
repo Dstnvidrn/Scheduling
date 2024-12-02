@@ -2,12 +2,9 @@
 using Scheduling.Enums;
 using Scheduling.Helpers;
 using Scheduling.Interfaces;
-using Scheduling.Models;
 using Scheduling.Services;
 using System;
-using System.Data;
 using System.Windows.Forms;
-using ZstdSharp.Unsafe;
 
 namespace Scheduling.Forms
 {
@@ -22,16 +19,17 @@ namespace Scheduling.Forms
         {
             InitializeComponent();
             AdjustLayout();
-            _mode = mode;          
+            _mode = mode;
             _databaseHelper = databaseHelper;
             _appointmentService = new AppointmentService(databaseHelper);
             _customerService = new CustomerService(databaseHelper);
-        }public AppointmentManager(Mode mode, AppointmentDTO selectedAppointment,UserDTO loggedInUser, IDatabaseHelper databaseHelper)
+        }
+        public AppointmentManager(Mode mode, AppointmentDTO selectedAppointment, UserDTO loggedInUser, IDatabaseHelper databaseHelper)
         {
             InitializeComponent();
             AdjustLayout();
             _mode = mode;
-            _selectedAppointmentDTO = selectedAppointment;           
+            _selectedAppointmentDTO = selectedAppointment;
             _databaseHelper = databaseHelper;
             _appointmentService = new AppointmentService(databaseHelper);
             _customerService = new CustomerService(databaseHelper);
@@ -71,7 +69,8 @@ namespace Scheduling.Forms
                 return false;
             }
             // Check if Date has not passed
-            if(startEst < DateTime.Now || endEst < DateTime.Now) {
+            if (startEst < DateTime.Now || endEst < DateTime.Now)
+            {
                 MessageBox.Show("Date selection has passed.");
                 return false;
             }
@@ -89,7 +88,7 @@ namespace Scheduling.Forms
                 return false;
             }
             return true;
-                
+
         }
 
         private void PopulateFormFromSelected(AppointmentDTO appointmentDTO)
@@ -118,16 +117,16 @@ namespace Scheduling.Forms
             // Populate Type ComboBox
             PopulateTypeComboBox();
 
-         
-            if (_mode == Mode.Create) 
-            { 
-                BtnOperation.Text = "Create"; 
+
+            if (_mode == Mode.Create)
+            {
+                BtnOperation.Text = "Create";
             }
 
-            else if (_mode == Mode.Edit) 
-            { 
+            else if (_mode == Mode.Edit)
+            {
                 BtnOperation.Text = "Update";
-                PopulateFormFromSelected(_selectedAppointmentDTO); 
+                PopulateFormFromSelected(_selectedAppointmentDTO);
             }
         }
         private void PopulateCustomerComboBox()
@@ -144,7 +143,7 @@ namespace Scheduling.Forms
                 Console.WriteLine($"CustomerId: {customer.Key}, CustomerName: {customer.Value}");
             }
 
-           
+
 
         }
         private void PopulateTypeComboBox()
@@ -155,12 +154,12 @@ namespace Scheduling.Forms
             cmbType.Items.Add("Meeting");
             cmbType.Items.Add("Review");
 
-            
+
         }
         private void BtnOperation_Click(object sender, EventArgs e)
         {
             AppointmentDTO appointmentDTO = new AppointmentDTO();
-            if (ValidateBusinessHours(DateTime.SpecifyKind(dateTimeStart.Value, DateTimeKind.Local), DateTime.SpecifyKind(dateTimeEnd.Value, DateTimeKind.Local)) && ValidateFields()) 
+            if (ValidateBusinessHours(DateTime.SpecifyKind(dateTimeStart.Value, DateTimeKind.Local), DateTime.SpecifyKind(dateTimeEnd.Value, DateTimeKind.Local)) && ValidateFields())
             {
                 if (_mode == Mode.Create)
                 {
@@ -205,10 +204,10 @@ namespace Scheduling.Forms
                     }
                 }
 
-                
+
             }
         }
-        
+
 
         private AppointmentDTO CollectAppointmentDetails()
         {

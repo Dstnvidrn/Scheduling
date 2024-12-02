@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.Contracts;
-using System.Drawing;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Drawing;
 using System.Windows.Forms;
 
 namespace Scheduling.Helpers
@@ -46,7 +39,7 @@ namespace Scheduling.Helpers
         }
         public static string Capitalize(params string[] strings)
         {
-            for(int i = 0; i < strings.Length; i++)
+            for (int i = 0; i < strings.Length; i++)
             {
                 strings[i] = $"{strings[i][0].ToString().ToUpper()}{strings[i].Substring(1)}";
             }

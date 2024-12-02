@@ -21,18 +21,18 @@ namespace Scheduling.Services.Mappers
                 IsActive = customerDTO.Active,
                 UpdatedBy = user,
                 CreatedBy = user,
-                
-                Address = new Address 
-                { 
+
+                Address = new Address
+                {
                     Street1 = customerDTO.Street1,
                     Street2 = customerDTO.Street2,
                     PhoneNumber = customerDTO.PhoneNumber,
                     PostalCode = customerDTO.Postal,
                     LastUpdate = DateTime.Now,
                     LastUpdatedBy = user,
-                    CreatedBy= user,
-                    
-                    City = new City 
+                    CreatedBy = user,
+
+                    City = new City
                     {
                         CityName = customerDTO.CityName,
                         LastUpdate = DateTime.Now,

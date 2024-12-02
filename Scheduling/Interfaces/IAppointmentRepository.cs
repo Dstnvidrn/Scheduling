@@ -1,10 +1,6 @@
-﻿using Scheduling.DTOs;
-using Scheduling.Models;
+﻿using Scheduling.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Scheduling.Interfaces
 {
@@ -14,7 +10,7 @@ namespace Scheduling.Interfaces
         List<Appointment> GetAppointments();
 
         // Retrieve a appointment by ID
-       
+
 
         // Create new appointment
         void CreateAppointment(Appointment appointment);

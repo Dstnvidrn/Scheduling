@@ -1,13 +1,7 @@
 ﻿using Scheduling.Data.Repositories;
 using Scheduling.DTOs;
 using Scheduling.Interfaces;
-using Scheduling.Models;
 using Scheduling.Services.Mappers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Scheduling.Services
 {
@@ -25,15 +19,15 @@ namespace Scheduling.Services
 
         public int GetUserId(string username)
         {
-             return _userMapper.MapToDTO(_userRepository.GetUser(username)).UserId;
+            return _userMapper.MapToDTO(_userRepository.GetUser(username)).UserId;
 
         }
-        public UserDTO GetUser(string username) 
+        public UserDTO GetUser(string username)
         {
             return _userMapper.MapToDTO(_userRepository.GetUser(username));
         }
 
 
-        
+
     }
 }

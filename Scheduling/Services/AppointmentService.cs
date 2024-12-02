@@ -2,13 +2,10 @@
 using Scheduling.DTOs;
 using Scheduling.Helpers;
 using Scheduling.Interfaces;
-using Scheduling.Models;
 using Scheduling.Services.Mappers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Scheduling.Services
@@ -28,68 +25,31 @@ namespace Scheduling.Services
         }
 
         public List<AppointmentDTO> GetAllAppointments()
-        { 
+        {
             var appointments = _repository.GetAppointments();
 
             return _appointmentMapper.MapToDTOs(appointments);
         }
 
-        private Appointment MapAndValidateAppointment(AppointmentDTO appointmentDTO)
-        {
-            try
-            {
-                // Retrieve the user's time zone
-                TimeZoneInfo userTimeZone = GetUserTimeZone();
 
-                // Ensure Start and End times have the correct kind
-                appointmentDTO.Start = EnsureDateTimeKind(appointmentDTO.Start, DateTimeKind.Local);
-                appointmentDTO.End = EnsureDateTimeKind(appointmentDTO.End, DateTimeKind.Local);
-
-                // Convert Start and End to UTC
-                appointmentDTO.Start = ConvertToUtc(appointmentDTO.Start, userTimeZone);
-                appointmentDTO.End = ConvertToUtc(appointmentDTO.End, userTimeZone);
-
-                
-
-                // Validate the appointment (overlapping appointments and business hours)
-                if (!ValidateAppointment(appointmentDTO))
-                {
-                    throw new InvalidOperationException("Appointment validation failed.");
-                }
-
-                // Map to domain model
-                return _appointmentMapper.MapToModel(appointmentDTO, _userMapper.MapToModel(GlobalUserInfo.CurrentLoggedInUser));
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"An error occurred while mapping and validating the appointment: {ex.Message}");
-                throw;
-            }
-        }
 
 
         public void AddAppointment(AppointmentDTO appointmentDTO)
         {
             try
             {
-                // Retrieve user's time zone
-                TimeZoneInfo userTimeZone = GetUserTimeZone();
-
-                // Ensure DateTime.Kind is consistent
-                appointmentDTO.Start = EnsureDateTimeKind(appointmentDTO.Start, DateTimeKind.Local);
-                appointmentDTO.End = EnsureDateTimeKind(appointmentDTO.End, DateTimeKind.Local);
-
                 // Convert Start and End times to UTC
-                appointmentDTO.Start = ConvertToUtc(appointmentDTO.Start, userTimeZone);
-                appointmentDTO.End = ConvertToUtc(appointmentDTO.End, userTimeZone);
+                appointmentDTO.Start = ConvertToUtc(appointmentDTO.Start);
+                appointmentDTO.End = ConvertToUtc(appointmentDTO.End);
 
-                // Map and validate
-                var appointmentModel = MapAndValidateAppointment(appointmentDTO);
+                // Validate appointment
+                if (!ValidateAppointment(appointmentDTO))
+                    return;
 
-                // Save appointment
+                // Map to model and save
+                var appointmentModel = _appointmentMapper.MapToModel(appointmentDTO, _userMapper.MapToModel(GlobalUserInfo.CurrentLoggedInUser));
                 _repository.CreateAppointment(appointmentModel);
 
-                MessageBox.Show("Appointment added successfully!");
             }
             catch (Exception ex)
             {
@@ -97,43 +57,23 @@ namespace Scheduling.Services
             }
         }
 
-
-
-
-
-        private DateTime EnsureDateTimeKind(DateTime dateTime, DateTimeKind kind)
-        {
-            return dateTime.Kind == DateTimeKind.Unspecified
-                ? DateTime.SpecifyKind(dateTime, kind)
-                : dateTime;
-        }
-
-
-
-
-
         public void UpdateAppointment(AppointmentDTO appointmentDTO)
         {
             try
             {
-                // Retrieve user's time zone
-                TimeZoneInfo userTimeZone = GetUserTimeZone();
-
-                // Ensure DateTime.Kind is consistent
-                appointmentDTO.Start = EnsureDateTimeKind(appointmentDTO.Start, DateTimeKind.Local);
-                appointmentDTO.End = EnsureDateTimeKind(appointmentDTO.End, DateTimeKind.Local);
-
                 // Convert Start and End times to UTC
-                appointmentDTO.Start = ConvertToUtc(appointmentDTO.Start, userTimeZone);
-                appointmentDTO.End = ConvertToUtc(appointmentDTO.End, userTimeZone);
+                appointmentDTO.Start = ConvertToUtc(appointmentDTO.Start);
+                appointmentDTO.End = ConvertToUtc(appointmentDTO.End);
 
-                // Map and validate
-                var appointmentModel = MapAndValidateAppointment(appointmentDTO);
+                // Validate appointment
+                if (!ValidateAppointment(appointmentDTO))
+                    return;
 
-                // Update appointment
+                // Map to model and update
+                var appointmentModel = _appointmentMapper.MapToModel(appointmentDTO, _userMapper.MapToModel(GlobalUserInfo.CurrentLoggedInUser));
                 _repository.UpdateAppointment(appointmentModel);
 
-                MessageBox.Show("Appointment updated successfully!");
+
             }
             catch (Exception ex)
             {
@@ -145,19 +85,33 @@ namespace Scheduling.Services
 
 
 
-        public void DeleteAppointment(int appointmentId) {
+        public void DeleteAppointment(int appointmentId)
+        {
             if (appointmentId <= 0)
             {
-                throw new ArgumentException("Invalid appointment ID.");
+                MessageBox.Show("Invalid appointment ID.");
+                return;
             }
 
-            // Call the repository to delete the appointment
             _repository.DeleteAppointment(appointmentId);
         }
 
-        public bool ValidateAppointment(AppointmentDTO appointment)
+        // Get appointments for display (converted to user's local time)
+        public List<AppointmentDTO> GetAppointmentsForDisplay(int userId)
         {
-            // Check overlapping appointments
+            var appointments = _repository.GetAppointmentsByUser(userId);
+            return _appointmentMapper.MapToDTOs(appointments).Select(appointment =>
+            {
+                appointment.Start = ConvertFromUtc(appointment.Start);
+                appointment.End = ConvertFromUtc(appointment.End);
+                return appointment;
+            }).ToList();
+        }
+
+        // Validate an appointment
+        private bool ValidateAppointment(AppointmentDTO appointment)
+        {
+            // Ensure no overlapping appointments
             if (_repository.IsOverlappingAppointment(appointment.CustomerId, appointment.Start, appointment.End, appointment.AppointmentId))
             {
                 MessageBox.Show("This appointment overlaps with an existing appointment.");
@@ -167,41 +121,58 @@ namespace Scheduling.Services
             // Validate business hours
             return ValidateBusinessHours(appointment.Start, appointment.End);
         }
+
+        // Check if an appointment is within business hours (9 AM - 5 PM EST, Monday-Friday)
         private bool ValidateBusinessHours(DateTime startUtc, DateTime endUtc)
         {
-            if (startUtc.Kind != DateTimeKind.Utc || endUtc.Kind != DateTimeKind.Utc)
+            try
             {
-                throw new ArgumentException("Start and End times must be in UTC.");
+                // Convert UTC to Eastern Time
+                TimeZoneInfo easternZone = TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time");
+                DateTime startEst = TimeZoneInfo.ConvertTimeFromUtc(startUtc, easternZone);
+                DateTime endEst = TimeZoneInfo.ConvertTimeFromUtc(endUtc, easternZone);
+
+                // Define business hours
+                TimeSpan businessStart = new TimeSpan(9, 0, 0); // 9:00 a.m.
+                TimeSpan businessEnd = new TimeSpan(17, 0, 0);  // 5:00 p.m.
+
+                // Validate if within business hours
+                if (startEst.TimeOfDay < businessStart || endEst.TimeOfDay > businessEnd)
+                {
+                    MessageBox.Show("Appointments must be scheduled during business hours: 9:00 a.m. to 5:00 p.m., Monday–Friday.");
+                    return false;
+                }
+
+                // Check if on a weekend
+                if (startEst.DayOfWeek == DayOfWeek.Saturday || startEst.DayOfWeek == DayOfWeek.Sunday)
+                {
+                    MessageBox.Show("Appointments must be scheduled on weekdays: Monday–Friday.");
+                    return false;
+                }
+
+                return true;
             }
-
-            TimeZoneInfo easternZone = TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time");
-            DateTime startEst = TimeZoneInfo.ConvertTimeFromUtc(startUtc, easternZone);
-            DateTime endEst = TimeZoneInfo.ConvertTimeFromUtc(endUtc, easternZone);
-
-            // Define business hours
-            TimeSpan businessStart = new TimeSpan(9, 0, 0);
-            TimeSpan businessEnd = new TimeSpan(17, 0, 0);
-
-            // Check time constraints
-            if (startEst.TimeOfDay < businessStart || endEst.TimeOfDay > businessEnd)
+            catch (Exception ex)
             {
-                MessageBox.Show("Appointments must be within business hours: 9:00 a.m. to 5:00 p.m., Monday–Friday.");
+                MessageBox.Show($"An error occurred while validating business hours: {ex.Message}");
                 return false;
             }
-
-            if (startEst.DayOfWeek == DayOfWeek.Saturday || startEst.DayOfWeek == DayOfWeek.Sunday)
-            {
-                MessageBox.Show("Appointments must be on weekdays.");
-                return false;
-            }
-
-            return true;
         }
 
+        // Convert local time to UTC
+        private DateTime ConvertToUtc(DateTime localDateTime)
+        {
+            if (localDateTime.Kind == DateTimeKind.Unspecified)
+                localDateTime = DateTime.SpecifyKind(localDateTime, DateTimeKind.Local);
 
+            return localDateTime.ToUniversalTime();
+        }
 
-
-
+        // Convert UTC time to local time
+        private DateTime ConvertFromUtc(DateTime utcDateTime)
+        {
+            return utcDateTime.ToLocalTime();
+        }
 
 
         private TimeZoneInfo GetUserTimeZone()
@@ -250,39 +221,7 @@ namespace Scheduling.Services
                 : null; // Return null if not found
         }
 
-        private DateTime ConvertToUserTimeZone(DateTime utcDateTime, string timeZoneId)
-        {
-            try
-            {
-                TimeZoneInfo userTimeZone = TimeZoneInfo.FindSystemTimeZoneById(timeZoneId);
-                return TimeZoneInfo.ConvertTimeFromUtc(utcDateTime, userTimeZone);
-            }
-            catch (TimeZoneNotFoundException)
-            {
-                MessageBox.Show($"Invalid time zone: {timeZoneId}. Defaulting to UTC.");
-                return utcDateTime; // Return as-is if time zone is invalid
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"An error occurred while converting time: {ex.Message}");
-                return utcDateTime; // Return as-is on failure
-            }
-        }
 
-        private DateTime ConvertToUtc(DateTime localDateTime, TimeZoneInfo timeZone)
-        {
-            if (localDateTime.Kind == DateTimeKind.Utc)
-            {
-                throw new ArgumentException("DateTime must not be in UTC when converting to UTC.");
-            }
-
-            if (localDateTime.Kind == DateTimeKind.Unspecified)
-            {
-                localDateTime = DateTime.SpecifyKind(localDateTime, DateTimeKind.Local);
-            }
-
-            return TimeZoneInfo.ConvertTimeToUtc(localDateTime, timeZone);
-        }
 
 
         private DateTime ConvertFromUtc(DateTime utcDateTime, TimeZoneInfo timeZone)
@@ -366,23 +305,6 @@ namespace Scheduling.Services
             return appointments
                 .GroupBy(a => a.CustomerName)
                 .ToDictionary(g => g.Key, g => g.Count());
-        }
-        public List<AppointmentDTO> GetAppointmentsForDisplay(int userId)
-        {
-            // Retrieve appointments from the repository
-            var appointments = _appointmentMapper.MapToDTOs(_repository.GetAppointmentsByUser(userId));
-
-            // Get user's time zone
-            TimeZoneInfo userTimeZone = GetUserTimeZone();
-
-            // Convert each appointment's times from UTC to user's time zone
-            foreach (var appointment in appointments)
-            {
-                appointment.Start = ConvertFromUtc(appointment.Start, userTimeZone);
-                appointment.End = ConvertFromUtc(appointment.End, userTimeZone);
-            }
-
-            return appointments;
         }
 
 

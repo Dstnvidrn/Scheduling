@@ -391,7 +391,7 @@ namespace Scheduling.Data.Repositories
             UpdateCity(customer);
             UpdateCountry(customer);
         }
-    
+
         private void UpdateAddress(Customer customer)
         {
             string query = @"
@@ -487,6 +487,6 @@ namespace Scheduling.Data.Repositories
 
             return customers;
         }
-        
+
     }
 }

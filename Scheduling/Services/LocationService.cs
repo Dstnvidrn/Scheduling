@@ -1,10 +1,9 @@
-﻿using System.Net;
+﻿using System;
 using System.Net.Http;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Text.Json;
-using System;
-using System.Text.Json.Serialization;
 
 namespace Scheduling.Services
 {
@@ -25,7 +24,7 @@ namespace Scheduling.Services
                 var response = await _httpClient.GetAsync(url);
                 response.EnsureSuccessStatusCode();
                 var content = await response.Content.ReadAsStringAsync();
-               // MessageBox.Show(content);
+                // MessageBox.Show(content);
                 return JsonSerializer.Deserialize<UserInfo>(content);
             }
             catch (Exception ex)

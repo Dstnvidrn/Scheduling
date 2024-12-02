@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Scheduling.Models
 {
@@ -17,7 +13,7 @@ namespace Scheduling.Models
         public DateTime CreateDate { get; set; } = DateTime.UtcNow;
         public User CreatedBy { get; set; }
         public DateTime LastUpdate { get; set; } = DateTime.UtcNow;
-        public User LastUpdatedBy { get; set; } 
+        public User LastUpdatedBy { get; set; }
 
     }
 }

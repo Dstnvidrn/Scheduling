@@ -1,23 +1,21 @@
-﻿using Scheduling.Data;
-using System;
+﻿using Scheduling.DTOs;
+using Scheduling.Enums;
+using Scheduling.Forms;
 using Scheduling.Helpers;
+using Scheduling.Interfaces;
+using Scheduling.Services;
+using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
-using System.Windows.Forms;
-using Scheduling.Data.Repositories;
-using Scheduling.Interfaces;
-using System.Collections.Generic;
-using Scheduling.DTOs;
-using Scheduling.Forms;
-using Scheduling.Enums;
-using Scheduling.Services;
 using System.Linq;
+using System.Windows.Forms;
 
 namespace Scheduling
 {
     public partial class AppointmentsForm : Form
     {
-        
+
         private readonly AppointmentService _appointmentService;
         private readonly IDatabaseHelper _databaseHelper;
         public AppointmentsForm()
@@ -34,7 +32,7 @@ namespace Scheduling
             dgvAppointments.Width = this.Width;
             dgvAppointments.Height = this.Height;
 
-            
+
         }
 
         private void AppointmentsForm_Load(object sender, EventArgs e)
@@ -95,7 +93,7 @@ namespace Scheduling
                 PopulateDataGridView();
             }
         }
-      
+
 
         private void btnLogout_Click(object sender, EventArgs e)
         {
@@ -129,7 +127,7 @@ namespace Scheduling
         }
 
 
-        
+
 
         private void btnCustomers_Click_1(object sender, EventArgs e)
         {
@@ -171,22 +169,22 @@ namespace Scheduling
 
             AppointmentDTO appointment = new AppointmentDTO();
 
-                    appointment.AppointmentId = Convert.ToInt32(selectedRow.Cells["AppointmentId"].Value);
-                    appointment.CustomerId = Convert.ToInt32(selectedRow.Cells["CustomerId"].Value);
-                    appointment.CustomerName = selectedRow.Cells["CustomerName"].Value.ToString();
-                    appointment.Title = selectedRow.Cells["Title"].Value.ToString();
-                    appointment.Description = selectedRow.Cells["Description"].Value.ToString();
-                    appointment.Type = selectedRow.Cells["Type"].Value.ToString();
-                    appointment.Start = Convert.ToDateTime(selectedRow.Cells["Start"].Value);
-                    appointment.End = Convert.ToDateTime(selectedRow.Cells["End"].Value);
-                    appointment.Location = selectedRow.Cells["Location"].Value.ToString();
-                    appointment.Contact = selectedRow.Cells["Contact"].Value.ToString();
-                    appointment.URL = selectedRow.Cells["URL"].Value.ToString();
+            appointment.AppointmentId = Convert.ToInt32(selectedRow.Cells["AppointmentId"].Value);
+            appointment.CustomerId = Convert.ToInt32(selectedRow.Cells["CustomerId"].Value);
+            appointment.CustomerName = selectedRow.Cells["CustomerName"].Value.ToString();
+            appointment.Title = selectedRow.Cells["Title"].Value.ToString();
+            appointment.Description = selectedRow.Cells["Description"].Value.ToString();
+            appointment.Type = selectedRow.Cells["Type"].Value.ToString();
+            appointment.Start = Convert.ToDateTime(selectedRow.Cells["Start"].Value);
+            appointment.End = Convert.ToDateTime(selectedRow.Cells["End"].Value);
+            appointment.Location = selectedRow.Cells["Location"].Value.ToString();
+            appointment.Contact = selectedRow.Cells["Contact"].Value.ToString();
+            appointment.URL = selectedRow.Cells["URL"].Value.ToString();
 
 
 
             return appointment;
-            
+
 
         }
 

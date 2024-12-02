@@ -1,5 +1,4 @@
-﻿using Mysqlx.Resultset;
-using Scheduling.DTOs;
+﻿using Scheduling.DTOs;
 using Scheduling.Interfaces;
 using Scheduling.Models;
 using System;
@@ -12,7 +11,7 @@ namespace Scheduling.Data.Repositories
     {
         private readonly IDatabaseHelper _databaseHelper;
         private readonly ICustomerRepository _customerRepository;
-        public AppointmentRepository(IDatabaseHelper databaseHelper) 
+        public AppointmentRepository(IDatabaseHelper databaseHelper)
         {
             _databaseHelper = databaseHelper;
             _customerRepository = new CustomerRepository(_databaseHelper);
@@ -93,9 +92,9 @@ namespace Scheduling.Data.Repositories
 
             // map DataTable to List<>
             var appointments = new List<Appointment>();
-            foreach(DataRow row in dataTable.Rows)
+            foreach (DataRow row in dataTable.Rows)
             {
-                
+
                 var appointment = new Appointment
                 {
                     AppointmentId = Convert.ToInt32(row["appointmentId"]),
@@ -110,11 +109,11 @@ namespace Scheduling.Data.Repositories
                     Location = row["location"].ToString(),
                     Contact = row["contact"].ToString(),
                     CreateDate = Convert.ToDateTime(row["createDate"]),
-                    CreatedBy = new User { Username = row["createdByUserName"] != null ? row["createdByUserName"].ToString() : null},
+                    CreatedBy = new User { Username = row["createdByUserName"] != null ? row["createdByUserName"].ToString() : null },
                     LastUpdate = Convert.ToDateTime(row["lastUpdate"]),
                     LastUpdatedBy = new User { Username = row["LastUpdatedByUserName"].ToString() }
                 };
-                appointments.Add(appointment);        
+                appointments.Add(appointment);
             }
             return appointments;
         }

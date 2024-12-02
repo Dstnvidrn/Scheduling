@@ -2,7 +2,6 @@
 using Scheduling.DTOs;
 using Scheduling.Helpers;
 using Scheduling.Interfaces;
-using Scheduling.Models;
 using Scheduling.Services.Mappers;
 using System;
 using System.Collections.Generic;
@@ -32,14 +31,14 @@ namespace Scheduling.Services
 
         public bool CreateCustomer(CustomerDTO customerDTO)
         {
-           try
+            try
             {
                 _customerRepository.AddCustomer(_customerMapper.MapToModel(customerDTO, GlobalUserInfo.CurrentLoggedInUser));
                 return true;
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error creating customer: {ex.Message}", "Error",MessageBoxButtons.OK, MessageBoxIcon.Error );
+                MessageBox.Show($"Error creating customer: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
         }
@@ -50,7 +49,7 @@ namespace Scheduling.Services
                 _customerRepository.DeleteCustomer(_customerMapper.MapToModel(customerDTO, GlobalUserInfo.CurrentLoggedInUser));
                 return true;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
 
                 MessageBox.Show($"Error deleting customer: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);

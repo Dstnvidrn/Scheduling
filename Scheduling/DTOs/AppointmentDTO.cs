@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Scheduling.DTOs
 {
@@ -22,7 +18,7 @@ namespace Scheduling.DTOs
         public string Contact { get; set; }
         public string CreatedBy { get; set; }
         public DateTime LastUpdate { get; set; }
-        public string UpdatedBy { get; set;}
+        public string UpdatedBy { get; set; }
         public string URL { get; set; }
     }
 }
