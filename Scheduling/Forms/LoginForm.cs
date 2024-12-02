@@ -104,6 +104,7 @@ namespace Scheduling
                     
 
             }
+            else
             {
                 // Display localized error message
                 string errorMessage = LocalizationService.GetDualMessage("LoginError");
