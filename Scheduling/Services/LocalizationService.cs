@@ -13,7 +13,14 @@ public static class LocalizationService
     public static string GetDualMessage(string key)
     {
         string englishMessage = GetMessage(key, "en");
-        string otherLanguageMessage = GetMessage(key, "es"); // Change "fr" to the desired language code
-        return $"{englishMessage} / {otherLanguageMessage}";
+        string systemLanguageCode = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+
+        if (systemLanguageCode == "en")
+        {
+            return englishMessage;
+        }
+
+        string systemLanguageMessage = GetMessage(key, systemLanguageCode);
+        return $"{englishMessage} / {systemLanguageMessage}";
     }
 }
