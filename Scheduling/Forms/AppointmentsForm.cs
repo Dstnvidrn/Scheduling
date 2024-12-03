@@ -72,6 +72,10 @@ namespace Scheduling
                 .Where(a => a.Start.Month == DateTime.Now.Month && a.Start.Year == DateTime.Now.Year)
                 .ToList();
             dgvMonthAppoint.DataSource = appointments;
+            dgvMonthAppoint.DataSource = appointments;
+            dgvMonthAppoint.Columns["userId"].Visible = false;
+            dgvMonthAppoint.Columns["appointmentId"].Visible = false;
+            dgvMonthAppoint.Columns["customerId"].Visible = false;
         }
 
         private void LoadWeeklyAppointments()
@@ -83,6 +87,11 @@ namespace Scheduling
                 .Where(a => a.Start >= currentWeekStart && a.Start < currentWeekEnd)
                 .ToList();
             dgvWeekAppoint.DataSource = appointments;
+            dgvWeekAppoint.DataSource = appointments;
+            dgvWeekAppoint.DataSource = appointments;
+            dgvWeekAppoint.Columns["userId"].Visible = false;
+            dgvWeekAppoint.Columns["appointmentId"].Visible = false;
+            dgvWeekAppoint.Columns["customerId"].Visible = false;
         }
 
         private void btnCreate_Click(object sender, EventArgs e)
