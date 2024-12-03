@@ -198,11 +198,7 @@ namespace Scheduling.Services
             return localDateTime.ToUniversalTime();
         }
 
-        // Convert UTC time to local time
-        private DateTime ConvertFromUtc(DateTime utcDateTime)
-        {
-            return utcDateTime.ToLocalTime();
-        }
+
 
 
         private TimeZoneInfo GetUserTimeZone()
