@@ -86,10 +86,13 @@
             // 
             // ReportForm
             // 
+            this.AcceptButton = this.btnGenerate;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1086, 555);
             this.Controls.Add(this.pnlReports);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
             this.Name = "ReportForm";
             this.Text = "Reports";
             this.Load += new System.EventHandler(this.ReportForm_Load);
