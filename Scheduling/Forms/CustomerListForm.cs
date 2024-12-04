@@ -35,6 +35,8 @@ namespace Scheduling.Forms
                 List<CustomerDTO> customers = _customerService.GetAllCustomers();
 
                 dgvCustomers.DataSource = customers;
+                dgvCustomers.Columns["CreateDate"].Visible = false;
+                dgvCustomers.Columns["LastUpdate"].Visible = false;
             }
             catch (Exception ex)
             {
