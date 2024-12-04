@@ -48,6 +48,7 @@
             // 
             // pnlReports
             // 
+            this.pnlReports.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(72)))), ((int)(((byte)(87)))));
             this.pnlReports.Controls.Add(this.btnGenerate);
             this.pnlReports.Controls.Add(this.dataGridViewReport);
             this.pnlReports.Controls.Add(this.comboBoxReportType);
@@ -73,12 +74,14 @@
             // 
             // btnGenerate
             // 
+            this.btnGenerate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(111)))), ((int)(((byte)(97)))));
+            this.btnGenerate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnGenerate.Location = new System.Drawing.Point(425, 501);
             this.btnGenerate.Name = "btnGenerate";
             this.btnGenerate.Size = new System.Drawing.Size(224, 42);
             this.btnGenerate.TabIndex = 2;
             this.btnGenerate.Text = "Generate";
-            this.btnGenerate.UseVisualStyleBackColor = true;
+            this.btnGenerate.UseVisualStyleBackColor = false;
             this.btnGenerate.Click += new System.EventHandler(this.btnGenerate_Click);
             // 
             // ReportForm
