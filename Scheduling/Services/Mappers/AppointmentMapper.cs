@@ -28,7 +28,7 @@ namespace Scheduling.Services.Mappers
                 Type = appointment.Type,
                 URL = appointment.URL,
                 AppointmentId = appointment.AppointmentId,
-                //UserId = appointment.UserId,
+                UserId = appointment.UserId
 
 
             };

@@ -1,6 +1,7 @@
 ﻿using Scheduling.Interfaces;
 using Scheduling.Models;
 using System;
+using System.Collections.Generic;
 using System.Data;
 
 namespace Scheduling.Data.Repositories
@@ -15,6 +16,24 @@ namespace Scheduling.Data.Repositories
             _databaseHelper = databaseHelper;
         }
 
+        public List<User> GetAllUsers()
+        {
+            string query = @"SELECT userId, username FROM user";
+
+            DataTable results = _databaseHelper.ExecuteSelectQuery(query);
+            List<User> users = new List<User>();
+            foreach (DataRow row in results.Rows)
+            {
+                var user = new User
+                {
+                    UserId = Convert.ToInt32(row["userId"]),
+                    Username = row["userName"].ToString(),
+
+                };
+                users.Add(user);
+            }
+            return users;
+        }
 
         public User GetUser(string username)
         {

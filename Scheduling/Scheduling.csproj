@@ -144,6 +144,12 @@
     <Compile Include="Forms\CustomerListForm.Designer.cs">
       <DependentUpon>CustomerListForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\ReportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ReportForm.Designer.cs">
+      <DependentUpon>ReportForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Helpers\Colors.cs" />
     <Compile Include="Data\Database\MySqlDatabase.cs" />
     <Compile Include="Helpers\DatabaseHelper.cs" />
@@ -189,6 +195,7 @@
     <Compile Include="Services\Mappers\AppointmentMapper.cs" />
     <Compile Include="Services\Mappers\CustomerMapper.cs" />
     <Compile Include="Services\Mappers\UserMapper.cs" />
+    <Compile Include="Services\ReportService.cs" />
     <Compile Include="Services\UserService.cs" />
     <EmbeddedResource Include="Forms\AppointmentManager.resx">
       <DependentUpon>AppointmentManager.cs</DependentUpon>
@@ -204,6 +211,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ReportForm.resx">
+      <DependentUpon>ReportForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

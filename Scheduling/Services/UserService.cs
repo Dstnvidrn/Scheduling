@@ -1,7 +1,10 @@
 ﻿using Scheduling.Data.Repositories;
 using Scheduling.DTOs;
 using Scheduling.Interfaces;
+using Scheduling.Models;
 using Scheduling.Services.Mappers;
+using System;
+using System.Collections.Generic;
 
 namespace Scheduling.Services
 {
@@ -27,7 +30,10 @@ namespace Scheduling.Services
             return _userMapper.MapToDTO(_userRepository.GetUser(username));
         }
 
+        public List<User> GetAllUsers()
+        {
+            return _userRepository.GetAllUsers(); // Fetch all users from repository
 
-
+        }
     }
 }

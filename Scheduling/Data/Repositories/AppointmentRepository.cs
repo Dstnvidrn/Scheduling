@@ -98,7 +98,7 @@ namespace Scheduling.Data.Repositories
             var appointments = new List<Appointment>();
             foreach (DataRow row in dataTable.Rows)
             {
-
+                
                 var appointment = new Appointment
                 {
                     AppointmentId = Convert.ToInt32(row["appointmentId"]),
@@ -115,7 +115,8 @@ namespace Scheduling.Data.Repositories
                     CreateDate = Convert.ToDateTime(row["createDate"]),
                     CreatedBy = new User { Username = row["createdByUserName"] != null ? row["createdByUserName"].ToString() : null },
                     LastUpdate = Convert.ToDateTime(row["lastUpdate"]),
-                    LastUpdatedBy = new User { Username = row["LastUpdatedByUserName"].ToString() }
+                    LastUpdatedBy = new User { Username = row["LastUpdatedByUserName"].ToString() },
+                    UserId = Convert.ToInt32(row["userId"])
                 };
                 appointments.Add(appointment);
             }

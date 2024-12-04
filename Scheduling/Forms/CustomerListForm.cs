@@ -15,7 +15,6 @@ namespace Scheduling.Forms
 
         private readonly CustomerService _customerService;
         private readonly IDatabaseHelper _databaseHelper;
-        private Mode _mode;
         public CustomerListForm()
         {
             InitializeComponent();

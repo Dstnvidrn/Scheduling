@@ -44,7 +44,7 @@ namespace Scheduling
             LayoutManager.CenterSingleNestedControlsX(pnlContainer, lblAppointments);
             // Set placerholder text in search box
             LayoutManager.SetPlacholderText(txtAppointmentSearch, "Search", Colors.NeutalDarkColor);
-            lblLoggedInUser.Text = $"Logged in as: {LayoutManager.Capitalize(GlobalUserInfo.CurrentLoggedInUser.Username)}";
+            lblLoggedInUser.Text = $"Logged in as: {LayoutManager.Capitalize(GlobalUserInfo.CurrentLoggedInUser.Username)}. ID: {GlobalUserInfo.CurrentLoggedInUser.UserId}";
             CheckUpcomingAppointments(GlobalUserInfo.CurrentLoggedInUser.UserId);
             LoadMonthlyAppointments();
             LoadWeeklyAppointments();
@@ -244,6 +244,12 @@ namespace Scheduling
             }
         }
 
-
+        private void btnReports_Click(object sender, EventArgs e)
+        {
+            using (ReportForm reportForm = new ReportForm(_databaseHelper))
+            {
+                reportForm.ShowDialog();
+            }
+        }
     }
 }
