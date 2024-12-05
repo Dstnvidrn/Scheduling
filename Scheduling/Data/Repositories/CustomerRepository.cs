@@ -435,7 +435,7 @@ namespace Scheduling.Data.Repositories
 
             var parameters = new[]
             {
-                _databaseHelper.CreateParameter("@cityName", customer.CustomerName),
+                _databaseHelper.CreateParameter("@cityName", customer.Address.City.CityName),
                 _databaseHelper.CreateParameter("@customerId", customer.CustomerId),
                 _databaseHelper.CreateParameter("@lastUpdate", customer.LastUpdate),
                 _databaseHelper.CreateParameter("@lastUpdateBy", customer.UpdatedBy.Username)
